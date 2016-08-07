@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		025C2C411D57817100397638 /* SwiftySignals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025C2C371D57817000397638 /* SwiftySignals.framework */; };
+		025C2C4E1D57827D00397638 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F71D53A19D009A3F63 /* Property.swift */; };
+		025C2C4F1D57827F00397638 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F81D53A19D009A3F63 /* Signal.swift */; };
+		025C2C501D57828200397638 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F91D53A19D009A3F63 /* Slot.swift */; };
+		025C2C521D57828F00397638 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 029D33371D53A0ED00002059 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		025C2C531D57829700397638 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D33431D53A0EE00002059 /* SwiftySignalsTests.swift */; };
+		025C2C5C1D57836900397638 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 025C2C5B1D57836900397638 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		025C2C631D57836900397638 /* SwiftySignals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025C2C591D57836900397638 /* SwiftySignals.framework */; };
+		025C2C681D57836900397638 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C2C671D57836900397638 /* SwiftySignalsTests.swift */; };
+		025C2C701D57837B00397638 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F71D53A19D009A3F63 /* Property.swift */; };
+		025C2C711D57837D00397638 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F81D53A19D009A3F63 /* Signal.swift */; };
+		025C2C721D57837F00397638 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F91D53A19D009A3F63 /* Slot.swift */; };
+		025C2C7B1D5783FA00397638 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 025C2C7A1D5783FA00397638 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		025C2C801D57841000397638 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F71D53A19D009A3F63 /* Property.swift */; };
+		025C2C811D57841200397638 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F81D53A19D009A3F63 /* Signal.swift */; };
+		025C2C821D57841400397638 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F91D53A19D009A3F63 /* Slot.swift */; };
 		029D33381D53A0ED00002059 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 029D33371D53A0ED00002059 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		029D333F1D53A0EE00002059 /* SwiftySignals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029D33341D53A0ED00002059 /* SwiftySignals.framework */; };
 		029D33441D53A0EE00002059 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D33431D53A0EE00002059 /* SwiftySignalsTests.swift */; };
@@ -16,6 +32,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		025C2C421D57817100397638 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 029D332B1D53A0ED00002059 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 025C2C361D57817000397638;
+			remoteInfo = SwiftySignals;
+		};
+		025C2C641D57836900397638 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 029D332B1D53A0ED00002059 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 025C2C581D57836900397638;
+			remoteInfo = SwiftySignals;
+		};
 		029D33401D53A0EE00002059 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 029D332B1D53A0ED00002059 /* Project object */;
@@ -26,6 +56,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		025C2C371D57817000397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		025C2C401D57817100397638 /* SwiftySignalsTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		025C2C591D57836900397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		025C2C5B1D57836900397638 /* SwiftySignals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftySignals.h; sourceTree = "<group>"; };
+		025C2C5D1D57836900397638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		025C2C621D57836900397638 /* SwiftySignalsTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		025C2C671D57836900397638 /* SwiftySignalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftySignalsTests.swift; sourceTree = "<group>"; };
+		025C2C691D57836900397638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		025C2C781D5783FA00397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		025C2C7A1D5783FA00397638 /* SwiftySignals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftySignals.h; sourceTree = "<group>"; };
+		025C2C7C1D5783FB00397638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		029D33341D53A0ED00002059 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		029D33371D53A0ED00002059 /* SwiftySignals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftySignals.h; sourceTree = "<group>"; };
 		029D33391D53A0ED00002059 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -38,6 +79,43 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		025C2C331D57817000397638 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C3D1D57817100397638 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				025C2C411D57817100397638 /* SwiftySignals.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C551D57836900397638 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C5F1D57836900397638 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				025C2C631D57836900397638 /* SwiftySignals.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C741D5783FA00397638 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		029D33301D53A0ED00002059 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,11 +134,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		025C2C5A1D57836900397638 /* SwiftySignals */ = {
+			isa = PBXGroup;
+			children = (
+				025C2C5B1D57836900397638 /* SwiftySignals.h */,
+				025C2C5D1D57836900397638 /* Info.plist */,
+			);
+			path = SwiftySignals;
+			sourceTree = "<group>";
+		};
+		025C2C661D57836900397638 /* SwiftySignalsTests */ = {
+			isa = PBXGroup;
+			children = (
+				025C2C671D57836900397638 /* SwiftySignalsTests.swift */,
+				025C2C691D57836900397638 /* Info.plist */,
+			);
+			path = SwiftySignalsTests;
+			sourceTree = "<group>";
+		};
+		025C2C791D5783FA00397638 /* SwiftySignals */ = {
+			isa = PBXGroup;
+			children = (
+				025C2C7A1D5783FA00397638 /* SwiftySignals.h */,
+				025C2C7C1D5783FB00397638 /* Info.plist */,
+			);
+			path = SwiftySignals;
+			sourceTree = "<group>";
+		};
 		029D332A1D53A0ED00002059 = {
 			isa = PBXGroup;
 			children = (
 				029D33361D53A0ED00002059 /* SwiftySignals */,
 				029D33421D53A0EE00002059 /* SwiftySignalsTests */,
+				025C2C5A1D57836900397638 /* SwiftySignals */,
+				025C2C661D57836900397638 /* SwiftySignalsTests */,
+				025C2C791D5783FA00397638 /* SwiftySignals */,
 				029D33351D53A0ED00002059 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,6 +178,11 @@
 			children = (
 				029D33341D53A0ED00002059 /* SwiftySignals.framework */,
 				029D333E1D53A0EE00002059 /* SwiftySignalsTests-macOS.xctest */,
+				025C2C371D57817000397638 /* SwiftySignals.framework */,
+				025C2C401D57817100397638 /* SwiftySignalsTests-iOS.xctest */,
+				025C2C591D57836900397638 /* SwiftySignals.framework */,
+				025C2C621D57836900397638 /* SwiftySignalsTests-tvOS.xctest */,
+				025C2C781D5783FA00397638 /* SwiftySignals.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,6 +211,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		025C2C341D57817000397638 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				025C2C521D57828F00397638 /* SwiftySignals.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C561D57836900397638 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				025C2C5C1D57836900397638 /* SwiftySignals.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C751D5783FA00397638 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				025C2C7B1D5783FA00397638 /* SwiftySignals.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		029D33311D53A0ED00002059 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -109,6 +246,96 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		025C2C361D57817000397638 /* SwiftySignals-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 025C2C481D57817100397638 /* Build configuration list for PBXNativeTarget "SwiftySignals-iOS" */;
+			buildPhases = (
+				025C2C321D57817000397638 /* Sources */,
+				025C2C331D57817000397638 /* Frameworks */,
+				025C2C341D57817000397638 /* Headers */,
+				025C2C351D57817000397638 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SwiftySignals-iOS";
+			productName = SwiftySignals;
+			productReference = 025C2C371D57817000397638 /* SwiftySignals.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		025C2C3F1D57817100397638 /* SwiftySignalsTests-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 025C2C4B1D57817100397638 /* Build configuration list for PBXNativeTarget "SwiftySignalsTests-iOS" */;
+			buildPhases = (
+				025C2C3C1D57817100397638 /* Sources */,
+				025C2C3D1D57817100397638 /* Frameworks */,
+				025C2C3E1D57817100397638 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				025C2C431D57817100397638 /* PBXTargetDependency */,
+			);
+			name = "SwiftySignalsTests-iOS";
+			productName = SwiftySignalsTests;
+			productReference = 025C2C401D57817100397638 /* SwiftySignalsTests-iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		025C2C581D57836900397638 /* SwiftySignals-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 025C2C6A1D57836900397638 /* Build configuration list for PBXNativeTarget "SwiftySignals-tvOS" */;
+			buildPhases = (
+				025C2C541D57836900397638 /* Sources */,
+				025C2C551D57836900397638 /* Frameworks */,
+				025C2C561D57836900397638 /* Headers */,
+				025C2C571D57836900397638 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SwiftySignals-tvOS";
+			productName = SwiftySignals;
+			productReference = 025C2C591D57836900397638 /* SwiftySignals.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		025C2C611D57836900397638 /* SwiftySignalsTests-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 025C2C6D1D57836900397638 /* Build configuration list for PBXNativeTarget "SwiftySignalsTests-tvOS" */;
+			buildPhases = (
+				025C2C5E1D57836900397638 /* Sources */,
+				025C2C5F1D57836900397638 /* Frameworks */,
+				025C2C601D57836900397638 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				025C2C651D57836900397638 /* PBXTargetDependency */,
+			);
+			name = "SwiftySignalsTests-tvOS";
+			productName = SwiftySignalsTests;
+			productReference = 025C2C621D57836900397638 /* SwiftySignalsTests-tvOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		025C2C771D5783FA00397638 /* SwiftySignals-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 025C2C7D1D5783FB00397638 /* Build configuration list for PBXNativeTarget "SwiftySignals-watchOS" */;
+			buildPhases = (
+				025C2C731D5783FA00397638 /* Sources */,
+				025C2C741D5783FA00397638 /* Frameworks */,
+				025C2C751D5783FA00397638 /* Headers */,
+				025C2C761D5783FA00397638 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SwiftySignals-watchOS";
+			productName = SwiftySignals;
+			productReference = 025C2C781D5783FA00397638 /* SwiftySignals.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		029D33331D53A0ED00002059 /* SwiftySignals-macOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 029D33481D53A0EE00002059 /* Build configuration list for PBXNativeTarget "SwiftySignals-macOS" */;
@@ -155,6 +382,21 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Patrick Sturm";
 				TargetAttributes = {
+					025C2C361D57817000397638 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					025C2C3F1D57817100397638 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					025C2C581D57836900397638 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					025C2C611D57836900397638 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					025C2C771D5783FA00397638 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					029D33331D53A0ED00002059 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -177,11 +419,51 @@
 			targets = (
 				029D33331D53A0ED00002059 /* SwiftySignals-macOS */,
 				029D333D1D53A0EE00002059 /* SwiftySignalsTests-macOS */,
+				025C2C361D57817000397638 /* SwiftySignals-iOS */,
+				025C2C3F1D57817100397638 /* SwiftySignalsTests-iOS */,
+				025C2C581D57836900397638 /* SwiftySignals-tvOS */,
+				025C2C611D57836900397638 /* SwiftySignalsTests-tvOS */,
+				025C2C771D5783FA00397638 /* SwiftySignals-watchOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		025C2C351D57817000397638 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C3E1D57817100397638 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C571D57836900397638 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C601D57836900397638 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C761D5783FA00397638 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		029D33321D53A0ED00002059 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -199,6 +481,52 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		025C2C321D57817000397638 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				025C2C4E1D57827D00397638 /* Property.swift in Sources */,
+				025C2C4F1D57827F00397638 /* Signal.swift in Sources */,
+				025C2C501D57828200397638 /* Slot.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C3C1D57817100397638 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				025C2C531D57829700397638 /* SwiftySignalsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C541D57836900397638 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				025C2C701D57837B00397638 /* Property.swift in Sources */,
+				025C2C711D57837D00397638 /* Signal.swift in Sources */,
+				025C2C721D57837F00397638 /* Slot.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C5E1D57836900397638 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				025C2C681D57836900397638 /* SwiftySignalsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		025C2C731D5783FA00397638 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				025C2C801D57841000397638 /* Property.swift in Sources */,
+				025C2C811D57841200397638 /* Signal.swift in Sources */,
+				025C2C821D57841400397638 /* Slot.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		029D332F1D53A0ED00002059 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -220,6 +548,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		025C2C431D57817100397638 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 025C2C361D57817000397638 /* SwiftySignals-iOS */;
+			targetProxy = 025C2C421D57817100397638 /* PBXContainerItemProxy */;
+		};
+		025C2C651D57836900397638 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 025C2C581D57836900397638 /* SwiftySignals-tvOS */;
+			targetProxy = 025C2C641D57836900397638 /* PBXContainerItemProxy */;
+		};
 		029D33411D53A0EE00002059 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 029D33331D53A0ED00002059 /* SwiftySignals-macOS */;
@@ -228,6 +566,179 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		025C2C491D57817100397638 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignals;
+				PRODUCT_NAME = SwiftySignals;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		025C2C4A1D57817100397638 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignals;
+				PRODUCT_NAME = SwiftySignals;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		025C2C4C1D57817100397638 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = SwiftySignalsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		025C2C4D1D57817100397638 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = SwiftySignalsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		025C2C6B1D57836900397638 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignals;
+				PRODUCT_NAME = SwiftySignals;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		025C2C6C1D57836900397638 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignals;
+				PRODUCT_NAME = SwiftySignals;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		025C2C6E1D57836900397638 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SwiftySignalsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		025C2C6F1D57836900397638 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SwiftySignalsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		025C2C7E1D5783FB00397638 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignals;
+				PRODUCT_NAME = SwiftySignals;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		025C2C7F1D5783FB00397638 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignals;
+				PRODUCT_NAME = SwiftySignals;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
 		029D33461D53A0EE00002059 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -380,6 +891,46 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		025C2C481D57817100397638 /* Build configuration list for PBXNativeTarget "SwiftySignals-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				025C2C491D57817100397638 /* Debug */,
+				025C2C4A1D57817100397638 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		025C2C4B1D57817100397638 /* Build configuration list for PBXNativeTarget "SwiftySignalsTests-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				025C2C4C1D57817100397638 /* Debug */,
+				025C2C4D1D57817100397638 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		025C2C6A1D57836900397638 /* Build configuration list for PBXNativeTarget "SwiftySignals-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				025C2C6B1D57836900397638 /* Debug */,
+				025C2C6C1D57836900397638 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		025C2C6D1D57836900397638 /* Build configuration list for PBXNativeTarget "SwiftySignalsTests-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				025C2C6E1D57836900397638 /* Debug */,
+				025C2C6F1D57836900397638 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		025C2C7D1D5783FB00397638 /* Build configuration list for PBXNativeTarget "SwiftySignals-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				025C2C7E1D5783FB00397638 /* Debug */,
+				025C2C7F1D5783FB00397638 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		029D332E1D53A0ED00002059 /* Build configuration list for PBXProject "SwiftySignals" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

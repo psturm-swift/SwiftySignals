@@ -3,6 +3,9 @@ osx_image: xcode7.3
 
 script:
   - xcodebuild test -workspace SwiftySignals.xcworkspace -scheme SwiftySignals-macOS
+  - xcodebuild test -workspace SwiftySignals.xcworkspace -scheme SwiftySignals-iOS -sdk iphonesimulator
+  - xcodebuild test -workspace SwiftySignals.xcworkspace -scheme SwiftySignals-tvOS -sdk appletvsimulator
+  - xcodebuild build -workspace SwiftySignals.xcworkspace -scheme SwiftySignals-watchOS -sdk watchsimulator
 
 notifications:
 email: true
