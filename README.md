@@ -148,15 +148,17 @@ You cannot connection your functions directly to the signal. Instead you need to
 	}
 
 After we connect the `setNewTemperature` instance function to the property, we call it once with the current value of the property:
+
 	setNewTemperature(Model.shared.temperature.value)
 
 Instead of initializing the local temperature variable manually we could do this alternatively by calling the `invoke` function on the returned slot of `didSet`:
-	        Model.shared
-	            .temperature
-	            .didSet(
-	                on: self, 
-	                call: TemperatureVC.setNewTemperature
-	            )
-	            .invoke()
+
+	 Model.shared
+		.temperature
+		.didSet(
+			on: self, 
+			call: TemperatureVC.setNewTemperature
+		)
+		.invoke()
 
 The additional `invoke` command will trigger `setNewTemperature` with the property’s value.
