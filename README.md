@@ -1,5 +1,7 @@
 # SwiftySignals
 
+[![Build Status](https://travis-ci.org/psturm-swift/SwiftySignals.svg?branch=master)](https://travis-ci.org/psturm-swift/SwiftySignals)
+
 ## Author
 Patrick Sturm, psturm.mail@googlemail.com
 
