@@ -126,7 +126,7 @@ You cannot connection your functions directly to the signal. Instead you need to
 
 	class Model {
 	    static let shared = Model()
-	    public let temperature = Property<Temperature>(value: 56°C)
+	    let temperature = Property<Temperature>(value: 56°C)
 	}
 	
 	class TemperatureVC: NSViewController {
