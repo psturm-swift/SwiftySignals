@@ -58,7 +58,7 @@ public final class Slot<Message> {
         self.signal = signal
     }
     
-    public func release() {
+    public func unsubscribe() {
         if let signal = self.signal, let internalSlot = self.internalSlot {
             signal.remove(slot: internalSlot)
         }

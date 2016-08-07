@@ -75,7 +75,7 @@ The `then(on:call:)` function returns a so called slot. The slot allows you to d
 	                    call: TemperatureVC.newTemperatureArrived
 	                )
 	
-	slot.release() // Disconnect the receiver
+	slot.unsubscribe() // Disconnect the receiver
 
 ### Connecting closures to a signal
 Alternatively you could connect a closure instead of an instance method to the signal. However, also in this case you need a receiver object. This receiver object is given along with the message to your closure:

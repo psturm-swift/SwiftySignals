@@ -35,9 +35,9 @@ public final class PropertySlot<T> {
         }
     }
     
-    public func release() {
+    public func unsubscribe() {
         if let slot = self.slot {
-            slot.release()
+            slot.unsubscribe()
         }
     }
 }
