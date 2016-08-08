@@ -29,6 +29,10 @@
 		02BC22FA1D53A19D009A3F63 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F71D53A19D009A3F63 /* Property.swift */; };
 		02BC22FB1D53A19D009A3F63 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F81D53A19D009A3F63 /* Signal.swift */; };
 		02BC22FC1D53A19D009A3F63 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F91D53A19D009A3F63 /* Slot.swift */; };
+		02E39FE71D590F2500E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
+		02E39FE81D590F4B00E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
+		02E39FE91D590F5400E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
+		02E39FEA1D590F5900E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +80,7 @@
 		02BC22F71D53A19D009A3F63 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		02BC22F81D53A19D009A3F63 /* Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
 		02BC22F91D53A19D009A3F63 /* Slot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
+		02E39FE61D590F2500E95722 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +200,7 @@
 				02BC22F71D53A19D009A3F63 /* Property.swift */,
 				02BC22F81D53A19D009A3F63 /* Signal.swift */,
 				02BC22F91D53A19D009A3F63 /* Slot.swift */,
+				02E39FE61D590F2500E95722 /* Context.swift */,
 			);
 			path = SwiftySignals;
 			sourceTree = "<group>";
@@ -488,6 +494,7 @@
 				025C2C4E1D57827D00397638 /* Property.swift in Sources */,
 				025C2C4F1D57827F00397638 /* Signal.swift in Sources */,
 				025C2C501D57828200397638 /* Slot.swift in Sources */,
+				02E39FE81D590F4B00E95722 /* Context.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +513,7 @@
 				025C2C701D57837B00397638 /* Property.swift in Sources */,
 				025C2C711D57837D00397638 /* Signal.swift in Sources */,
 				025C2C721D57837F00397638 /* Slot.swift in Sources */,
+				02E39FE91D590F5400E95722 /* Context.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +532,7 @@
 				025C2C801D57841000397638 /* Property.swift in Sources */,
 				025C2C811D57841200397638 /* Signal.swift in Sources */,
 				025C2C821D57841400397638 /* Slot.swift in Sources */,
+				02E39FEA1D590F5900E95722 /* Context.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02BC22FA1D53A19D009A3F63 /* Property.swift in Sources */,
+				02E39FE71D590F2500E95722 /* Context.swift in Sources */,
 				02BC22FC1D53A19D009A3F63 /* Slot.swift in Sources */,
 				02BC22FB1D53A19D009A3F63 /* Signal.swift in Sources */,
 			);
@@ -898,6 +908,7 @@
 				025C2C4A1D57817100397638 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		025C2C4B1D57817100397638 /* Build configuration list for PBXNativeTarget "SwiftySignalsTests-iOS" */ = {
 			isa = XCConfigurationList;
@@ -906,6 +917,7 @@
 				025C2C4D1D57817100397638 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		025C2C6A1D57836900397638 /* Build configuration list for PBXNativeTarget "SwiftySignals-tvOS" */ = {
 			isa = XCConfigurationList;
@@ -914,6 +926,7 @@
 				025C2C6C1D57836900397638 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		025C2C6D1D57836900397638 /* Build configuration list for PBXNativeTarget "SwiftySignalsTests-tvOS" */ = {
 			isa = XCConfigurationList;
@@ -922,6 +935,7 @@
 				025C2C6F1D57836900397638 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		025C2C7D1D5783FB00397638 /* Build configuration list for PBXNativeTarget "SwiftySignals-watchOS" */ = {
 			isa = XCConfigurationList;
@@ -930,6 +944,7 @@
 				025C2C7F1D5783FB00397638 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		029D332E1D53A0ED00002059 /* Build configuration list for PBXProject "SwiftySignals" */ = {
 			isa = XCConfigurationList;

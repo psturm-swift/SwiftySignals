@@ -49,31 +49,6 @@ public enum InvocationPolicy {
     }
 }
 
-public final class Slot<Message> {
-    private weak var internalSlot: InternalSlot<Message>?
-    private weak var signal: Signal<Message>?
-    
-    private init(internalSlot: InternalSlot<Message>, signal: Signal<Message>) {
-        self.internalSlot = internalSlot
-        self.signal = signal
-    }
-    
-    public func unsubscribe() {
-        if let signal = self.signal, let internalSlot = self.internalSlot {
-            signal.remove(slot: internalSlot)
-        }
-    }
-    
-    public func invoke(with argument: Message) {
-        if let internalSlot = self.internalSlot {
-            internalSlot.invoke(with: argument)
-        }
-    }
-}
-
-// Message = MessageType
-// Owner = Receiver
-
 public final class Signal<Message> {
     private var connectedSlots = [InternalSlot<Message>]()
     
@@ -125,7 +100,7 @@ public final class Signal<Message> {
         })
     }
     
-    private func remove(slot slot: InternalSlot<Message>) {
+    func remove(slot slot: InternalSlot<Message>) {
         connectedSlots = connectedSlots.filter { $0 !== slot }
     }
     

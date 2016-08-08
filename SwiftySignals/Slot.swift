@@ -20,43 +20,6 @@
 
 import Foundation
 
-public protocol InvocationContext {
-    func invoke(function: Void->Void)
-}
-
-public struct DefaultInvocationContext: InvocationContext {
-    public func invoke(function: Void -> Void) {
-        if NSThread.isMainThread() {
-            function()
-        }
-        else {
-            dispatch_async(dispatch_get_main_queue()) {
-                function()
-            }
-        }
-    }
-}
-
-public struct ImmediateInvocationContext: InvocationContext {
-    public func invoke(function: Void -> Void) {
-        function()
-    }
-}
-
-public struct DispatchQueueInvocationContext: InvocationContext {
-    let dispatchQueue: dispatch_queue_t
-    
-    public init(dispatchQueue: dispatch_queue_t) {
-        self.dispatchQueue = dispatchQueue
-    }
-    
-    public func invoke(function: Void -> Void) {
-        dispatch_async(dispatchQueue) {
-            function()
-        }
-    }
-}
-
 public final class InternalSlot<Message> {
     private let function: Message->Void
     private let context: InvocationContext
@@ -78,5 +41,27 @@ public final class InternalSlot<Message> {
     
     var isValid: Bool {
         return receiver != nil
+    }
+}
+
+public final class Slot<Message> {
+    private weak var internalSlot: InternalSlot<Message>?
+    private weak var signal: Signal<Message>?
+    
+    init(internalSlot: InternalSlot<Message>, signal: Signal<Message>) {
+        self.internalSlot = internalSlot
+        self.signal = signal
+    }
+    
+    public func unsubscribe() {
+        if let signal = self.signal, let internalSlot = self.internalSlot {
+            signal.remove(slot: internalSlot)
+        }
+    }
+    
+    public func invoke(with argument: Message) {
+        if let internalSlot = self.internalSlot {
+            internalSlot.invoke(with: argument)
+        }
     }
 }
