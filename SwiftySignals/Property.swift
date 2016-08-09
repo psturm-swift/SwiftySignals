@@ -20,14 +20,9 @@
 
 import Foundation
 
-public final class PropertySlot<T>: IsDefaultConstructable {
+public final class PropertySlot<T> {
     private let slot: Slot<T>?
     private weak var property: Property<T>?
-    
-    public init() {
-        self.property = nil
-        self.slot = nil
-    }
     
     private init(property: Property<T>?, slot: Slot<T>) {
         self.property = property
@@ -46,26 +41,28 @@ public final class PropertySlot<T>: IsDefaultConstructable {
 }
 
 public class Property<T> {
-    private(set) public var didSet = ProtectedSignal<T, PropertySlot<T>>()
+    private let signalDidSet = Signal<T>()
+    private(set) public lazy var didSet: SignalTrait<T,PropertySlot<T>> = {
+        return SignalTrait(signal: self.signalDidSet, convert: {
+            [weak self] slot in PropertySlot<T>(property: self, slot: slot)
+        })
+    }()
     
     public var value: T {
         didSet {
-            didSet.internalSignal.trigger(with: value)
+            signalDidSet.trigger(with: value)
         }
     }
     
     public init(value: T) {
         self.value = value
-        self.didSet = ProtectedSignal<T, PropertySlot<T>>(protectSlot: {
-            [weak self] slot in PropertySlot<T>(property: self, slot: slot)
-        })
     }
 
     public func removeAllListeners() {
-        didSet.internalSignal.removeAllListeners()
+        signalDidSet.removeAllListeners()
     }
     
     public var listenerCount: Int {
-        return didSet.internalSignal.listenerCount
+        return signalDidSet.listenerCount
     }
 }

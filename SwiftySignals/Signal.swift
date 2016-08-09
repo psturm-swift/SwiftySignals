@@ -132,50 +132,40 @@ public final class Signal<Message> {
     }
 }
 
-public protocol IsDefaultConstructable {
-    init()
-}
-
-public final class ProtectedSignal<Message, TargetSlot: IsDefaultConstructable> {
-    private let signal = Signal<Message>()
-    private var protectSlot: Slot<Message> -> TargetSlot = { _ in TargetSlot() }
+public final class SignalTrait<Message, TargetSlot: AnyObject> {
+    private let signal: Signal<Message>
+    private let convert: Slot<Message> -> TargetSlot
     
-    internal var internalSignal: Signal<Message> {
-        return signal
-    }
-    
-    public init() {
-    }
-    
-    public init(protectSlot: Slot<Message> -> TargetSlot) {
-        self.protectSlot = protectSlot
+    public init(signal: Signal<Message>, convert: Slot<Message> -> TargetSlot) {
+        self.signal = signal
+        self.convert = convert
     }
     
     public func then<Receiver:AnyObject>(with context: InvocationContext,
                      and receiver: Receiver,
                          call function: (Receiver, Message) -> Void) -> TargetSlot
     {
-        return protectSlot(signal.then(with: context, and: receiver, call: function))
+        return convert(signal.then(with: context, and: receiver, call: function))
     }
     
     public func then<Receiver:AnyObject>(with context: InvocationContext,
                      on receiver: Receiver,
                         call function: Receiver->(Message->Void)) -> TargetSlot
     {
-        return protectSlot(signal.then(with: context, on: receiver, call: function))
+        return convert(signal.then(with: context, on: receiver, call: function))
     }
     
     public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy = .OnMainThreadASAP,
                      with receiver: Receiver,
                           call function: (Receiver, Message) -> Void) -> TargetSlot
     {
-        return protectSlot(signal.then(invoke: policy, with: receiver, call: function))
+        return convert(signal.then(invoke: policy, with: receiver, call: function))
     }
     
     public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy = .OnMainThreadASAP,
                      on receiver: Receiver,
                         call function: Receiver->(Message->Void)) -> TargetSlot
     {
-        return protectSlot(signal.then(invoke: policy, on: receiver, call: function))
+        return convert(signal.then(invoke: policy, on: receiver, call: function))
     }
 }
