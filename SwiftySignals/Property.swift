@@ -29,21 +29,19 @@ public final class PropertySlot<T>: IsDefaultConstructable {
         self.slot = nil
     }
     
-    private init(property: Property<T>, slot: Slot<T>) {
+    private init(property: Property<T>?, slot: Slot<T>) {
         self.property = property
         self.slot = slot
     }
 
     public func invoke() {
-        if let slot = slot, let property = property {
-            slot.invoke(with: property.value)
+        if let property = property {
+            slot?.invoke(with: property.value)
         }
     }
     
     public func unsubscribe() {
-        if let slot = self.slot {
-            slot.unsubscribe()
-        }
+        slot?.unsubscribe()
     }
 }
 
@@ -59,7 +57,7 @@ public class Property<T> {
     public init(value: T) {
         self.value = value
         self.didSet = ProtectedSignal<T, PropertySlot<T>>(protectSlot: {
-            [unowned self] slot in PropertySlot<T>(property: self, slot: slot)
+            [weak self] slot in PropertySlot<T>(property: self, slot: slot)
         })
     }
 
