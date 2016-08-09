@@ -123,8 +123,10 @@ With an invocation policy you steer in which context a connected function is cal
 In the current version instances of `Signal<MessageType>` are not thread-safe. Thus only one thread, preferable the main thread, is allowed to access the signal. This restriction might become obsolete in the future.
 
 ### Properties
-A property is of type `Property<T>`. It stores a value `Property<T>.value` of type `T` and has an embedded signal. If you set a new value to `Property<T>.value` then the embedded signal is triggered automatically.
-You cannot connection your functions directly to the signal. Instead you need to use the `didSet` functions of `Property<T>`. This functions works similar to the `then` functions for signals.
+A property is of type `Property<T>`. It stores a value `Property<T>.value` of type `T` and has an embedded signal `Property<T>.didSet`
+	
+	If you set a new value to `Property<T>.value` then the embedded signal is triggered automatically.
+You can connect your functions directly to the signal.
 
 	class Model {
 	    static let shared = Model()
@@ -137,7 +139,8 @@ You cannot connection your functions directly to the signal. Instead you need to
 	    override func init() {
 	        Model.shared
 	            .temperature
-	            .didSet(
+	            .didSet
+	            .then(
 	                on: self, 
 	                call: TemperatureVC.setNewTemperature
 	            )
@@ -153,11 +156,12 @@ After we connect the `setNewTemperature` instance function to the property, we c
 
 	setNewTemperature(Model.shared.temperature.value)
 
-Instead of initializing the local temperature variable manually we could do this alternatively by calling the `invoke` function on the returned slot of `didSet`:
+Instead of initializing the local temperature variable manually we could do this alternatively by calling the `invoke` function on the returned slot of `then`:
 
 	 Model.shared
 		.temperature
-		.didSet(
+		.didSet
+		.then(
 			on: self, 
 			call: TemperatureVC.setNewTemperature
 		)
