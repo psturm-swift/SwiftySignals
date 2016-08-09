@@ -62,8 +62,8 @@ class SwiftySignals: XCTestCase {
     }
     
     func testIfAllObserversAreCalledIfTheyAreConnectedTheFirstTime() {
-        property.didSet(on: self, call: SwiftySignals.updateValue1).invoke()
-        property.didSet(on: self, call: SwiftySignals.updateValue2).invoke()
+        property.didSet.then(on: self, call: SwiftySignals.updateValue1).invoke()
+        property.didSet.then(on: self, call: SwiftySignals.updateValue2).invoke()
         
         XCTAssertEqual(42, value1)
         XCTAssertEqual(42, value2)
@@ -71,8 +71,8 @@ class SwiftySignals: XCTestCase {
     }
 
     func testIfAllObserversAreCalledIfTheValueChanges() {
-        property.didSet(on: self, call: SwiftySignals.updateValue1).invoke()
-        property.didSet(on: self, call: SwiftySignals.updateValue2).invoke()
+        property.didSet.then(on: self, call: SwiftySignals.updateValue1).invoke()
+        property.didSet.then(on: self, call: SwiftySignals.updateValue2).invoke()
 
         property.value = 84
 
@@ -82,11 +82,11 @@ class SwiftySignals: XCTestCase {
     }
     
     func testIfReleasedSlotsAreIgnored() {
-        property.didSet(on: self, call: SwiftySignals.updateValue1)
-        
+        property.didSet.then(on: self, call: SwiftySignals.updateValue1)
+
         var helper: Helper? = Helper(reference: self)
         if let helper = helper {
-            property.didSet(on: helper, call: Helper.updateValue).invoke()
+            property.didSet.then(on: helper, call: Helper.updateValue).invoke()
         }
         helper = nil
         
@@ -99,9 +99,9 @@ class SwiftySignals: XCTestCase {
     func testIfMainQueueInvocationPolicyDefersTheInvocation() {
         let expectation = self.expectationWithDescription("I expect that value3 is equal to 84")
 
-        property.didSet(on: self, call: SwiftySignals.updateValue1).invoke()
-        property.didSet(on: self, call: SwiftySignals.updateValue2).invoke()
-        property.didSet(invoke: .OnMainQueue, with: self, call: { (owner, newValue) in
+        property.didSet.then(on: self, call: SwiftySignals.updateValue1).invoke()
+        property.didSet.then(on: self, call: SwiftySignals.updateValue2).invoke()
+        property.didSet.then(invoke: .OnMainQueue, with: self, call: { (owner, newValue) in
             owner.value3 = newValue
             if newValue == 84 {
                 expectation.fulfill()

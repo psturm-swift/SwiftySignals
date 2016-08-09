@@ -20,9 +20,14 @@
 
 import Foundation
 
-public final class PropertySlot<T> {
+public final class PropertySlot<T>: IsDefaultConstructable {
     private let slot: Slot<T>?
     private weak var property: Property<T>?
+    
+    public init() {
+        self.property = nil
+        self.slot = nil
+    }
     
     private init(property: Property<T>, slot: Slot<T>) {
         self.property = property
@@ -43,53 +48,26 @@ public final class PropertySlot<T> {
 }
 
 public class Property<T> {
-    private let signalOnValueChange = Signal<T>()
-
+    private(set) public var didSet = ProtectedSignal<T, PropertySlot<T>>()
+    
     public var value: T {
         didSet {
-            signalOnValueChange.trigger(with: value)
+            didSet.internalSignal.trigger(with: value)
         }
     }
     
     public init(value: T) {
         self.value = value
+        self.didSet = ProtectedSignal<T, PropertySlot<T>>(protectSlot: {
+            [unowned self] slot in PropertySlot<T>(property: self, slot: slot)
+        })
     }
 
-    public func didSet<Receiver:AnyObject>(invoke policy: InvocationPolicy = .OnMainThreadASAP,
-                       with receiver: Receiver,
-                            call function: (Receiver, T) -> Void) -> PropertySlot<T>
-    {
-        return didSet(with: policy.context, and: receiver, call: function)
-    }
-    
-    public func didSet<Receiver:AnyObject>(invoke policy: InvocationPolicy = .OnMainThreadASAP,
-                       on receiver: Receiver,
-                            call function: Receiver->(T->Void)) -> PropertySlot<T>
-    {
-        return didSet(with: policy.context, on: receiver, call: function)
-    }
-    
-    public func didSet<Receiver:AnyObject>(with context: InvocationContext,
-                     and receiver: Receiver,
-                         call function: (Receiver, T) -> Void) -> PropertySlot<T>
-    {
-        let slot = signalOnValueChange.then(with: context, and: receiver, call: function)
-        return PropertySlot<T>(property: self, slot: slot)
-    }
-    
-    public func didSet<Receiver:AnyObject>(with context: InvocationContext,
-                     on receiver: Receiver,
-                        call function: Receiver->(T->Void)) -> PropertySlot<T>
-    {
-        let slot = signalOnValueChange.then(with: context, on: receiver, call: function)
-        return PropertySlot<T>(property: self, slot: slot)
-    }
-    
     public func removeAllListeners() {
-        signalOnValueChange.removeAllListeners()
+        didSet.internalSignal.removeAllListeners()
     }
     
     public var listenerCount: Int {
-        return signalOnValueChange.listenerCount
+        return didSet.internalSignal.listenerCount
     }
 }
