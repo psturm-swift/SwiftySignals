@@ -148,7 +148,7 @@ public final class ProtectedSignal<Message, TargetSlot: IsDefaultConstructable> 
     }
     
     public init(protectSlot: Slot<Message> -> TargetSlot) {
-        self.protectSlot = { _ in TargetSlot() }
+        self.protectSlot = protectSlot
     }
     
     public func then<Receiver:AnyObject>(with context: InvocationContext,
