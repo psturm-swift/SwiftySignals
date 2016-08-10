@@ -131,7 +131,7 @@ class SwiftySignals: XCTestCase {
         timerExpectation.fireAfter(seconds: 4.0)
         
         let timer = Timer()
-        timer.fired.then(with: self) { (owner, _) in
+        timer.fired.then(with: self) { owner in
             owner.timerCounter += 1
         }
         timer.fireAfter(seconds: 1.0)
@@ -151,7 +151,7 @@ class SwiftySignals: XCTestCase {
         timerExpectation.fireAfter(seconds: 4.0)
         
         let timer = PeriodicTimer()
-        timer.fired.then(with: self) { (owner, _) in
+        timer.fired.then(with: self) { owner in
             owner.timerCounter += 1
         }
         timer.interval = 1.0
