@@ -132,7 +132,7 @@ public final class Signal<Message> {
     }
 }
 
-public final class SignalTrait<Message, TargetSlot: AnyObject> {
+public struct SignalTrait<Message, TargetSlot: AnyObject> {
     private let signal: Signal<Message>
     private let convert: Slot<Message> -> TargetSlot
     
