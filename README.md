@@ -1,6 +1,6 @@
 # SwiftySignals
 
-[![Build Status](https://travis-ci.org/psturm-swift/SwiftySignals.svg?branch=master)](https://travis-ci.org/psturm-swift/SwiftySignals)
+[![Build Status][image-1]][1]
 
 ## Author
 Patrick Sturm, psturm.mail@googlemail.com
@@ -124,7 +124,7 @@ In the current version instances of `Signal<MessageType>` are not thread-safe. T
 
 ### Properties
 A property is of type `Property<T>`. It stores a value `Property<T>.value` of type `T` and has an embedded signal `Property<T>.didSet`
-	
+ 
 	If you set a new value to `Property<T>.value` then the embedded signal is triggered automatically.
 You can connect your functions directly to the signal.
 
@@ -159,12 +159,38 @@ After we connect the `setNewTemperature` instance function to the property, we c
 Instead of initializing the local temperature variable manually we could do this alternatively by calling the `invoke` function on the returned slot of `then`:
 
 	 Model.shared
-		.temperature
-		.didSet
-		.then(
-			on: self, 
-			call: TemperatureVC.setNewTemperature
-		)
-		.invoke()
+	    .temperature
+	    .didSet
+	    .then(
+	        on: self, 
+	        call: TemperatureVC.setNewTemperature
+	    )
+	    .invoke()
 
 The additional `invoke` command will trigger `setNewTemperature` with the property’s value.
+
+### Defining a timer
+A timer has an embedded signal `Timer.fired` which will fire after a given time. The timer can be started with the function `Timer.fireAfter(seconds:)`
+
+	class ViewController: NSViewController {
+		let timer = Timer()
+	
+		override func viewDidLoad() {
+			timer
+				.fired
+				.then(on: self, call: ViewController.timerUpdate)
+	
+			timer.fireAfter(seconds: 600)
+		}
+	}
+
+The timer can be stopped by calling `Timer.invalidate()`. When the timer has fired it will never fire again unless you call explicitly `Timer.fireAfter(seconds:)` again.
+
+### Defining a periodic timer
+A periodic timer works like the timer described before. It has a signal `PeriodicTimer.fired` where you can hook on your handler which should be executed when the timer fires. The interval of the timer is specified by the attribute `PerdiodicTimer.interval`.
+
+The timer can be started by `PeriodicTimer.activate`.
+
+[1]:	https://travis-ci.org/psturm-swift/SwiftySignals
+
+[image-1]:	https://travis-ci.org/psturm-swift/SwiftySignals.svg?branch=master
