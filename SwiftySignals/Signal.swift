@@ -132,40 +132,40 @@ public final class Signal<Message> {
     }
 }
 
-public struct SignalTrait<Message, TargetSlot: AnyObject> {
+public struct SignalTrait<Message, SlotTraitGenerator: IsSlotTraitGenerator where Message == SlotTraitGenerator.MessageType> {
     private let signal: Signal<Message>
-    private let convert: Slot<Message> -> TargetSlot
+    private let generator: SlotTraitGenerator
     
-    public init(signal: Signal<Message>, convert: Slot<Message> -> TargetSlot) {
+    public init(signal: Signal<Message>, generator: SlotTraitGenerator) {
         self.signal = signal
-        self.convert = convert
+        self.generator = generator
     }
     
     public func then<Receiver:AnyObject>(with context: InvocationContext,
                      and receiver: Receiver,
-                         call function: (Receiver, Message) -> Void) -> TargetSlot
+                         call function: (Receiver, Message) -> Void) -> SlotTraitGenerator.SlotTrait
     {
-        return convert(signal.then(with: context, and: receiver, call: function))
+        return generator.slotTrait(for: signal.then(with: context, and: receiver, call: function))
     }
     
     public func then<Receiver:AnyObject>(with context: InvocationContext,
                      on receiver: Receiver,
-                        call function: Receiver->(Message->Void)) -> TargetSlot
+                        call function: Receiver->(Message->Void)) -> SlotTraitGenerator.SlotTrait
     {
-        return convert(signal.then(with: context, on: receiver, call: function))
+        return generator.slotTrait(for: signal.then(with: context, on: receiver, call: function))
     }
     
     public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy = .OnMainThreadASAP,
                      with receiver: Receiver,
-                          call function: (Receiver, Message) -> Void) -> TargetSlot
+                          call function: (Receiver, Message) -> Void) -> SlotTraitGenerator.SlotTrait
     {
-        return convert(signal.then(invoke: policy, with: receiver, call: function))
+        return generator.slotTrait(for: signal.then(invoke: policy, with: receiver, call: function))
     }
     
     public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy = .OnMainThreadASAP,
                      on receiver: Receiver,
-                        call function: Receiver->(Message->Void)) -> TargetSlot
+                        call function: Receiver->(Message->Void)) -> SlotTraitGenerator.SlotTrait
     {
-        return convert(signal.then(invoke: policy, on: receiver, call: function))
+        return generator.slotTrait(for: signal.then(invoke: policy, on: receiver, call: function))
     }
 }

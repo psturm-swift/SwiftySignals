@@ -20,7 +20,7 @@
 
 import Foundation
 
-public final class PropertySlot<T> {
+public final class PropertySlotTrait<T> {
     private let slot: Slot<T>?
     private weak var property: Property<T>?
     
@@ -40,12 +40,25 @@ public final class PropertySlot<T> {
     }
 }
 
+public struct PropertySlotTraitGenerator<T>: IsSlotTraitGenerator {
+    public typealias MessageType = T
+    public typealias SlotTrait = PropertySlotTrait<T>
+    private weak var property: Property<T>?
+    
+    init(property: Property<T>) {
+        self.property = property
+    }
+    
+    public func slotTrait(for slot: Slot<MessageType>) -> PropertySlotTrait<T> {
+        return PropertySlotTrait<T>(property: property, slot: slot)
+    }
+}
+
 public class Property<T> {
     private let signalDidSet = Signal<T>()
-    private(set) public lazy var didSet: SignalTrait<T,PropertySlot<T>> = {
-        return SignalTrait(signal: self.signalDidSet, convert: {
-            [weak self] slot in PropertySlot<T>(property: self, slot: slot)
-        })
+    
+    private(set) public lazy var didSet: SignalTrait<T, PropertySlotTraitGenerator<T>> = {
+        return SignalTrait(signal: self.signalDidSet, generator: PropertySlotTraitGenerator(property: self))
     }()
     
     public var value: T {

@@ -51,3 +51,10 @@ public final class Slot<Message> {
         return receiver != nil
     }
 }
+
+public protocol IsSlotTraitGenerator {
+    associatedtype MessageType
+    associatedtype SlotTrait: AnyObject
+
+    func slotTrait(for slot: Slot<MessageType>) -> SlotTrait
+}
