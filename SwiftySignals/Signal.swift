@@ -50,7 +50,7 @@ public enum InvocationPolicy {
 }
 
 public final class Signal<Message> {
-    private var connectedSlots = [InternalSlot<Message>]()
+    private var connectedSlots = [Slot<Message>]()
     
     public init() {
     }
@@ -100,7 +100,7 @@ public final class Signal<Message> {
         })
     }
     
-    func remove(slot slot: InternalSlot<Message>) {
+    func remove(slot slot: Slot<Message>) {
         connectedSlots = connectedSlots.filter { $0 !== slot }
     }
     
@@ -116,15 +116,15 @@ public final class Signal<Message> {
                        withReceiver receiver: Receiver,
                                  withFunction function: (Receiver, Message) -> Void) -> Slot<Message>
     {
-        let internalSlot = InternalSlot<Message>(context: context, receiver: receiver, function: { [weak receiver] value in
+        let slot = Slot<Message>(context: context, receiver: receiver, signal: self, function: { [weak receiver] value in
             if let receiver = receiver {
                 function(receiver, value)
             }
         })
         
-        connectedSlots.append(internalSlot)
+        connectedSlots.append(slot)
         
-        return Slot(internalSlot: internalSlot, signal: self)
+        return slot
     }
     
     private func removeInvalidSlots() {

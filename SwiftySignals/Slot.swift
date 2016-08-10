@@ -20,15 +20,17 @@
 
 import Foundation
 
-public final class InternalSlot<Message> {
+public final class Slot<Message> {
     private let function: Message->Void
     private let context: InvocationContext
     private weak var receiver: AnyObject?
+    private weak var signal: Signal<Message>?
     
-    init(context: InvocationContext, receiver: AnyObject, function: Message->Void) {
+    init(context: InvocationContext, receiver: AnyObject, signal: Signal<Message>, function: Message->Void) {
         self.function = function
         self.context = context
         self.receiver = receiver
+        self.signal = signal
     }
     
     public func invoke(with argument: Message) {
@@ -38,30 +40,14 @@ public final class InternalSlot<Message> {
             }
         }
     }
-    
-    var isValid: Bool {
-        return receiver != nil
-    }
-}
 
-public final class Slot<Message> {
-    private weak var internalSlot: InternalSlot<Message>?
-    private weak var signal: Signal<Message>?
-    
-    init(internalSlot: InternalSlot<Message>, signal: Signal<Message>) {
-        self.internalSlot = internalSlot
-        self.signal = signal
-    }
-    
     public func unsubscribe() {
-        if let signal = self.signal, let internalSlot = self.internalSlot {
-            signal.remove(slot: internalSlot)
+        if let signal = self.signal {
+            signal.remove(slot: self)
         }
     }
     
-    public func invoke(with argument: Message) {
-        if let internalSlot = self.internalSlot {
-            internalSlot.invoke(with: argument)
-        }
+    public var isValid: Bool {
+        return receiver != nil
     }
 }
