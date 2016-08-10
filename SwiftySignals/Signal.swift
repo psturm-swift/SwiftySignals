@@ -49,7 +49,20 @@ public enum InvocationPolicy {
     }
 }
 
-public final class Signal<Message> {
+public protocol IsSignal {
+    associatedtype MessageType
+    associatedtype SlotType: AnyObject
+    
+    func then<Receiver:AnyObject>(with context: InvocationContext, and receiver: Receiver, call function: (Receiver, MessageType) -> Void) -> SlotType
+    func then<Receiver:AnyObject>(with context: InvocationContext, on receiver: Receiver, call function: Receiver->(MessageType->Void)) -> SlotType
+    func then<Receiver:AnyObject>(invoke policy: InvocationPolicy, with receiver: Receiver, call function: (Receiver, MessageType) -> Void) -> SlotType
+    func then<Receiver:AnyObject>(invoke policy: InvocationPolicy, on receiver: Receiver, call function: Receiver->(MessageType->Void)) -> SlotType
+}
+
+public final class Signal<Message>: IsSignal {
+    public typealias MessageType = Message
+    public typealias SlotType = Slot<Message>
+    
     private var connectedSlots = [Slot<Message>]()
     
     public init() {
@@ -132,7 +145,10 @@ public final class Signal<Message> {
     }
 }
 
-public struct SignalTrait<Message, SlotTraitGenerator: IsSlotTraitGenerator where Message == SlotTraitGenerator.MessageType> {
+public struct SignalTrait<Message, SlotTraitGenerator: IsSlotTraitGenerator where Message == SlotTraitGenerator.MessageType>: IsSignal {
+    public typealias MessageType = Message
+    public typealias SlotType = SlotTraitGenerator.SlotTrait
+    
     private let signal: Signal<Message>
     private let generator: SlotTraitGenerator
     
