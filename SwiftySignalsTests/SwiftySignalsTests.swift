@@ -35,6 +35,8 @@ class Helper {
 }
 
 class SwiftySignals: XCTestCase {
+    var timerCounter = 0
+    
     let property = Property(value: 42)
     var value1 = 0
     var value2 = 0
@@ -47,6 +49,7 @@ class SwiftySignals: XCTestCase {
         value1 = 0
         value2 = 0
         value3 = 0
+        timerCounter = 0
     }
     
     override func tearDown() {
@@ -116,5 +119,46 @@ class SwiftySignals: XCTestCase {
         waitForExpectationsWithTimeout(1.0, handler: nil)
         
         XCTAssertEqual(3, property.listenerCount)
+    }
+    
+    func testIfTimerFiresOnlyOnce() {
+        let expectation = self.expectationWithDescription("I expect that the timer has fired only once within 4 seconds")
+
+        let timerExpectation = Timer()
+        timerExpectation.fired.then(with: self) { (_, _) in
+            expectation.fulfill()
+        }
+        timerExpectation.fireAfter(seconds: 4.0)
+        
+        let timer = Timer()
+        timer.fired.then(with: self) { (owner, _) in
+            owner.timerCounter += 1
+        }
+        timer.fireAfter(seconds: 1.0)
+
+        waitForExpectationsWithTimeout(10.0, handler: nil)
+        
+        XCTAssertEqual(1, timerCounter)
+    }
+    
+    func testIfPeriodicTimerFiresMoreThanOnce() {
+        let expectation = self.expectationWithDescription("I expect that the timer has fired only once within 4 seconds")
+        
+        let timerExpectation = Timer()
+        timerExpectation.fired.then(with: self) { (_, _) in
+            expectation.fulfill()
+        }
+        timerExpectation.fireAfter(seconds: 4.0)
+        
+        let timer = PeriodicTimer()
+        timer.fired.then(with: self) { (owner, _) in
+            owner.timerCounter += 1
+        }
+        timer.interval = 1.0
+        timer.activate()
+        
+        waitForExpectationsWithTimeout(10.0, handler: nil)
+        
+        XCTAssertLessThan(1, timerCounter)
     }
 }

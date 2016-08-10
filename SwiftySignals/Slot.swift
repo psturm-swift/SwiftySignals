@@ -52,9 +52,33 @@ public final class Slot<Message> {
     }
 }
 
+public final class RestrictedSlotTrait<T> {
+    private let slot: Slot<T>?
+    
+    private init(slot: Slot<T>) {
+        self.slot = slot
+    }
+    
+    public func unsubscribe() {
+        slot?.unsubscribe()
+    }
+}
+
 public protocol IsSlotTraitGenerator {
     associatedtype MessageType
     associatedtype SlotTrait: AnyObject
-
+    
     func slotTrait(for slot: Slot<MessageType>) -> SlotTrait
+}
+
+public struct RestrictedSlotTraitGenerator<T>: IsSlotTraitGenerator {
+    public typealias MessageType = T
+    public typealias SlotTrait = RestrictedSlotTrait<T>
+    
+    init() {
+    }
+    
+    public func slotTrait(for slot: Slot<T>) -> RestrictedSlotTrait<T> {
+        return RestrictedSlotTrait<T>(slot: slot)
+    }
 }
