@@ -20,35 +20,6 @@
 
 import Foundation
 
-public enum InvocationPolicy {
-    case Immediately
-    case OnMainThreadASAP
-    case OnMainQueue
-    case WithLowPriority
-    case WithNormalPriority
-    case WithHighPriority
-    case OnQueue(dispatch_queue_t)
-    
-    var context: InvocationContext {
-        switch self {
-        case .Immediately:
-            return ImmediateInvocationContext()
-        case .OnMainThreadASAP:
-            return DefaultInvocationContext()
-        case .OnMainQueue:
-            return DispatchQueueInvocationContext(dispatchQueue: dispatch_get_main_queue())
-        case .WithLowPriority:
-            return DispatchQueueInvocationContext(dispatchQueue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0))
-        case .WithNormalPriority:
-            return DispatchQueueInvocationContext(dispatchQueue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0))
-        case .WithHighPriority:
-            return DispatchQueueInvocationContext(dispatchQueue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0))
-        case .OnQueue(let customQueue):
-            return DispatchQueueInvocationContext(dispatchQueue: customQueue)
-        }
-    }
-}
-
 public protocol IsSignal {
     associatedtype MessageType
     associatedtype SlotType: AnyObject
