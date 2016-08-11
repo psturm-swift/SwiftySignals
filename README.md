@@ -172,24 +172,43 @@ The additional `invoke` command will trigger `setNewTemperature` with the proper
 ### Defining a timer
 A timer has an embedded signal `Timer.fired` which will fire after a given time. The timer can be started with the function `Timer.fireAfter(seconds:)`
 
-	class ViewController: NSViewController {
-		let timer = Timer()
+	class TemperatureSensor {
+	    let timer = Timer()
 	
-		override func viewDidLoad() {
-			timer
-				.fired
-				.then(on: self, call: ViewController.timerUpdate)
+	    override func viewDidLoad() {
+	        timer
+	            .fired
+	            .then(
+					on: self, 
+					call: TemperatureSensor.updateTemperature
+				)
 	
-			timer.fireAfter(seconds: 600)
-		}
+	        timer.fireAfter(seconds: 600)
+	    }
 	}
 
 The timer can be stopped by calling `Timer.invalidate()`. When the timer has fired it will never fire again unless you call explicitly `Timer.fireAfter(seconds:)` again.
 
 ### Defining a periodic timer
-A periodic timer works like the timer described before. It has a signal `PeriodicTimer.fired` where you can hook on your handler which should be executed when the timer fires. The interval of the timer is specified by the attribute `PerdiodicTimer.interval`.
+The `PeriodicTimer` is a timer which is called regularly in intervals. 
 
-The timer can be started by `PeriodicTimer.activate`.
+	class TemperatureSensor {
+	    let timer = PeriodicTimer()
+	
+	    override func viewDidLoad() {
+	        timer
+	            .fired
+	            .then(
+					on: self, 
+					call: TemperatureSensor.updateTemperature
+				)
+	
+			timer.interval = 600
+	        timer.activate()
+	    }
+	}
+
+You can change the fire interval by setting `PeriodicTimer.interval` to the interval length in seconds. The timer needs to be started by `PerdiodicTimer.activate()`.
 
 [1]:	https://travis-ci.org/psturm-swift/SwiftySignals
 
