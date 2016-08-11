@@ -1,6 +1,6 @@
 # SwiftySignals
 
-[![Build Status][image-1]][1]
+[![Build Status][image-1]][1] [![][image-2]][2]
 
 ## Author
 Patrick Sturm, psturm.mail@googlemail.com
@@ -179,9 +179,9 @@ A timer has an embedded signal `Timer.fired` which will fire after a given time.
 	        timer
 	            .fired
 	            .then(
-					on: self, 
-					call: TemperatureSensor.updateTemperature
-				)
+	                on: self, 
+	                call: TemperatureSensor.updateTemperature
+	            )
 	
 	        timer.fireAfter(seconds: 600)
 	    }
@@ -199,17 +199,19 @@ The `PeriodicTimer` is a timer which is called regularly in intervals.
 	        timer
 	            .fired
 	            .then(
-					on: self, 
-					call: TemperatureSensor.updateTemperature
-				)
+	                on: self, 
+	                call: TemperatureSensor.updateTemperature
+	            )
 	
-			timer.interval = 600
+	        timer.interval = 600
 	        timer.activate()
 	    }
 	}
 
-You can change the fire interval by setting `PeriodicTimer.interval` to the interval length in seconds. The timer needs to be started by `PerdiodicTimer.activate()`.
+You can change the fire interval by setting `PeriodicTimer.interval` to the interval length in seconds. The timer needs to be started by `PeriodicTimer.activate()`.
 
 [1]:	https://travis-ci.org/psturm-swift/SwiftySignals
+[2]:	https://cocoapods.org/pods/SwiftySignals "CocoaPods"
 
 [image-1]:	https://travis-ci.org/psturm-swift/SwiftySignals.svg?branch=master
+[image-2]:	https://img.shields.io/cocoapods/v/SwiftySignals.svg "Version CocoaPods"
