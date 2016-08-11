@@ -13,7 +13,7 @@ SwiftySignals provides a simple API to send and react to application messages.
 There are three concept involved:
 - *Signal:* Signals are senders of messages.
 - *Message*: Messages are instances of an arbitrary type.
-- *Slot:*: Slots receive messages in the first place and hand them over to a connected user defined function. The user defined function can be executed on any dispatch queue.
+- *Slot:* Slots receive messages in the first place and hand them over to a connected user defined function. The user defined function can be executed on any dispatch queue.
 The concept can be considered as a specific implementation of the observer pattern.
 SwiftySignals provides already some classes which make use of signals:
 - *Property:* A property stores a value of arbitrary type and signals if the value has been changed.
