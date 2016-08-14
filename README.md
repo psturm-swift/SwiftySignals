@@ -70,6 +70,7 @@ The best place to connect the view controller as receiver is `viewDidLoad()`.  N
 	}
 
 The connection between view controller and signal lives until either the signal or the receiver is destroyed.
+As soon you connect a function to a signal, your function will get the last fired message, if the signal has been fired previously.
 
 ### Manual disconnect the receiver from the signal
 The `then(on:call:)` function returns a so called slot. The slot allows you to disconnect the receiver from the signal manually.
@@ -148,7 +149,6 @@ You can connect your functions directly to the signal.
 	                on: self, 
 	                call: TemperatureVC.setNewTemperature
 	            )
-	        setNewTemperature(Model.shared.temperature.value)
 	    }
 	
 	    func setNewTemperature(value: Temperature) {
@@ -156,22 +156,7 @@ You can connect your functions directly to the signal.
 	    }
 	}
 
-After we connect the `setNewTemperature` instance function to the property, we call it once with the current value of the property:
-
-	setNewTemperature(Model.shared.temperature.value)
-
-Instead of initializing the local temperature variable manually we could do this alternatively by calling the `invoke` function on the returned slot of `then`:
-
-	 Model.shared
-	    .temperature
-	    .didSet
-	    .then(
-	        on: self, 
-	        call: TemperatureVC.setNewTemperature
-	    )
-	    .invoke()
-
-The additional `invoke` command will trigger `setNewTemperature` with the property’s value.
+By calling then the function `setNewTemperature` is called by the current value of the property.
 
 ### Defining a timer
 A timer has an embedded signal `Timer.fired` which will fire after a given time. The timer can be started with the function `Timer.fireAfter(seconds:)`

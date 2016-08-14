@@ -37,15 +37,14 @@ class Helper {
 class SwiftySignals: XCTestCase {
     var timerCounter = 0
     
-    let property = Property(value: 42)
+    var property = Property(value: 42)
     var value1 = 0
     var value2 = 0
     var value3 = 0
     
     override func setUp() {
         super.setUp()
-        property.removeAllListeners()
-        property.value = 42
+        property = Property(value: 42)
         value1 = 0
         value2 = 0
         value3 = 0
@@ -65,23 +64,23 @@ class SwiftySignals: XCTestCase {
     }
     
     func testIfAllObserversAreCalledIfTheyAreConnectedTheFirstTime() {
-        property.didSet.then(on: self, call: SwiftySignals.updateValue1).invoke()
-        property.didSet.then(on: self, call: SwiftySignals.updateValue2).invoke()
+        property.didSet.then(on: self, call: SwiftySignals.updateValue1)
+        property.didSet.then(on: self, call: SwiftySignals.updateValue2)
         
         XCTAssertEqual(42, value1)
         XCTAssertEqual(42, value2)
-        XCTAssertEqual(2, property.listenerCount)
+        XCTAssertEqual(2, property.didSet.subscriberCount)
     }
 
     func testIfAllObserversAreCalledIfTheValueChanges() {
-        property.didSet.then(on: self, call: SwiftySignals.updateValue1).invoke()
-        property.didSet.then(on: self, call: SwiftySignals.updateValue2).invoke()
+        property.didSet.then(on: self, call: SwiftySignals.updateValue1)
+        property.didSet.then(on: self, call: SwiftySignals.updateValue2)
 
         property.value = 84
 
         XCTAssertEqual(84, value1)
         XCTAssertEqual(84, value2)
-        XCTAssertEqual(2, property.listenerCount)
+        XCTAssertEqual(2, property.didSet.subscriberCount)
     }
     
     func testIfReleasedSlotsAreIgnored() {
@@ -89,21 +88,21 @@ class SwiftySignals: XCTestCase {
 
         var helper: Helper? = Helper(reference: self)
         if let helper = helper {
-            property.didSet.then(on: helper, call: Helper.updateValue).invoke()
+            property.didSet.then(on: helper, call: Helper.updateValue)
         }
         helper = nil
         
         property.value = 21
         XCTAssertEqual(21, value1)
         XCTAssertEqual(42, value2)
-        XCTAssertEqual(1, property.listenerCount)
+        XCTAssertEqual(1, property.didSet.subscriberCount)
     }
     
     func testIfMainQueueInvocationPolicyDefersTheInvocation() {
         let expectation = self.expectationWithDescription("I expect that value3 is equal to 84")
 
-        property.didSet.then(on: self, call: SwiftySignals.updateValue1).invoke()
-        property.didSet.then(on: self, call: SwiftySignals.updateValue2).invoke()
+        property.didSet.then(on: self, call: SwiftySignals.updateValue1)
+        property.didSet.then(on: self, call: SwiftySignals.updateValue2)
         property.didSet.then(invoke: .OnMainQueue, with: self, call: { (owner, newValue) in
             owner.value3 = newValue
             if newValue == 84 {
@@ -118,7 +117,7 @@ class SwiftySignals: XCTestCase {
         
         waitForExpectationsWithTimeout(1.0, handler: nil)
         
-        XCTAssertEqual(3, property.listenerCount)
+        XCTAssertEqual(3, property.didSet.subscriberCount)
     }
     
     func testIfTimerFiresOnlyOnce() {
@@ -131,6 +130,7 @@ class SwiftySignals: XCTestCase {
         timerExpectation.fireAfter(seconds: 4.0)
         
         let timer = Timer()
+
         timer.fired.then(with: self) { owner in
             owner.timerCounter += 1
         }

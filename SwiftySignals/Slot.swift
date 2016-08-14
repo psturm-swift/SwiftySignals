@@ -33,7 +33,7 @@ public final class Slot<Message> {
         self.signal = signal
     }
     
-    public func invoke(with argument: Message) {
+    func invoke(with argument: Message) {
         if isValid {
             context.invoke {
                 self.function(argument)
@@ -41,44 +41,13 @@ public final class Slot<Message> {
         }
     }
 
+    var isValid: Bool {
+        return receiver != nil
+    }
+
     public func unsubscribe() {
         if let signal = self.signal {
             signal.remove(slot: self)
         }
-    }
-    
-    public var isValid: Bool {
-        return receiver != nil
-    }
-}
-
-public final class RestrictedSlotTrait<T> {
-    private let slot: Slot<T>?
-    
-    private init(slot: Slot<T>) {
-        self.slot = slot
-    }
-    
-    public func unsubscribe() {
-        slot?.unsubscribe()
-    }
-}
-
-public protocol IsSlotTraitGenerator {
-    associatedtype MessageType
-    associatedtype SlotTrait: AnyObject
-    
-    func slotTrait(for slot: Slot<MessageType>) -> SlotTrait
-}
-
-public struct RestrictedSlotTraitGenerator<T>: IsSlotTraitGenerator {
-    public typealias MessageType = T
-    public typealias SlotTrait = RestrictedSlotTrait<T>
-    
-    init() {
-    }
-    
-    public func slotTrait(for slot: Slot<T>) -> RestrictedSlotTrait<T> {
-        return RestrictedSlotTrait<T>(slot: slot)
     }
 }

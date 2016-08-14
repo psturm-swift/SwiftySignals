@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		023A17CF1D5F240200295C46 /* MessageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A17CE1D5F240200295C46 /* MessageSource.swift */; };
 		025C2C411D57817100397638 /* SwiftySignals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025C2C371D57817000397638 /* SwiftySignals.framework */; };
 		025C2C4E1D57827D00397638 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F71D53A19D009A3F63 /* Property.swift */; };
 		025C2C4F1D57827F00397638 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F81D53A19D009A3F63 /* Signal.swift */; };
@@ -33,6 +34,9 @@
 		02C868451D5B9E8900435B55 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C868431D5B98E500435B55 /* Timer.swift */; };
 		02C868461D5B9E8E00435B55 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C868431D5B98E500435B55 /* Timer.swift */; };
 		02C868471D5B9E9100435B55 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C868431D5B98E500435B55 /* Timer.swift */; };
+		02CD3F9F1D610C3900C7EA60 /* MessageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A17CE1D5F240200295C46 /* MessageSource.swift */; };
+		02CD3FA01D610C4000C7EA60 /* MessageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A17CE1D5F240200295C46 /* MessageSource.swift */; };
+		02CD3FA11D610C4400C7EA60 /* MessageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A17CE1D5F240200295C46 /* MessageSource.swift */; };
 		02E39FE71D590F2500E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
 		02E39FE81D590F4B00E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
 		02E39FE91D590F5400E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
@@ -64,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		023A17CE1D5F240200295C46 /* MessageSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSource.swift; sourceTree = "<group>"; };
 		025C2C371D57817000397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C2C401D57817100397638 /* SwiftySignalsTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C2C591D57836900397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,6 +212,7 @@
 				02BC22F91D53A19D009A3F63 /* Slot.swift */,
 				02E39FE61D590F2500E95722 /* Context.swift */,
 				02C868431D5B98E500435B55 /* Timer.swift */,
+				023A17CE1D5F240200295C46 /* MessageSource.swift */,
 			);
 			path = SwiftySignals;
 			sourceTree = "<group>";
@@ -502,6 +508,7 @@
 				025C2C501D57828200397638 /* Slot.swift in Sources */,
 				02E39FE81D590F4B00E95722 /* Context.swift in Sources */,
 				02C868451D5B9E8900435B55 /* Timer.swift in Sources */,
+				02CD3F9F1D610C3900C7EA60 /* MessageSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +529,7 @@
 				025C2C721D57837F00397638 /* Slot.swift in Sources */,
 				02E39FE91D590F5400E95722 /* Context.swift in Sources */,
 				02C868461D5B9E8E00435B55 /* Timer.swift in Sources */,
+				02CD3FA01D610C4000C7EA60 /* MessageSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +550,7 @@
 				025C2C821D57841400397638 /* Slot.swift in Sources */,
 				02E39FEA1D590F5900E95722 /* Context.swift in Sources */,
 				02C868471D5B9E9100435B55 /* Timer.swift in Sources */,
+				02CD3FA11D610C4400C7EA60 /* MessageSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +561,7 @@
 				02BC22FA1D53A19D009A3F63 /* Property.swift in Sources */,
 				02E39FE71D590F2500E95722 /* Context.swift in Sources */,
 				02BC22FC1D53A19D009A3F63 /* Slot.swift in Sources */,
+				023A17CF1D5F240200295C46 /* MessageSource.swift in Sources */,
 				02C868441D5B98E500435B55 /* Timer.swift in Sources */,
 				02BC22FB1D53A19D009A3F63 /* Signal.swift in Sources */,
 			);

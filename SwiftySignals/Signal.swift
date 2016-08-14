@@ -20,184 +20,75 @@
 
 import Foundation
 
-public protocol IsSignal {
-    associatedtype MessageType
-    associatedtype SlotType: AnyObject
-    
-    func then<Receiver:AnyObject>(with context: InvocationContext, and receiver: Receiver, call function: (Receiver, MessageType) -> Void) -> SlotType
-    func then<Receiver:AnyObject>(with context: InvocationContext, and receiver: Receiver, call function: Receiver -> Void) -> SlotType
-    func then<Receiver:AnyObject>(with context: InvocationContext, on receiver: Receiver, call function: Receiver->(MessageType->Void)) -> SlotType
-    func then<Receiver:AnyObject>(invoke policy: InvocationPolicy, with receiver: Receiver, call function: (Receiver, MessageType) -> Void) -> SlotType
-    func then<Receiver:AnyObject>(invoke policy: InvocationPolicy, with receiver: Receiver, call function: Receiver -> Void) -> SlotType
-    func then<Receiver:AnyObject>(invoke policy: InvocationPolicy, on receiver: Receiver, call function: Receiver->(MessageType->Void)) -> SlotType
-}
-
-public final class Signal<Message>: IsSignal {
+public final class Signal<Message>: IsMessageSource {
     public typealias MessageType = Message
     public typealias SlotType = Slot<Message>
     
     private var connectedSlots = [Slot<Message>]()
+    private(set) public var lastMessage: Message? = nil
     
     public init() {
     }
-    
-    public func trigger(with argument: Message) {
-        trigger(argument)
-    }
 
-    public func trigger(argument: Message) {
+    public func trigger(with message: Message) {
+        lastMessage = message
         removeInvalidSlots()
-
+        
         let connectedSlots = self.connectedSlots
         for slot in connectedSlots {
-            slot.invoke(with: argument)
+            slot.invoke(with: message)
         }
     }
-
+    
+    public func trigger(message: Message) {
+        trigger(with: message)
+    }
+    
     public func then<Receiver:AnyObject>(with context: InvocationContext,
                      and receiver: Receiver,
                          call function: (Receiver, Message) -> Void) -> Slot<Message>
     {
-        return appendNewSlot(withContext: context, withReceiver: receiver, withFunction: function)
+        let slot = Slot<Message>(context: context, receiver: receiver, signal: self, function: { [weak receiver] message in
+            if let receiver = receiver {
+                function(receiver, message)
+            }
+        })
+        connectedSlots.append(slot)
+        if let lastMessage = self.lastMessage {
+            slot.invoke(with: lastMessage)
+        }
+        
+        return slot
+    }
+    
+    public var subscriberCount: Int {
+        return connectedSlots.count
     }
 
-    public func then<Receiver:AnyObject>(with context: InvocationContext,
-                     and receiver: Receiver,
-                         call function: Receiver -> Void) -> Slot<Message>
-    {
-        return appendNewSlot(withContext: context, withReceiver: receiver, withFunction: function)
-    }
-    
-    public func then<Receiver:AnyObject>(with context: InvocationContext,
-                     on receiver: Receiver,
-                        call function: Receiver->(Message->Void)) -> Slot<Message>
-    {
-        return appendNewSlot(withContext: context, withReceiver: receiver, withFunction: { (_receiver, _value) in
-            function(_receiver)(_value)
-        })
-    }
-    
-    public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy = .OnMainThreadASAP,
-                     with receiver: Receiver,
-                          call function: (Receiver, Message) -> Void) -> Slot<Message>
-    {
-        return appendNewSlot(withContext: policy.context, withReceiver: receiver, withFunction: function)
-    }
-    
-    public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy = .OnMainThreadASAP,
-                     with receiver: Receiver,
-                          call function: Receiver -> Void) -> Slot<Message>
-    {
-        return appendNewSlot(withContext: policy.context, withReceiver: receiver, withFunction: function)
-    }
-
-    public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy = .OnMainThreadASAP,
-                     on receiver: Receiver,
-                          call function: Receiver->(Message->Void)) -> Slot<Message>
-    {
-        return appendNewSlot(withContext: policy.context, withReceiver: receiver, withFunction: { (_owner, _value) in
-            function(_owner)(_value)
-        })
-    }
-    
     func remove(slot slot: Slot<Message>) {
         connectedSlots = connectedSlots.filter { $0 !== slot }
     }
     
-    public func removeAllListeners() {
-        connectedSlots = []
-    }
-    
-    public var listenerCount: Int {
-        return connectedSlots.count
-    }
-    
-    private func appendNewSlot<Receiver:AnyObject>(withContext context: InvocationContext,
-                       withReceiver receiver: Receiver,
-                                 withFunction function: (Receiver, Message) -> Void) -> Slot<Message>
-    {
-        let slot = Slot<Message>(context: context, receiver: receiver, signal: self, function: { [weak receiver] value in
-            if let receiver = receiver {
-                function(receiver, value)
-            }
-        })
-        
-        connectedSlots.append(slot)
-        
-        return slot
-    }
-    
-    private func appendNewSlot<Receiver:AnyObject>(withContext context: InvocationContext,
-                               withReceiver receiver: Receiver,
-                                            withFunction function: Receiver -> Void) -> Slot<Message>
-    {
-        let slot = Slot<Message>(context: context, receiver: receiver, signal: self, function: { [weak receiver] value in
-            if let receiver = receiver {
-                function(receiver)
-            }
-        })
-        
-        connectedSlots.append(slot)
-        
-        return slot
-    }
-    
-    private func removeInvalidSlots() {
+    func removeInvalidSlots() {
         connectedSlots = connectedSlots.filter { slot in slot.isValid }
     }
 }
 
-public struct SignalTrait<Message, SlotTraitGenerator: IsSlotTraitGenerator where Message == SlotTraitGenerator.MessageType>: IsSignal {
-    public typealias MessageType = Message
-    public typealias SlotType = SlotTraitGenerator.SlotTrait
+public final class MessagePublisher<Message>: IsMessageSource {
+    var signal: Signal<Message>
     
-    private let signal: Signal<Message>
-    private let generator: SlotTraitGenerator
-    
-    public init(signal: Signal<Message>, generator: SlotTraitGenerator) {
+    init(signal: Signal<Message>) {
         self.signal = signal
-        self.generator = generator
     }
     
     public func then<Receiver:AnyObject>(with context: InvocationContext,
                      and receiver: Receiver,
-                         call function: (Receiver, Message) -> Void) -> SlotTraitGenerator.SlotTrait
+                         call function: (Receiver, Message) -> Void) -> Slot<Message>
     {
-        return generator.slotTrait(for: signal.then(with: context, and: receiver, call: function))
+        return signal.then(with: context, and: receiver, call: function)
     }
     
-    public func then<Receiver:AnyObject>(with context: InvocationContext,
-                     and receiver: Receiver,
-                         call function: Receiver -> Void) -> SlotTraitGenerator.SlotTrait
-    {
-        return generator.slotTrait(for: signal.then(with: context, and: receiver, call: function))
-    }
-    
-    public func then<Receiver:AnyObject>(with context: InvocationContext,
-                     on receiver: Receiver,
-                        call function: Receiver->(Message->Void)) -> SlotTraitGenerator.SlotTrait
-    {
-        return generator.slotTrait(for: signal.then(with: context, on: receiver, call: function))
-    }
-    
-    public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy = .OnMainThreadASAP,
-                     with receiver: Receiver,
-                          call function: (Receiver, Message) -> Void) -> SlotTraitGenerator.SlotTrait
-    {
-        return generator.slotTrait(for: signal.then(invoke: policy, with: receiver, call: function))
-    }
-    
-    public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy = .OnMainThreadASAP,
-                     with receiver: Receiver,
-                          call function: Receiver -> Void) -> SlotTraitGenerator.SlotTrait
-    {
-        return generator.slotTrait(for: signal.then(invoke: policy, with: receiver, call: function))
-    }
-    
-    public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy = .OnMainThreadASAP,
-                     on receiver: Receiver,
-                        call function: Receiver->(Message->Void)) -> SlotTraitGenerator.SlotTrait
-    {
-        return generator.slotTrait(for: signal.then(invoke: policy, on: receiver, call: function))
+    public var subscriberCount: Int {
+        return signal.subscriberCount
     }
 }

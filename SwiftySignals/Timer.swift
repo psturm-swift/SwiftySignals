@@ -23,10 +23,10 @@ import Foundation
 public final class Timer {
     private weak var timer: NSTimer? = nil
     private let tolerance: NSTimeInterval
-    private let signal = Signal<Void>()
-    lazy private(set) public var fired: SignalTrait<Void, RestrictedSlotTraitGenerator<Void>> = {
-        return SignalTrait(signal: self.signal, generator: RestrictedSlotTraitGenerator<Void>())
-    }()
+    private let signalFired = Signal<Void>()
+    public var fired: MessagePublisher<Void> {
+        return MessagePublisher<Void>(signal: signalFired)
+    }
     
     public init(tolerance: NSTimeInterval = 0) {
         self.tolerance = tolerance
@@ -48,17 +48,17 @@ public final class Timer {
     }
     
     @objc private func fireSignal() {
-        signal.trigger()
+        signalFired.trigger()
     }
 }
 
 public final class PeriodicTimer {
     private weak var timer: NSTimer? = nil
     private let tolerance: NSTimeInterval
-    private let signal = Signal<Void>()
-    lazy private(set) public var fired: SignalTrait<Void, RestrictedSlotTraitGenerator<Void>> = {
-        return SignalTrait(signal: self.signal, generator: RestrictedSlotTraitGenerator<Void>())
-    }()
+    private let signalFired = Signal<Void>()
+    public var fired: MessagePublisher<Void> {
+        return MessagePublisher<Void>(signal: signalFired)
+    }
     
     public init(tolerance: NSTimeInterval = 0) {
         self.tolerance = tolerance
@@ -88,7 +88,6 @@ public final class PeriodicTimer {
     }
     
     @objc private func fireSignal() {
-        signal.trigger()
+        signalFired.trigger()
     }
 }
-

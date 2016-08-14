@@ -20,46 +20,11 @@
 
 import Foundation
 
-public final class PropertySlotTrait<T> {
-    private let slot: Slot<T>?
-    private weak var property: Property<T>?
-    
-    private init(property: Property<T>?, slot: Slot<T>) {
-        self.property = property
-        self.slot = slot
-    }
-
-    public func invoke() {
-        if let property = property {
-            slot?.invoke(with: property.value)
-        }
-    }
-    
-    public func unsubscribe() {
-        slot?.unsubscribe()
-    }
-}
-
-public struct PropertySlotTraitGenerator<T>: IsSlotTraitGenerator {
-    public typealias MessageType = T
-    public typealias SlotTrait = PropertySlotTrait<T>
-    private weak var property: Property<T>?
-    
-    init(property: Property<T>) {
-        self.property = property
-    }
-    
-    public func slotTrait(for slot: Slot<MessageType>) -> PropertySlotTrait<T> {
-        return PropertySlotTrait<T>(property: property, slot: slot)
-    }
-}
-
 public class Property<T> {
     private let signalDidSet = Signal<T>()
-    
-    private(set) public lazy var didSet: SignalTrait<T, PropertySlotTraitGenerator<T>> = {
-        return SignalTrait(signal: self.signalDidSet, generator: PropertySlotTraitGenerator(property: self))
-    }()
+    public var didSet: MessagePublisher<T> {
+        return MessagePublisher<T>(signal: self.signalDidSet)
+    }
     
     public var value: T {
         didSet {
@@ -69,13 +34,6 @@ public class Property<T> {
     
     public init(value: T) {
         self.value = value
-    }
-
-    public func removeAllListeners() {
-        signalDidSet.removeAllListeners()
-    }
-    
-    public var listenerCount: Int {
-        return signalDidSet.listenerCount
+        signalDidSet.trigger(with: value)
     }
 }
