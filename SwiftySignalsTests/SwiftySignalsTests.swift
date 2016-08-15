@@ -170,4 +170,13 @@ class SwiftySignals: XCTestCase {
         XCTAssertEqual(0, value2)
         XCTAssertEqual(2, property.didSet.subscriberCount)
     }
+
+    func testIfOnlyFunctionsAreCalledThatPassTheConcatenatedFilter() {
+        property.didSet.filter({$0 > 0}).filter({$0 > 10}).then(on: self, call: SwiftySignals.updateValue1)
+        property.didSet.filter({$0 > 3}).filter({$0 > 100}).then(on: self, call: SwiftySignals.updateValue2)
+        
+        XCTAssertEqual(42, value1)
+        XCTAssertEqual(0, value2)
+        XCTAssertEqual(2, property.didSet.subscriberCount)
+    }
 }

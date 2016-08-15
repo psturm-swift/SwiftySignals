@@ -134,8 +134,4 @@ public final class MessagePublisherFilter<Message>: IsMessageSource {
             }
         }
     }
-    
-    public var subscriberCount: Int {
-        return signal.subscriberCount
-    }
 }

@@ -25,7 +25,6 @@ public protocol IsMessageSource {
     associatedtype SlotType: AnyObject
     
     func then<Receiver:AnyObject>(with context: InvocationContext, and receiver: Receiver, call function: (Receiver, MessageType) -> Void) -> SlotType
-    var subscriberCount: Int { get }
     
     // Begin: Functions with default implementation
     func then<Receiver:AnyObject>(with context: InvocationContext, on receiver: Receiver, call function: Receiver->(MessageType->Void)) -> SlotType
