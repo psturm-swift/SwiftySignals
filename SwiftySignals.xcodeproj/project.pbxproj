@@ -14,13 +14,10 @@
 		025C2C501D57828200397638 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F91D53A19D009A3F63 /* Slot.swift */; };
 		025C2C521D57828F00397638 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 029D33371D53A0ED00002059 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		025C2C531D57829700397638 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D33431D53A0EE00002059 /* SwiftySignalsTests.swift */; };
-		025C2C5C1D57836900397638 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 025C2C5B1D57836900397638 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		025C2C631D57836900397638 /* SwiftySignals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025C2C591D57836900397638 /* SwiftySignals.framework */; };
-		025C2C681D57836900397638 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C2C671D57836900397638 /* SwiftySignalsTests.swift */; };
 		025C2C701D57837B00397638 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F71D53A19D009A3F63 /* Property.swift */; };
 		025C2C711D57837D00397638 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F81D53A19D009A3F63 /* Signal.swift */; };
 		025C2C721D57837F00397638 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F91D53A19D009A3F63 /* Slot.swift */; };
-		025C2C7B1D5783FA00397638 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 025C2C7A1D5783FA00397638 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		025C2C801D57841000397638 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F71D53A19D009A3F63 /* Property.swift */; };
 		025C2C811D57841200397638 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F81D53A19D009A3F63 /* Signal.swift */; };
 		025C2C821D57841400397638 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F91D53A19D009A3F63 /* Slot.swift */; };
@@ -72,14 +69,8 @@
 		025C2C371D57817000397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C2C401D57817100397638 /* SwiftySignalsTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C2C591D57836900397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		025C2C5B1D57836900397638 /* SwiftySignals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftySignals.h; sourceTree = "<group>"; };
-		025C2C5D1D57836900397638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		025C2C621D57836900397638 /* SwiftySignalsTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		025C2C671D57836900397638 /* SwiftySignalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftySignalsTests.swift; sourceTree = "<group>"; };
-		025C2C691D57836900397638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		025C2C781D5783FA00397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		025C2C7A1D5783FA00397638 /* SwiftySignals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftySignals.h; sourceTree = "<group>"; };
-		025C2C7C1D5783FB00397638 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		029D33341D53A0ED00002059 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		029D33371D53A0ED00002059 /* SwiftySignals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftySignals.h; sourceTree = "<group>"; };
 		029D33391D53A0ED00002059 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -149,41 +140,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		025C2C5A1D57836900397638 /* SwiftySignals */ = {
-			isa = PBXGroup;
-			children = (
-				025C2C5B1D57836900397638 /* SwiftySignals.h */,
-				025C2C5D1D57836900397638 /* Info.plist */,
-			);
-			path = SwiftySignals;
-			sourceTree = "<group>";
-		};
-		025C2C661D57836900397638 /* SwiftySignalsTests */ = {
-			isa = PBXGroup;
-			children = (
-				025C2C671D57836900397638 /* SwiftySignalsTests.swift */,
-				025C2C691D57836900397638 /* Info.plist */,
-			);
-			path = SwiftySignalsTests;
-			sourceTree = "<group>";
-		};
-		025C2C791D5783FA00397638 /* SwiftySignals */ = {
-			isa = PBXGroup;
-			children = (
-				025C2C7A1D5783FA00397638 /* SwiftySignals.h */,
-				025C2C7C1D5783FB00397638 /* Info.plist */,
-			);
-			path = SwiftySignals;
-			sourceTree = "<group>";
-		};
 		029D332A1D53A0ED00002059 = {
 			isa = PBXGroup;
 			children = (
 				029D33361D53A0ED00002059 /* SwiftySignals */,
 				029D33421D53A0EE00002059 /* SwiftySignalsTests */,
-				025C2C5A1D57836900397638 /* SwiftySignals */,
-				025C2C661D57836900397638 /* SwiftySignalsTests */,
-				025C2C791D5783FA00397638 /* SwiftySignals */,
 				029D33351D53A0ED00002059 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -241,7 +202,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025C2C5C1D57836900397638 /* SwiftySignals.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +209,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025C2C7B1D5783FA00397638 /* SwiftySignals.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,7 +496,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025C2C681D57836900397638 /* SwiftySignalsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

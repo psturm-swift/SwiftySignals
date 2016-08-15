@@ -71,3 +71,10 @@ public extension IsMessageSource {
         return then(with: InvocationPolicy.OnMainThreadASAP.context, on: receiver, call: function)
     }
 }
+
+public protocol IsMessageFilter {
+    associatedtype MessageType
+    associatedtype FilterResult: IsMessageSource
+    
+    func filter(predicate: MessageType->Bool) -> FilterResult
+}

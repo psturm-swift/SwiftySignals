@@ -20,9 +20,10 @@
 
 import Foundation
 
-public final class Signal<Message>: IsMessageSource {
+public final class Signal<Message>: IsMessageSource, IsMessageFilter {
     public typealias MessageType = Message
     public typealias SlotType = Slot<Message>
+    public typealias FilterResult = MessagePublisherFilter<Message>
     
     private var connectedSlots = [Slot<Message>]()
     private(set) public var lastMessage: Message? = nil
@@ -78,9 +79,10 @@ public final class Signal<Message>: IsMessageSource {
     }
 }
 
-public final class MessagePublisher<Message>: IsMessageSource {
+public final class MessagePublisher<Message>: IsMessageSource, IsMessageFilter {
     public typealias MessageType = Message
     public typealias SlotType = Slot<Message>
+    public typealias FilterResult = MessagePublisherFilter<Message>
     
     let signal: Signal<Message>
     
@@ -104,9 +106,10 @@ public final class MessagePublisher<Message>: IsMessageSource {
     }
 }
 
-public final class MessagePublisherFilter<Message>: IsMessageSource {
+public final class MessagePublisherFilter<Message>: IsMessageSource, IsMessageFilter {
     public typealias MessageType = Message
     public typealias SlotType = Slot<Message>
+    public typealias FilterResult = MessagePublisherFilter<Message>
 
     let predicate: Message->Bool
     let signal: Signal<Message>
