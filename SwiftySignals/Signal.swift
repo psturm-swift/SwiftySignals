@@ -44,6 +44,10 @@ public final class Signal<Message>: IsMessageSource {
         trigger(with: message)
     }
     
+    public func filter(predicate: Message->Bool) -> MessagePublisherFilter<Message> {
+        return MessagePublisherFilter(signal: self, predicate: predicate)
+    }
+    
     public func then<Receiver:AnyObject>(with context: InvocationContext,
                      and receiver: Receiver,
                          call function: (Receiver, Message) -> Void) -> Slot<Message>
@@ -75,10 +79,17 @@ public final class Signal<Message>: IsMessageSource {
 }
 
 public final class MessagePublisher<Message>: IsMessageSource {
-    var signal: Signal<Message>
+    public typealias MessageType = Message
+    public typealias SlotType = Slot<Message>
+    
+    let signal: Signal<Message>
     
     init(signal: Signal<Message>) {
         self.signal = signal
+    }
+    
+    public func filter(predicate: Message->Bool) -> MessagePublisherFilter<Message> {
+        return signal.filter(predicate)
     }
     
     public func then<Receiver:AnyObject>(with context: InvocationContext,
@@ -86,6 +97,42 @@ public final class MessagePublisher<Message>: IsMessageSource {
                          call function: (Receiver, Message) -> Void) -> Slot<Message>
     {
         return signal.then(with: context, and: receiver, call: function)
+    }
+    
+    public var subscriberCount: Int {
+        return signal.subscriberCount
+    }
+}
+
+public final class MessagePublisherFilter<Message>: IsMessageSource {
+    public typealias MessageType = Message
+    public typealias SlotType = Slot<Message>
+
+    let predicate: Message->Bool
+    let signal: Signal<Message>
+    
+    init(signal: Signal<Message>, predicate: Message->Bool) {
+        self.signal = signal
+        self.predicate = predicate
+    }
+    
+    public func filter(predicate: Message->Bool) -> MessagePublisherFilter<Message> {
+        let currentPredictate = self.predicate
+        return MessagePublisherFilter(signal: self.signal, predicate: {
+            message in
+            return currentPredictate(message) && predicate(message)
+        })
+    }
+    
+    public func then<Receiver:AnyObject>(with context: InvocationContext,
+                     and receiver: Receiver,
+                         call function: (Receiver, Message) -> Void) -> Slot<Message>
+    {
+        return signal.then(with: context, and: receiver) { [predicate] (receiver, message) in
+            if (predicate(message)) {
+                function(receiver, message)
+            }
+        }
     }
     
     public var subscriberCount: Int {

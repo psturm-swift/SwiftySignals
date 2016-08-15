@@ -161,4 +161,13 @@ class SwiftySignals: XCTestCase {
         
         XCTAssertLessThan(1, timerCounter)
     }
+    
+    func testIfOnlyFunctionsAreCalledThatPassTheFilter() {
+        property.didSet.filter({$0 > 0}).then(on: self, call: SwiftySignals.updateValue1)
+        property.didSet.filter({$0 > 100}).then(on: self, call: SwiftySignals.updateValue2)
+        
+        XCTAssertEqual(42, value1)
+        XCTAssertEqual(0, value2)
+        XCTAssertEqual(2, property.didSet.subscriberCount)
+    }
 }
