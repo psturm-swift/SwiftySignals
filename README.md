@@ -199,6 +199,25 @@ The `PeriodicTimer` is a timer which is called regularly in intervals.
 
 You can change the fire interval by setting `PeriodicTimer.interval` to the interval length in seconds. The timer needs to be started by `PeriodicTimer.activate()`.
 
+### Filter messages
+A filter can be added to each subscription. Therefore the signal provides the function `filter(predicate:)`
+
+	class TemperatureAlert {
+	    override func viewDidLoad() {
+	        TemperatureSensor.shared
+	            .signalTemperature
+	            .filter({ $0 > 30.0 })
+	            .then(
+	                on: self,
+	                call: TemperatureAlert.tooHigh
+	            )
+	    }
+	
+	    func tooHigh(temperature: Temperature) {
+	        // Show alert
+	    }
+	}
+
 [1]:	https://travis-ci.org/psturm-swift/SwiftySignals
 [2]:	https://cocoapods.org/pods/SwiftySignals "CocoaPods"
 
