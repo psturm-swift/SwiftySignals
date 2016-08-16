@@ -34,6 +34,7 @@
 		02CD3F9F1D610C3900C7EA60 /* MessageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A17CE1D5F240200295C46 /* MessageSource.swift */; };
 		02CD3FA01D610C4000C7EA60 /* MessageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A17CE1D5F240200295C46 /* MessageSource.swift */; };
 		02CD3FA11D610C4400C7EA60 /* MessageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A17CE1D5F240200295C46 /* MessageSource.swift */; };
+		02D865641D62A376007D02A6 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D33431D53A0EE00002059 /* SwiftySignalsTests.swift */; };
 		02E39FE71D590F2500E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
 		02E39FE81D590F4B00E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
 		02E39FE91D590F5400E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
@@ -496,6 +497,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D865641D62A376007D02A6 /* SwiftySignalsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
