@@ -20,7 +20,7 @@
 
 import Foundation
 
-public protocol IsMessageSource {
+public protocol EventType {
     associatedtype MessageType
     associatedtype SlotType: AnyObject
     
@@ -38,7 +38,7 @@ public protocol IsMessageSource {
     // End: Functions with default implementation
 }
 
-public extension IsMessageSource {
+public extension EventType {
     public func then<Receiver:AnyObject>(with context: InvocationContext, on receiver: Receiver, call function: Receiver->(MessageType->Void)) -> SlotType {
         return then(with: context, and: receiver) { (receiver, message) in function(receiver)(message) }
     }
@@ -72,9 +72,9 @@ public extension IsMessageSource {
     }
 }
 
-public protocol IsMessageFilter {
+public protocol FilteredEventType {
     associatedtype MessageType
-    associatedtype FilterResult: IsMessageSource
+    associatedtype FilterResult: EventType
     
     func filter(predicate: MessageType->Bool) -> FilterResult
 }

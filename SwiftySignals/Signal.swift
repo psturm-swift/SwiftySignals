@@ -20,121 +20,17 @@
 
 import Foundation
 
-public final class Signal<Message>: IsMessageSource, IsMessageFilter {
-    public typealias MessageType = Message
-    public typealias SlotType = Slot<Message>
-    public typealias FilterResult = MessagePublisherFilter<Message>
-    
-    private var connectedSlots = [Slot<Message>]()
-    private(set) public var lastMessage: Message? = nil
+public final class Signal<Message> {
+    public let fired = Event<Message>()
     
     public init() {
     }
-
-    public func trigger(with message: Message) {
-        lastMessage = message
-        removeInvalidSlots()
-        
-        let connectedSlots = self.connectedSlots
-        for slot in connectedSlots {
-            slot.invoke(with: message)
-        }
+    
+    public func fire(with message: Message) {
+        fired.fire(with: message)
     }
     
-    public func trigger(message: Message) {
-        trigger(with: message)
-    }
-    
-    public func filter(predicate: Message->Bool) -> MessagePublisherFilter<Message> {
-        return MessagePublisherFilter(signal: self, predicate: predicate)
-    }
-    
-    public func then<Receiver:AnyObject>(with context: InvocationContext,
-                     and receiver: Receiver,
-                         call function: (Receiver, Message) -> Void) -> Slot<Message>
-    {
-        let slot = Slot<Message>(context: context, receiver: receiver, signal: self, function: { [weak receiver] message in
-            if let receiver = receiver {
-                function(receiver, message)
-            }
-        })
-        connectedSlots.append(slot)
-        if let lastMessage = self.lastMessage {
-            slot.invoke(with: lastMessage)
-        }
-        
-        return slot
-    }
-    
-    public var subscriberCount: Int {
-        return connectedSlots.count
-    }
-
-    func remove(slot slot: Slot<Message>) {
-        connectedSlots = connectedSlots.filter { $0 !== slot }
-    }
-    
-    func removeInvalidSlots() {
-        connectedSlots = connectedSlots.filter { slot in slot.isValid }
-    }
-}
-
-public final class MessagePublisher<Message>: IsMessageSource, IsMessageFilter {
-    public typealias MessageType = Message
-    public typealias SlotType = Slot<Message>
-    public typealias FilterResult = MessagePublisherFilter<Message>
-    
-    let signal: Signal<Message>
-    
-    init(signal: Signal<Message>) {
-        self.signal = signal
-    }
-    
-    public func filter(predicate: Message->Bool) -> MessagePublisherFilter<Message> {
-        return signal.filter(predicate)
-    }
-    
-    public func then<Receiver:AnyObject>(with context: InvocationContext,
-                     and receiver: Receiver,
-                         call function: (Receiver, Message) -> Void) -> Slot<Message>
-    {
-        return signal.then(with: context, and: receiver, call: function)
-    }
-    
-    public var subscriberCount: Int {
-        return signal.subscriberCount
-    }
-}
-
-public final class MessagePublisherFilter<Message>: IsMessageSource, IsMessageFilter {
-    public typealias MessageType = Message
-    public typealias SlotType = Slot<Message>
-    public typealias FilterResult = MessagePublisherFilter<Message>
-
-    let predicate: Message->Bool
-    let signal: Signal<Message>
-    
-    init(signal: Signal<Message>, predicate: Message->Bool) {
-        self.signal = signal
-        self.predicate = predicate
-    }
-    
-    public func filter(predicate: Message->Bool) -> MessagePublisherFilter<Message> {
-        let currentPredictate = self.predicate
-        return MessagePublisherFilter(signal: self.signal, predicate: {
-            message in
-            return currentPredictate(message) && predicate(message)
-        })
-    }
-    
-    public func then<Receiver:AnyObject>(with context: InvocationContext,
-                     and receiver: Receiver,
-                         call function: (Receiver, Message) -> Void) -> Slot<Message>
-    {
-        return signal.then(with: context, and: receiver) { [predicate] (receiver, message) in
-            if (predicate(message)) {
-                function(receiver, message)
-            }
-        }
+    public func fire(message: Message) {
+        fired.fire(message)
     }
 }

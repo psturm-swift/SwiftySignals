@@ -23,10 +23,7 @@ import Foundation
 public final class Timer {
     private weak var timer: NSTimer? = nil
     private let tolerance: NSTimeInterval
-    private let signalFired = Signal<Void>()
-    public var fired: MessagePublisher<Void> {
-        return MessagePublisher<Void>(signal: signalFired)
-    }
+    public let fired = Event<Void>()
     
     public init(tolerance: NSTimeInterval = 0) {
         self.tolerance = tolerance
@@ -41,24 +38,21 @@ public final class Timer {
     
     public func fireAfter(seconds seconds: NSTimeInterval) {
         invalidate()
-        let timer = NSTimer(timeInterval: seconds, target: self, selector: #selector(Timer.fireSignal), userInfo: nil, repeats: false)
+        let timer = NSTimer(timeInterval: seconds, target: self, selector: #selector(Timer.fireEvent), userInfo: nil, repeats: false)
         timer.tolerance = tolerance
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
         self.timer = timer
     }
     
-    @objc private func fireSignal() {
-        signalFired.trigger()
+    @objc private func fireEvent() {
+        fired.fire()
     }
 }
 
 public final class PeriodicTimer {
     private weak var timer: NSTimer? = nil
     private let tolerance: NSTimeInterval
-    private let signalFired = Signal<Void>()
-    public var fired: MessagePublisher<Void> {
-        return MessagePublisher<Void>(signal: signalFired)
-    }
+    public let fired = Event<Void>()
     
     public init(tolerance: NSTimeInterval = 0) {
         self.tolerance = tolerance
@@ -81,13 +75,13 @@ public final class PeriodicTimer {
     
     public func activate() {
         invalidate()
-        let timer = NSTimer(timeInterval: interval, target: self, selector: #selector(Timer.fireSignal), userInfo: nil, repeats: true)
+        let timer = NSTimer(timeInterval: interval, target: self, selector: #selector(Timer.fireEvent), userInfo: nil, repeats: true)
         timer.tolerance = tolerance
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
         self.timer = timer
     }
     
-    @objc private func fireSignal() {
-        signalFired.trigger()
+    @objc private func fireEvent() {
+        fired.fire()
     }
 }

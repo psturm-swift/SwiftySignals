@@ -21,19 +21,16 @@
 import Foundation
 
 public class Property<T> {
-    private let signalDidSet = Signal<T>()
-    public var didSet: MessagePublisher<T> {
-        return MessagePublisher<T>(signal: self.signalDidSet)
-    }
+    public let didSet = Event<T>()
     
     public var value: T {
         didSet {
-            signalDidSet.trigger(with: value)
+            didSet.fire(with: value)
         }
     }
     
     public init(value: T) {
         self.value = value
-        signalDidSet.trigger(with: value)
+        didSet.fire(with: value)
     }
 }
