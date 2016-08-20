@@ -24,7 +24,10 @@ public protocol EventType {
     associatedtype MessageType
     associatedtype SlotType: AnyObject
     
-    func then<Receiver:AnyObject>(with context: InvocationContext, and receiver: Receiver, call function: @escaping (Receiver, MessageType) -> Void) -> SlotType
+    @discardableResult func then<Receiver:AnyObject>(
+    	with context: InvocationContext, 
+    	and receiver: Receiver, 
+    	call function: @escaping (Receiver, MessageType) -> Void) -> SlotType
     
     // Begin: Functions with default implementation
     @discardableResult func then<Receiver:AnyObject>(
