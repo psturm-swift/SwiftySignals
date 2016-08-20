@@ -59,7 +59,7 @@ The best place to connect the view controller as receiver is its `viewDidLoad()`
 	    override func viewDidLoad() {
 	        TemperatureSensor.shared
 	                .signalTemperature
-					.fired
+	                .fired
 	                .then(
 	                    on: self, 
 	                    call: TemperatureVC.newTemperatureArrived
@@ -79,7 +79,7 @@ The `then(on:call:)` function returns a so called slot. The slot allows you to u
 
 	let slot = TemperatureSensor.shared
 	                .signalTemperature
-					.fired
+	                .fired
 	                .then(
 	                    on: self, 
 	                    call: TemperatureVC.newTemperatureArrived
@@ -94,7 +94,7 @@ Alternatively you could connect a closure instead of an instance method to the s
 	    override func viewDidLoad() {
 	        TemperatureSensor.shared
 	            .signalTemperature
-				.fired
+	            .fired
 	            .then(with: self) { (receiver, temperature) in
 	                /* receiver === self */
 	                receiver.newTemperatureArrived(temperature)
@@ -134,7 +134,7 @@ In the current version instances of `Signal<MessageType>` are not thread-safe. T
 ### Properties
 A property is of type `Property<T>`. It stores a value `Property<T>.value` of type `T` and has an embedded event `Property<T>.didSet`
  
-If you set a new value to `Property<T>.value` then the embedded event is fired automatically. You can subscribe your functions directly to the event ``didSet``.
+If you set a new value to `Property<T>.value` then the embedded event is fired automatically. You can subscribe your functions directly to the event `didSet`.
 
 	class Model {
 	    static let shared = Model()
@@ -161,11 +161,11 @@ If you set a new value to `Property<T>.value` then the embedded event is fired a
 
 By calling then the function `setNewTemperature` is called by the current value of the property.
 
-### Defining a timer
-A timer has an embedded event `Timer.fired` which will fire after a given time. The timer can be started with the function `Timer.fireAfter(seconds:)`
+### Defining a once only time
+A once only timer has an embedded event `Timer.fired` which will fire after a given time. The timer can be started with the function `OnceOnlyTimer.fireAfter(seconds:)`
 
 	class TemperatureSensor {
-	    let timer = Timer()
+	    let timer = OnceOnlyTimer()
 	
 	    override func viewDidLoad() {
 	        timer
@@ -179,7 +179,7 @@ A timer has an embedded event `Timer.fired` which will fire after a given time. 
 	    }
 	}
 
-The timer can be stopped by calling `Timer.invalidate()`. When the timer has fired it will never fire again unless you call explicitly `Timer.fireAfter(seconds:)` again.
+The timer can be stopped by calling `OnceOnlyTimer.invalidate()`. When the timer has fired it will never fire again unless you call explicitly `OnceOnlyTimer.fireAfter(seconds:)` again.
 
 ### Defining a periodic timer
 The `PeriodicTimer` is a timer which is called regularly in intervals. 
@@ -209,7 +209,7 @@ A filter can be added to each subscription. Therefore the event provides the fun
 	    override func viewDidLoad() {
 	        TemperatureSensor.shared
 	            .signalTemperature
-				.fired
+	            .fired
 	            .filter({ $0 > 30.0 })
 	            .then(
 	                on: self,

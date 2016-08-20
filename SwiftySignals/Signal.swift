@@ -30,7 +30,7 @@ public final class Signal<Message> {
         fired.fire(with: message)
     }
     
-    public func fire(message: Message) {
+    public func fire(_ message: Message) {
         fired.fire(message)
     }
 }
