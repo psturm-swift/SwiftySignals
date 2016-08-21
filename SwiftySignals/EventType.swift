@@ -24,39 +24,39 @@ public protocol EventType {
     associatedtype MessageType
     associatedtype SlotType: AnyObject
     
-    @discardableResult func then<Receiver:AnyObject>(
+    func then<Receiver:AnyObject>(
     	with context: InvocationContext, 
     	and receiver: Receiver, 
     	call function: @escaping (Receiver, MessageType) -> Void) -> SlotType
     
     // Begin: Functions with default implementation
-    @discardableResult func then<Receiver:AnyObject>(
+    func then<Receiver:AnyObject>(
         with context: InvocationContext,
         on receiver: Receiver,
         call function: @escaping (Receiver)->((MessageType)->Void)) -> SlotType
-    @discardableResult func then<Receiver:AnyObject>(
+    func then<Receiver:AnyObject>(
         with context: InvocationContext,
         and receiver: Receiver,
         call function: @escaping (Receiver) -> Void) -> SlotType
-    @discardableResult func then<Receiver:AnyObject>(
+    func then<Receiver:AnyObject>(
         invoke policy: InvocationPolicy,
         with receiver: Receiver,
         call function: @escaping (Receiver, MessageType) -> Void) -> SlotType
-    @discardableResult func then<Receiver:AnyObject>(
+    func then<Receiver:AnyObject>(
         invoke policy: InvocationPolicy,
         with receiver: Receiver,
         call function: @escaping (Receiver) -> Void) -> SlotType
-    @discardableResult func then<Receiver:AnyObject>(
+    func then<Receiver:AnyObject>(
         invoke policy: InvocationPolicy,
         on receiver: Receiver,
         call function: @escaping (Receiver)->((MessageType)->Void)) -> SlotType
-    @discardableResult func then<Receiver:AnyObject>(
+    func then<Receiver:AnyObject>(
         with receiver: Receiver,
         call function: @escaping (Receiver, MessageType) -> Void) -> SlotType
-    @discardableResult func then<Receiver:AnyObject>(
+    func then<Receiver:AnyObject>(
         with receiver: Receiver,
         call function: @escaping (Receiver) -> Void) -> SlotType
-    @discardableResult func then<Receiver:AnyObject>(
+    func then<Receiver:AnyObject>(
         on receiver: Receiver,
         call function: @escaping (Receiver)->((MessageType)->Void)) -> SlotType
     // End: Functions with default implementation
