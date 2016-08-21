@@ -3,8 +3,8 @@ osx_image: xcode8
 
 script:
   - xcodebuild test -workspace SwiftySignals.xcworkspace -scheme SwiftySignals-macOS
-  - xcodebuild build -workspace SwiftySignals.xcworkspace -scheme SwiftySignals-iOS -sdk iphonesimulator
-  - xcodebuild build -workspace SwiftySignals.xcworkspace -scheme SwiftySignals-tvOS -sdk appletvsimulator
+  - xcodebuild test -workspace SwiftySignals.xcworkspace -scheme SwiftySignals-iOS -destination "platform=iOS Simulator,OS=10.0,name=iPhone 5" -sdk iphonesimulator
+  - xcodebuild test -workspace SwiftySignals.xcworkspace -scheme SwiftySignals-tvOS -destination "platform=tvOS Simulator,OS=10.0,name=Apple TV 1080p" -sdk appletvsimulator
   - xcodebuild build -workspace SwiftySignals.xcworkspace -scheme SwiftySignals-watchOS -sdk watchsimulator
 
 notifications:
