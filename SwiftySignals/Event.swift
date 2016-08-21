@@ -82,7 +82,7 @@ public final class FilteredEvent<Message>: EventType, FilteredEventType {
         })
     }
     
-    public func then<Receiver:AnyObject>(with context: InvocationContext,
+    @discardableResult public func then<Receiver:AnyObject>(with context: InvocationContext,
                      and receiver: Receiver,
                          call function: @escaping (Receiver, Message) -> Void) -> Slot<Message>
     {
