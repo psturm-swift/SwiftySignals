@@ -21,8 +21,8 @@
 import Foundation
 
 public final class OnceOnlyTimer {
-    fileprivate weak var timer: Foundation.Timer? = nil
-    fileprivate let tolerance: TimeInterval
+    private weak var timer: Foundation.Timer? = nil
+    private let tolerance: TimeInterval
     public let fired = Event<Void>()
     
     public init(tolerance: TimeInterval = 0) {
@@ -44,14 +44,14 @@ public final class OnceOnlyTimer {
         self.timer = timer
     }
     
-    @objc fileprivate func fireEvent() {
+    @objc private func fireEvent() {
         fired.fire()
     }
 }
 
 public final class PeriodicTimer {
-    fileprivate weak var timer: Foundation.Timer? = nil
-    fileprivate let tolerance: TimeInterval
+    private weak var timer: Foundation.Timer? = nil
+    private let tolerance: TimeInterval
     public let fired = Event<Void>()
     
     public init(tolerance: TimeInterval = 0) {
@@ -81,7 +81,7 @@ public final class PeriodicTimer {
         self.timer = timer
     }
     
-    @objc fileprivate func fireEvent() {
+    @objc private func fireEvent() {
         fired.fire()
     }
 }

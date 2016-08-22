@@ -11,8 +11,8 @@ import Foundation
 public final class Event<Message>: EventType, FilteredEventType {
     public typealias FilterResult = FilteredEvent<Message>
 
-    fileprivate var connectedSlots = [Slot<Message>]()
-    public fileprivate(set) var lastMessage: Message? = nil
+    private var connectedSlots = [Slot<Message>]()
+    public private(set) var lastMessage: Message? = nil
     
     public init() {
     }

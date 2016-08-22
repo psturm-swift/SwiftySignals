@@ -21,10 +21,10 @@
 import Foundation
 
 public final class Slot<Message> {
-    fileprivate let function: (Message)->Void
-    fileprivate let context: InvocationContext
-    fileprivate weak var receiver: AnyObject?
-    fileprivate weak var event: Event<Message>?
+    private let function: (Message)->Void
+    private let context: InvocationContext
+    private weak var receiver: AnyObject?
+    private weak var event: Event<Message>?
     
     init(context: InvocationContext, receiver: AnyObject, event: Event<Message>, function: @escaping (Message)->Void) {
         self.function = function
