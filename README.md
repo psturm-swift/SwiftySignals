@@ -59,7 +59,7 @@ The best place to connect the view controller as receiver is its `viewDidLoad()`
 	    override func viewDidLoad() {
 	        TemperatureSensor.shared
 	                .signalTemperature
-					.fired
+	                .fired
 	                .then(
 	                    on: self, 
 	                    call: TemperatureVC.newTemperatureArrived
@@ -75,17 +75,17 @@ The connection between view controller and signal lives until either the signal 
 As soon you connect a function to a signal, your function will get the last fired message, if the signal has been fired previously.
 
 ### Manual disconnect the receiver from the signal
-The `then(on:call:)` function returns a so called slot. The slot allows you to unsubscribe from the signal manually.
+The `then(on:call:)` function returns a so called slot. By invaliding the slot, you can unsubscribe from the signal manually.
 
 	let slot = TemperatureSensor.shared
 	                .signalTemperature
-					.fired
+	                .fired
 	                .then(
 	                    on: self, 
 	                    call: TemperatureVC.newTemperatureArrived
 	                )
 	
-	slot.unsubscribe() // Disconnect the receiver
+	slot.invalidate() // Disconnect the receiver
 
 ### Connecting closures to a signal
 Alternatively you could connect a closure instead of an instance method to the signal. However, also in this case you need a receiver object to determine the lifetime of the subscription. This receiver object is given along with the message to your closure:
@@ -94,7 +94,7 @@ Alternatively you could connect a closure instead of an instance method to the s
 	    override func viewDidLoad() {
 	        TemperatureSensor.shared
 	            .signalTemperature
-				.fired
+	            .fired
 	            .then(with: self) { (receiver, temperature) in
 	                /* receiver === self */
 	                receiver.newTemperatureArrived(temperature)
@@ -134,7 +134,7 @@ In the current version instances of `Signal<MessageType>` are not thread-safe. T
 ### Properties
 A property is of type `Property<T>`. It stores a value `Property<T>.value` of type `T` and has an embedded event `Property<T>.didSet`
  
-If you set a new value to `Property<T>.value` then the embedded event is fired automatically. You can subscribe your functions directly to the event ``didSet``.
+If you set a new value to `Property<T>.value` then the embedded event is fired automatically. You can subscribe your functions directly to the event `didSet`.
 
 	class Model {
 	    static let shared = Model()
@@ -209,7 +209,7 @@ A filter can be added to each subscription. Therefore the event provides the fun
 	    override func viewDidLoad() {
 	        TemperatureSensor.shared
 	            .signalTemperature
-				.fired
+	            .fired
 	            .filter({ $0 > 30.0 })
 	            .then(
 	                on: self,

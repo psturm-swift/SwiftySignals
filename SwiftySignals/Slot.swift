@@ -43,7 +43,7 @@ public final class Slot<Message> {
         return receiver != nil
     }
 
-    public func unsubscribe() {
+    public func invalidate() {
         receiver = nil
     }
 }
