@@ -75,7 +75,7 @@ The connection between view controller and signal lives until either the signal 
 As soon you connect a function to a signal, your function will get the last fired message, if the signal has been fired previously.
 
 ### Manual disconnect the receiver from the signal
-The `then(on:call:)` function returns a so called slot. The slot allows you to unsubscribe from the signal manually.
+The `then(on:call:)` function returns a so called slot. By invaliding the slot, you can unsubscribe from the signal manually.
 
 	let slot = TemperatureSensor.shared
 	                .signalTemperature
@@ -85,7 +85,7 @@ The `then(on:call:)` function returns a so called slot. The slot allows you to u
 	                    call: TemperatureVC.newTemperatureArrived
 	                )
 	
-	slot.unsubscribe() // Disconnect the receiver
+	slot.invalidate() // Disconnect the receiver
 
 ### Connecting closures to a signal
 Alternatively you could connect a closure instead of an instance method to the signal. However, also in this case you need a receiver object to determine the lifetime of the subscription. This receiver object is given along with the message to your closure:
