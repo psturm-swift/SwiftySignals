@@ -23,7 +23,7 @@ public final class Event<Message>: EventType, FilteredEventType {
                      and receiver: Receiver,
                          call function: (Receiver, Message) -> Void) -> Slot<Message>
     {
-        let slot = Slot<Message>(context: context, receiver: receiver, event: self, function: { [weak receiver] message in
+        let slot = Slot<Message>(context: context, receiver: receiver, function: { [weak receiver] message in
             if let receiver = receiver {
                 function(receiver, message)
             }
@@ -52,10 +52,6 @@ public final class Event<Message>: EventType, FilteredEventType {
     
     internal func fire(message: Message) {
         fire(with: message)
-    }
-    
-    internal func remove(slot slot: Slot<Message>) {
-        connectedSlots = connectedSlots.filter { $0 !== slot }
     }
     
     internal func removeInvalidSlots() {
