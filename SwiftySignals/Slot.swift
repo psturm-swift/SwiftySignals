@@ -25,7 +25,11 @@ public final class Slot<Message> {
     private let context: InvocationContext
     private weak var receiver: AnyObject?
     
-    init(context: InvocationContext, receiver: AnyObject, function: @escaping (Message)->Void) {
+    init(
+        context: InvocationContext, 
+        receiver: AnyObject, 
+        function: @escaping (Message)->Void)
+    {
         self.function = function
         self.context = context
         self.receiver = receiver

@@ -21,9 +21,10 @@ public final class Event<Message>: EventType, FilteredEventType {
         return FilteredEvent(event: self, predicate: predicate)
     }
     
-    @discardableResult public func then<Receiver:AnyObject>(with context: InvocationContext,
-                     and receiver: Receiver,
-                         call function: @escaping (Receiver, Message) -> Void) -> Slot<Message>
+    @discardableResult public func then<Receiver:AnyObject>(
+        with context: InvocationContext,
+        and receiver: Receiver,
+        call function: @escaping (Receiver, Message) -> Void) -> Slot<Message>
     {
         let slot = Slot<Message>(context: context, receiver: receiver, function: { [weak receiver] message in
             if let receiver = receiver {
@@ -78,9 +79,10 @@ public final class FilteredEvent<Message>: EventType, FilteredEventType {
         })
     }
     
-    @discardableResult public func then<Receiver:AnyObject>(with context: InvocationContext,
-                     and receiver: Receiver,
-                         call function: @escaping (Receiver, Message) -> Void) -> Slot<Message>
+    @discardableResult public func then<Receiver:AnyObject>(
+        with context: InvocationContext,
+        and receiver: Receiver,
+        call function: @escaping (Receiver, Message) -> Void) -> Slot<Message>
     {
         return event.then(with: context, and: receiver) { [predicate] (receiver, message) in
             if (predicate(message)) {
