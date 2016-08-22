@@ -24,13 +24,11 @@ public final class Slot<Message> {
     private let function: (Message)->Void
     private let context: InvocationContext
     private weak var receiver: AnyObject?
-    private weak var event: Event<Message>?
     
-    init(context: InvocationContext, receiver: AnyObject, event: Event<Message>, function: @escaping (Message)->Void) {
+    init(context: InvocationContext, receiver: AnyObject, function: @escaping (Message)->Void) {
         self.function = function
         self.context = context
         self.receiver = receiver
-        self.event = event
     }
     
     func invoke(with argument: Message) {
@@ -46,8 +44,6 @@ public final class Slot<Message> {
     }
 
     public func unsubscribe() {
-        if let event = self.event {
-            event.remove(slot: self)
-        }
+        receiver = nil
     }
 }
