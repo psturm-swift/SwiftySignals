@@ -9,7 +9,7 @@
 import Foundation
 
 public final class Event<Message>: EventType, FilteredEventType {
-    private var connectedSlots = [Slot<Message>]()
+    private var connectedSlots = [InternalSlot<Message>]()
     public private(set) var lastMessage: Message? = nil
     
     public init() {
@@ -19,21 +19,24 @@ public final class Event<Message>: EventType, FilteredEventType {
         return FilteredEvent(event: self, predicate: predicate)
     }
     
-    public func then<Receiver:AnyObject>(with context: InvocationContext,
-                     and receiver: Receiver,
-                         call function: (Receiver, Message) -> Void) -> Slot<Message>
+    public func then<Receiver:AnyObject>(
+        with context: InvocationContext,
+        and receiver: Receiver,
+        call function: (Receiver, Message) -> Void) -> Slot<Message>
     {
-        let slot = Slot<Message>(context: context, receiver: receiver, function: { [weak receiver] message in
+        let slot = InternalSlot<Message>(context: context, receiver: receiver, function: { 
+            [weak receiver] message in
             if let receiver = receiver {
                 function(receiver, message)
             }
         })
+        
         connectedSlots.append(slot)
         if let lastMessage = self.lastMessage {
             slot.invoke(with: lastMessage)
         }
         
-        return slot
+        return Slot(internalSlot: slot)
     }
     
     public var subscriberCount: Int {
@@ -41,21 +44,16 @@ public final class Event<Message>: EventType, FilteredEventType {
     }
     
     internal func fire(with message: Message) {
+        let validSlots = self.connectedSlots.filter { slot in slot.isValid }
         lastMessage = message
-        removeInvalidSlots()
-        
-        let connectedSlots = self.connectedSlots
-        for slot in connectedSlots {
+        for slot in validSlots {
             slot.invoke(with: message)
         }
+        self.connectedSlots = validSlots
     }
     
     internal func fire(message: Message) {
         fire(with: message)
-    }
-    
-    internal func removeInvalidSlots() {
-        connectedSlots = connectedSlots.filter { slot in slot.isValid }
     }
 }
 
@@ -76,9 +74,10 @@ public final class FilteredEvent<Message>: EventType, FilteredEventType {
         })
     }
     
-    public func then<Receiver:AnyObject>(with context: InvocationContext,
-                     and receiver: Receiver,
-                         call function: (Receiver, Message) -> Void) -> Slot<Message>
+    public func then<Receiver:AnyObject>(
+        with context: InvocationContext,
+        and receiver: Receiver,
+        call function: (Receiver, Message) -> Void) -> Slot<Message>
     {
         return event.then(with: context, and: receiver) { [predicate] (receiver, message) in
             if (predicate(message)) {

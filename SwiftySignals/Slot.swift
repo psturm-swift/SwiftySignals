@@ -20,7 +20,7 @@
 
 import Foundation
 
-public final class Slot<Message> {
+final class InternalSlot<Message> {
     private let function: Message->Void
     private let context: InvocationContext
     private weak var receiver: AnyObject?
@@ -43,7 +43,23 @@ public final class Slot<Message> {
         return receiver != nil
     }
 
-    public func invalidate() {
+    func invalidate() {
         receiver = nil
+    }
+}
+
+public final class Slot<Message> {
+    private weak var internalSlot: InternalSlot<Message>? = nil
+    
+    init(internalSlot: InternalSlot<Message>) {
+        self.internalSlot = internalSlot
+    }
+    
+    public var isValid: Bool {
+        return internalSlot?.isValid ?? false
+    }
+    
+    public func invalidate() {
+        internalSlot?.invalidate()
     }
 }
