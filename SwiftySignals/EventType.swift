@@ -24,50 +24,110 @@ public protocol EventType {
     associatedtype MessageType
     associatedtype SlotType: AnyObject
     
-    func then<Receiver:AnyObject>(with context: InvocationContext, and receiver: Receiver, call function: (Receiver, MessageType) -> Void) -> SlotType
+    func then<Receiver:AnyObject>(
+        with context: InvocationContext,
+        and receiver: Receiver,
+        call function: (Receiver, MessageType) -> Void) -> SlotType
     
     // Begin: Functions with default implementation
-    func then<Receiver:AnyObject>(with context: InvocationContext, on receiver: Receiver, call function: Receiver->(MessageType->Void)) -> SlotType
-    func then<Receiver:AnyObject>(with context: InvocationContext, and receiver: Receiver, call function: Receiver -> Void) -> SlotType
-    func then<Receiver:AnyObject>(invoke policy: InvocationPolicy, with receiver: Receiver, call function: (Receiver, MessageType) -> Void) -> SlotType
-    func then<Receiver:AnyObject>(invoke policy: InvocationPolicy, with receiver: Receiver, call function: Receiver -> Void) -> SlotType
-    func then<Receiver:AnyObject>(invoke policy: InvocationPolicy, on receiver: Receiver, call function: Receiver->(MessageType->Void)) -> SlotType
-    func then<Receiver:AnyObject>(with receiver: Receiver, call function: (Receiver, MessageType) -> Void) -> SlotType
-    func then<Receiver:AnyObject>(with receiver: Receiver, call function: Receiver -> Void) -> SlotType
-    func then<Receiver:AnyObject>(on receiver: Receiver, call function: Receiver->(MessageType->Void)) -> SlotType
+    func then<Receiver:AnyObject>(
+        with context: InvocationContext,
+        on receiver: Receiver,
+        call function: Receiver->(MessageType->Void)) -> SlotType
+    
+    func then<Receiver:AnyObject>(
+        with context: InvocationContext,
+        and receiver: Receiver,
+        call function: Receiver -> Void) -> SlotType
+    
+    func then<Receiver:AnyObject>(
+        invoke policy: InvocationPolicy,
+        with receiver: Receiver,
+        call function: (Receiver, MessageType) -> Void) -> SlotType
+    
+    func then<Receiver:AnyObject>(
+        invoke policy: InvocationPolicy,
+        with receiver: Receiver,
+        call function: Receiver -> Void) -> SlotType
+    
+    func then<Receiver:AnyObject>(
+        invoke policy: InvocationPolicy,
+        on receiver: Receiver,
+        call function: Receiver->(MessageType->Void)) -> SlotType
+    
+    func then<Receiver:AnyObject>(
+        with receiver: Receiver,
+        call function: (Receiver, MessageType) -> Void) -> SlotType
+    
+    func then<Receiver:AnyObject>(
+        with receiver: Receiver,
+        call function: Receiver -> Void) -> SlotType
+    
+    func then<Receiver:AnyObject>(
+        on receiver: Receiver,
+        call function: Receiver->(MessageType->Void)) -> SlotType
     // End: Functions with default implementation
 }
 
 public extension EventType {
-    public func then<Receiver:AnyObject>(with context: InvocationContext, on receiver: Receiver, call function: Receiver->(MessageType->Void)) -> SlotType {
+    public func then<Receiver:AnyObject>(
+        with context: InvocationContext,
+        on receiver: Receiver,
+        call function: Receiver->(MessageType->Void)) -> SlotType
+    {
         return then(with: context, and: receiver) { (receiver, message) in function(receiver)(message) }
     }
     
-    public func then<Receiver:AnyObject>(with context: InvocationContext, and receiver: Receiver, call function: Receiver -> Void) -> SlotType {
+    public func then<Receiver:AnyObject>(
+        with context: InvocationContext,
+        and receiver: Receiver,
+        call function: Receiver -> Void) -> SlotType
+    {
         return then(with: context, and: receiver) { (receiver, _) in function(receiver) }
     }
     
-    public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy, with receiver: Receiver, call function: (Receiver, MessageType) -> Void) -> SlotType {
+    public func then<Receiver:AnyObject>(
+        invoke policy: InvocationPolicy,
+        with receiver: Receiver,
+        call function: (Receiver, MessageType) -> Void) -> SlotType
+    {
         return then(with: policy.context, and: receiver, call: function)
     }
     
-    public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy, with receiver: Receiver, call function: Receiver -> Void) -> SlotType {
+    public func then<Receiver:AnyObject>(
+        invoke policy: InvocationPolicy,
+        with receiver: Receiver,
+        call function: Receiver -> Void) -> SlotType
+    {
         return then(with: policy.context, and: receiver, call: function)
     }
     
-    public func then<Receiver:AnyObject>(invoke policy: InvocationPolicy, on receiver: Receiver, call function: Receiver->(MessageType->Void)) -> SlotType {
+    public func then<Receiver:AnyObject>(
+        invoke policy: InvocationPolicy,
+        on receiver: Receiver,
+        call function: Receiver->(MessageType->Void)) -> SlotType
+    {
         return then(invoke: policy, on: receiver, call: function)
     }
     
-    func then<Receiver:AnyObject>(with receiver: Receiver, call function: (Receiver, MessageType) -> Void) -> SlotType {
+    func then<Receiver:AnyObject>(
+        with receiver: Receiver,
+        call function: (Receiver, MessageType) -> Void) -> SlotType
+    {
         return then(with: InvocationPolicy.OnMainThreadASAP.context, and: receiver, call: function)
     }
     
-    func then<Receiver:AnyObject>(with receiver: Receiver, call function: Receiver -> Void) -> SlotType {
+    func then<Receiver:AnyObject>(
+        with receiver: Receiver,
+        call function: Receiver -> Void) -> SlotType
+    {
         return then(with: InvocationPolicy.OnMainThreadASAP.context, and: receiver, call: function)
     }
     
-    func then<Receiver:AnyObject>(on receiver: Receiver, call function: Receiver->(MessageType->Void)) -> SlotType {
+    func then<Receiver:AnyObject>(
+        on receiver: Receiver,
+        call function: Receiver->(MessageType->Void)) -> SlotType
+    {
         return then(with: InvocationPolicy.OnMainThreadASAP.context, on: receiver, call: function)
     }
 }
