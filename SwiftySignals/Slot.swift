@@ -20,6 +20,32 @@
 
 import Foundation
 
+public protocol Invalidatable: class {
+    func invalidate()
+}
+
+public final class InvalidationContainer: Invalidatable {
+    private var objects: [Invalidatable] = []
+    
+    public init() {
+    }
+
+    internal func add(object: Invalidatable) {
+        objects.append(object)
+    }
+    
+    public func invalidate() {
+        for object in objects {
+            object.invalidate()
+        }
+        objects = []
+    }
+    
+    deinit {
+        invalidate()
+    }
+}
+
 final class InternalSlot<Message> {
     private let function: Message->Void
     private let context: InvocationContext
@@ -48,7 +74,7 @@ final class InternalSlot<Message> {
     }
 }
 
-public final class Slot<Message> {
+public final class Slot<Message>: Invalidatable {
     private weak var internalSlot: InternalSlot<Message>? = nil
     
     init(internalSlot: InternalSlot<Message>) {
@@ -61,5 +87,9 @@ public final class Slot<Message> {
     
     public func invalidate() {
         internalSlot?.invalidate()
+    }
+    
+    public func invalidate(with container: InvalidationContainer) {
+        container.add(self)
     }
 }

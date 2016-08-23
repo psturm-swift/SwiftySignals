@@ -18,6 +18,22 @@ public final class Event<Message>: EventType, FilteredEventType {
     public func filter(predicate: Message->Bool) -> FilteredEvent<Message> {
         return FilteredEvent(event: self, predicate: predicate)
     }
+
+    private func add(slot: InternalSlot<Message>) {
+        connectedSlots.append(slot)
+        if let lastMessage = self.lastMessage {
+            slot.invoke(with: lastMessage)
+        }
+    }
+
+    @warn_unused_result public func then(
+        with context: InvocationContext,
+        call function: Message->Void) -> Slot<Message>
+    {
+        let slot = InternalSlot<Message>(context: context, receiver: self, function: function)
+        add(slot)
+        return Slot(internalSlot: slot)
+    }
     
     public func then<Receiver:AnyObject>(
         with context: InvocationContext,
@@ -30,12 +46,7 @@ public final class Event<Message>: EventType, FilteredEventType {
                 function(receiver, message)
             }
         })
-        
-        connectedSlots.append(slot)
-        if let lastMessage = self.lastMessage {
-            slot.invoke(with: lastMessage)
-        }
-        
+        add(slot)
         return Slot(internalSlot: slot)
     }
     
@@ -66,12 +77,19 @@ public final class FilteredEvent<Message>: EventType, FilteredEventType {
         self.predicate = predicate
     }
     
-    public func filter(predicate: Message->Bool) -> FilteredEvent<Message> {
+    @warn_unused_result public func filter(predicate: Message->Bool) -> FilteredEvent<Message> {
         let currentPredictate = self.predicate
         return FilteredEvent(event: self.event, predicate: {
             message in
             return currentPredictate(message) && predicate(message)
         })
+    }
+    
+    @warn_unused_result public func then(
+        with context: InvocationContext,
+        call function: Message->Void) -> Slot<Message>
+    {
+        return event.then(with: context, call: function)
     }
     
     public func then<Receiver:AnyObject>(

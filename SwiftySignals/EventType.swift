@@ -24,6 +24,10 @@ public protocol EventType {
     associatedtype MessageType
     associatedtype SlotType: AnyObject
     
+    @warn_unused_result func then(
+        with context: InvocationContext,
+        call function: MessageType->Void) -> SlotType
+
     func then<Receiver:AnyObject>(
         with context: InvocationContext,
         and receiver: Receiver,
@@ -66,6 +70,12 @@ public protocol EventType {
     func then<Receiver:AnyObject>(
         on receiver: Receiver,
         call function: Receiver->(MessageType->Void)) -> SlotType
+
+    @warn_unused_result func then(
+        invoke policy: InvocationPolicy,
+        call function: MessageType->Void) -> SlotType
+
+    @warn_unused_result func then(call function: MessageType->Void) -> SlotType
     // End: Functions with default implementation
 }
 
@@ -110,25 +120,36 @@ public extension EventType {
         return then(invoke: policy, on: receiver, call: function)
     }
     
-    func then<Receiver:AnyObject>(
+    public func then<Receiver:AnyObject>(
         with receiver: Receiver,
         call function: (Receiver, MessageType) -> Void) -> SlotType
     {
         return then(with: InvocationPolicy.OnMainThreadASAP.context, and: receiver, call: function)
     }
     
-    func then<Receiver:AnyObject>(
+    public func then<Receiver:AnyObject>(
         with receiver: Receiver,
         call function: Receiver -> Void) -> SlotType
     {
         return then(with: InvocationPolicy.OnMainThreadASAP.context, and: receiver, call: function)
     }
     
-    func then<Receiver:AnyObject>(
+    public func then<Receiver:AnyObject>(
         on receiver: Receiver,
         call function: Receiver->(MessageType->Void)) -> SlotType
     {
         return then(with: InvocationPolicy.OnMainThreadASAP.context, on: receiver, call: function)
+    }
+    
+    @warn_unused_result public func then(
+        invoke policy: InvocationPolicy,
+        call function: MessageType->Void) -> SlotType
+    {
+        return then(with: policy.context, call: function)
+    }
+ 
+    @warn_unused_result public func then(call function: MessageType->Void) -> SlotType {
+        return then(with: InvocationPolicy.OnMainThreadASAP.context, call: function)
     }
 }
 
@@ -136,5 +157,5 @@ public protocol FilteredEventType {
     associatedtype MessageType
     associatedtype FilterResult: EventType
     
-    func filter(predicate: MessageType->Bool) -> FilterResult
+    @warn_unused_result func filter(predicate: MessageType->Bool) -> FilterResult
 }
