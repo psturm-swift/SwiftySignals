@@ -24,10 +24,14 @@ public protocol EventType {
     associatedtype MessageType
     associatedtype SlotType: AnyObject
     
-    func then<Receiver:AnyObject>(
-    	with context: InvocationContext, 
-    	and receiver: Receiver, 
-    	call function: @escaping (Receiver, MessageType) -> Void) -> SlotType
+    func then(
+        with context: InvocationContext,
+        call function: @escaping (MessageType)->Void) -> SlotType
+
+    @discardableResult func then<Receiver:AnyObject>(
+        with context: InvocationContext,
+        and receiver: Receiver,
+        call function: @escaping (Receiver, MessageType) -> Void) -> SlotType
     
     // Begin: Functions with default implementation
     func then<Receiver:AnyObject>(
@@ -59,6 +63,11 @@ public protocol EventType {
     func then<Receiver:AnyObject>(
         on receiver: Receiver,
         call function: @escaping (Receiver)->((MessageType)->Void)) -> SlotType
+    func then(
+        invoke policy: InvocationPolicy,
+        call function: @escaping (MessageType)->Void) -> SlotType
+
+    func then(call function: @escaping (MessageType)->Void) -> SlotType
     // End: Functions with default implementation
 }
 
@@ -122,6 +131,17 @@ public extension EventType {
         call function: @escaping (Receiver)->((MessageType)->Void)) -> SlotType
     {
         return then(with: InvocationPolicy.onMainThreadASAP.context, on: receiver, call: function)
+    }
+    
+    public func then(
+        invoke policy: InvocationPolicy,
+        call function: @escaping (MessageType)->Void) -> SlotType
+    {
+        return then(with: policy.context, call: function)
+    }
+ 
+    public func then(call function: @escaping (MessageType)->Void) -> SlotType {
+        return then(with: InvocationPolicy.onMainThreadASAP.context, call: function)
     }
 }
 

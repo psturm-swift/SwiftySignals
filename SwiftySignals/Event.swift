@@ -11,7 +11,7 @@ import Foundation
 public final class Event<Message>: EventType, FilteredEventType {
     public typealias FilterResult = FilteredEvent<Message>
 
-    private var connectedSlots = [Slot<Message>]()
+    private var connectedSlots = [InternalSlot<Message>]()
     public private(set) var lastMessage: Message? = nil
     
     public init() {
@@ -20,23 +20,36 @@ public final class Event<Message>: EventType, FilteredEventType {
     public func filter(_ predicate: @escaping (Message)->Bool) -> FilteredEvent<Message> {
         return FilteredEvent(event: self, predicate: predicate)
     }
+
+    private func add(_ slot: InternalSlot<Message>) {
+        connectedSlots.append(slot)
+        if let lastMessage = self.lastMessage {
+            slot.invoke(with: lastMessage)
+        }
+    }
+
+    public func then(
+        with context: InvocationContext,
+        call function: @escaping (Message)->Void) -> Slot<Message>
+    {
+        let slot = InternalSlot<Message>(context: context, receiver: self, function: function)
+        add(slot)
+        return Slot(internalSlot: slot)
+    }
     
     @discardableResult public func then<Receiver:AnyObject>(
         with context: InvocationContext,
         and receiver: Receiver,
         call function: @escaping (Receiver, Message) -> Void) -> Slot<Message>
     {
-        let slot = Slot<Message>(context: context, receiver: receiver, function: { [weak receiver] message in
+        let slot = InternalSlot<Message>(context: context, receiver: receiver, function: { 
+            [weak receiver] message in
             if let receiver = receiver {
                 function(receiver, message)
             }
         })
-        connectedSlots.append(slot)
-        if let lastMessage = self.lastMessage {
-            slot.invoke(with: lastMessage)
-        }
-        
-        return slot
+        add(slot)
+        return Slot(internalSlot: slot)
     }
     
     public var subscriberCount: Int {
@@ -44,21 +57,16 @@ public final class Event<Message>: EventType, FilteredEventType {
     }
     
     internal func fire(with message: Message) {
+        let validSlots = self.connectedSlots.filter { slot in slot.isValid }
         lastMessage = message
-        removeInvalidSlots()
-        
-        let connectedSlots = self.connectedSlots
-        for slot in connectedSlots {
+        for slot in validSlots {
             slot.invoke(with: message)
         }
+        self.connectedSlots = validSlots
     }
     
     internal func fire(_ message: Message) {
         fire(with: message)
-    }
-    
-    internal func removeInvalidSlots() {
-        connectedSlots = connectedSlots.filter { slot in slot.isValid }
     }
 }
 
@@ -77,6 +85,13 @@ public final class FilteredEvent<Message>: EventType, FilteredEventType {
             message in
             return currentPredictate(message) && predicate(message)
         })
+    }
+    
+    public func then(
+        with context: InvocationContext,
+        call function: @escaping (Message)->Void) -> Slot<Message>
+    {
+        return event.then(with: context, call: function)
     }
     
     @discardableResult public func then<Receiver:AnyObject>(

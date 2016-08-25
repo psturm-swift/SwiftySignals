@@ -179,4 +179,28 @@ class SwiftySignals: XCTestCase {
         XCTAssertEqual(0, value2)
         XCTAssertEqual(2, property.didSet.subscriberCount)
     }
+    
+    func testIfReceiverLessSubscriptionsWorkProperly() {
+        var invalidationContainer = InvalidationContainer()
+        
+        property
+            .didSet
+            .then { [weak self] value in self?.updateValue1(value) }
+            .invalidate(with: invalidationContainer)
+        
+        property
+            .didSet
+            .then { [weak self] value in self?.updateValue2(value) }
+            .invalidate(with: invalidationContainer)
+        
+        property.value = 66
+        XCTAssertEqual(66, value1)
+        XCTAssertEqual(66, value2)
+
+        invalidationContainer = InvalidationContainer()
+        property.value = 67
+
+        XCTAssertEqual(66, value1)
+        XCTAssertEqual(66, value2)
+    }
 }
