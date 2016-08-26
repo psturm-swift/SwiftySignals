@@ -76,7 +76,7 @@ As soon you connect a function to a signal, your function will get the last fire
 
 ### Manual disconnect the receiver from the signal
 The `then(on:call:)` function returns a so called slot. By invaliding the slot, you can unsubscribe from the signal manually.
-
+t
 	let slot = TemperatureSensor.shared
 	                .signalTemperature
 	                .fired
@@ -161,11 +161,11 @@ If you set a new value to `Property<T>.value` then the embedded event is fired a
 
 By calling then the function `setNewTemperature` is called by the current value of the property.
 
-### Defining a timer
-A timer has an embedded event `Timer.fired` which will fire after a given time. The timer can be started with the function `Timer.fireAfter(seconds:)`
+### Defining a timer that fires once
+A `OnceOnlyTimer` has an embedded event `OnceOnlyTimer.fired` which will fire after a given time. The timer can be started with the function `OnceOnlyTimer.fireAfter(seconds:)`
 
 	class TemperatureSensor {
-	    let timer = Timer()
+	    let timer = OnceOnlyTimer()
 	
 	    override func viewDidLoad() {
 	        timer
@@ -179,7 +179,7 @@ A timer has an embedded event `Timer.fired` which will fire after a given time. 
 	    }
 	}
 
-The timer can be stopped by calling `Timer.invalidate()`. When the timer has fired it will never fire again unless you call explicitly `Timer.fireAfter(seconds:)` again.
+The timer can be stopped by calling `OnceOnlyTimer.invalidate()`. When the timer has fired it will never fire again unless you call explicitly `OnceOnlyTimer.fireAfter(seconds:)` again.
 
 ### Defining a periodic timer
 The `PeriodicTimer` is a timer which is called regularly in intervals. 

@@ -20,7 +20,7 @@
 
 import Foundation
 
-public final class Timer {
+public final class OnceOnlyTimer {
     private weak var timer: NSTimer? = nil
     private let tolerance: NSTimeInterval
     public let fired = Event<Void>()
@@ -38,7 +38,11 @@ public final class Timer {
     
     public func fireAfter(seconds seconds: NSTimeInterval) {
         invalidate()
-        let timer = NSTimer(timeInterval: seconds, target: self, selector: #selector(Timer.fireEvent), userInfo: nil, repeats: false)
+        let timer = NSTimer(
+            timeInterval: seconds,
+            target: self,
+            selector: #selector(OnceOnlyTimer.fireEvent),
+            userInfo: nil, repeats: false)
         timer.tolerance = tolerance
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
         self.timer = timer
@@ -75,7 +79,11 @@ public final class PeriodicTimer {
     
     public func activate() {
         invalidate()
-        let timer = NSTimer(timeInterval: interval, target: self, selector: #selector(Timer.fireEvent), userInfo: nil, repeats: true)
+        let timer = NSTimer(
+            timeInterval: interval,
+            target: self,
+            selector: #selector(PeriodicTimer.fireEvent),
+            userInfo: nil, repeats: true)
         timer.tolerance = tolerance
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
         self.timer = timer

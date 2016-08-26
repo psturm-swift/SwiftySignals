@@ -123,13 +123,13 @@ class SwiftySignals: XCTestCase {
     func testIfTimerFiresOnlyOnce() {
         let expectation = self.expectationWithDescription("I expect that the timer has fired only once within 4 seconds")
 
-        let timerExpectation = Timer()
+        let timerExpectation = OnceOnlyTimer()
         timerExpectation.fired.then(with: self) { (_, _) in
             expectation.fulfill()
         }
         timerExpectation.fireAfter(seconds: 4.0)
         
-        let timer = Timer()
+        let timer = OnceOnlyTimer()
 
         timer.fired.then(with: self) { owner in
             owner.timerCounter += 1
@@ -144,7 +144,7 @@ class SwiftySignals: XCTestCase {
     func testIfPeriodicTimerFiresMoreThanOnce() {
         let expectation = self.expectationWithDescription("I expect that the timer has fired only once within 4 seconds")
         
-        let timerExpectation = Timer()
+        let timerExpectation = OnceOnlyTimer()
         timerExpectation.fired.then(with: self) { (_, _) in
             expectation.fulfill()
         }
