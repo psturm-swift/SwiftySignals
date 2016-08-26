@@ -20,7 +20,7 @@
 
 import Foundation
 
-public class Property<T> {
+public final class Property<T> {
     public let didSet = Event<T>()
     
     public var value: T {
