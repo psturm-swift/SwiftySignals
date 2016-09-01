@@ -76,7 +76,7 @@ As soon you connect a function to a signal, your function will get the last fire
 
 ### Manual disconnect the receiver from the signal
 The `then(on:call:)` function returns a so called slot. By invaliding the slot, you can unsubscribe from the signal manually.
-
+t
 	let slot = TemperatureSensor.shared
 	                .signalTemperature
 	                .fired

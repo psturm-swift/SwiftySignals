@@ -21,7 +21,7 @@
 import Foundation
 
 public final class OnceOnlyTimer {
-    private weak var timer: Foundation.Timer? = nil
+    private weak var timer: Timer? = nil
     private let tolerance: TimeInterval
     public let fired = Event<Void>()
     
@@ -38,7 +38,12 @@ public final class OnceOnlyTimer {
     
     public func fireAfter(seconds: TimeInterval) {
         invalidate()
-        let timer = Foundation.Timer(timeInterval: seconds, target: self, selector: #selector(OnceOnlyTimer.fireEvent), userInfo: nil, repeats: false)
+        let timer = Timer(
+            timeInterval: seconds,
+            target: self,
+            selector: #selector(OnceOnlyTimer.fireEvent),
+            userInfo: nil,
+            repeats: false)
         timer.tolerance = tolerance
         RunLoop.current.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
         self.timer = timer
@@ -75,7 +80,12 @@ public final class PeriodicTimer {
     
     public func activate() {
         invalidate()
-        let timer = Foundation.Timer(timeInterval: interval, target: self, selector: #selector(PeriodicTimer.fireEvent), userInfo: nil, repeats: true)
+        let timer = Timer(
+            timeInterval: interval,
+            target: self,
+            selector: #selector(PeriodicTimer.fireEvent),
+            userInfo: nil,
+            repeats: true)
         timer.tolerance = tolerance
         RunLoop.current.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
         self.timer = timer
