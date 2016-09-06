@@ -36,4 +36,8 @@ Signals are senders of messages (arbitrary type). Slots receive messages in the 
   s.watchos.deployment_target = '2.0'
 
   s.source_files = 'SwiftySignals/*.swift'
+
+  s.requires_arc = true
+
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.0' }
 end
