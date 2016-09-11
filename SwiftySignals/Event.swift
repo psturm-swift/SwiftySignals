@@ -71,7 +71,7 @@ public final class Event<Message>: EventType, FilteredEventType {
 }
 
 public final class FilteredEvent<Message>: EventType, FilteredEventType {
-    internal let predicate: @escaping (Message)->Bool
+    internal let predicate: (Message)->Bool
     internal let event: Event<Message>
     
     internal init(event: Event<Message>, predicate: @escaping (Message)->Bool) {
