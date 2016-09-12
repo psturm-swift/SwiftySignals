@@ -29,7 +29,7 @@ class Helper {
         self.reference = reference
     }
     
-    func updateValue(newValue: Int) {
+    func updateValue(_ newValue: Int) {
         reference.value2 = newValue
     }
 }
@@ -55,11 +55,11 @@ class SwiftySignals: XCTestCase {
         super.tearDown()
     }
     
-    func updateValue1(newValue: Int) {
+    func updateValue1(_ newValue: Int) {
         value1 = newValue
     }
     
-    func updateValue2(newValue: Int) {
+    func updateValue2(_ newValue: Int) {
         value2 = newValue
     }
     
@@ -99,11 +99,11 @@ class SwiftySignals: XCTestCase {
     }
     
     func testIfMainQueueInvocationPolicyDefersTheInvocation() {
-        let expectation = self.expectationWithDescription("I expect that value3 is equal to 84")
+        let expectation = self.expectation(description: "I expect that value3 is equal to 84")
 
         property.didSet.then(on: self, call: SwiftySignals.updateValue1)
         property.didSet.then(on: self, call: SwiftySignals.updateValue2)
-        property.didSet.then(invoke: .OnMainQueue, with: self, call: { (owner, newValue) in
+        property.didSet.then(invoke: .onMainQueue, with: self, call: { (owner, newValue) in
             owner.value3 = newValue
             if newValue == 84 {
                 expectation.fulfill()
@@ -115,13 +115,13 @@ class SwiftySignals: XCTestCase {
         XCTAssertEqual(84, value2)
         XCTAssertEqual(0, value3)
         
-        waitForExpectationsWithTimeout(1.0, handler: nil)
+        waitForExpectations(timeout: 1.0, handler: nil)
         
         XCTAssertEqual(3, property.didSet.subscriberCount)
     }
     
     func testIfTimerFiresOnlyOnce() {
-        let expectation = self.expectationWithDescription("I expect that the timer has fired only once within 4 seconds")
+        let expectation = self.expectation(description: "I expect that the timer has fired only once within 4 seconds")
 
         let timerExpectation = OnceOnlyTimer()
         timerExpectation.fired.then(with: self) { (_, _) in
@@ -136,13 +136,13 @@ class SwiftySignals: XCTestCase {
         }
         timer.fireAfter(seconds: 1.0)
 
-        waitForExpectationsWithTimeout(10.0, handler: nil)
+        waitForExpectations(timeout: 10.0, handler: nil)
         
         XCTAssertEqual(1, timerCounter)
     }
     
     func testIfPeriodicTimerFiresMoreThanOnce() {
-        let expectation = self.expectationWithDescription("I expect that the timer has fired only once within 4 seconds")
+        let expectation = self.expectation(description: "I expect that the timer has fired only once within 4 seconds")
         
         let timerExpectation = OnceOnlyTimer()
         timerExpectation.fired.then(with: self) { (_, _) in
@@ -157,7 +157,7 @@ class SwiftySignals: XCTestCase {
         timer.interval = 1.0
         timer.activate()
         
-        waitForExpectationsWithTimeout(10.0, handler: nil)
+        waitForExpectations(timeout: 10.0, handler: nil)
         
         XCTAssertLessThan(1, timerCounter)
     }

@@ -9,36 +9,38 @@
 import Foundation
 
 public final class Event<Message>: EventType, FilteredEventType {
+    public typealias FilterResult = FilteredEvent<Message>
+
     private var connectedSlots = [InternalSlot<Message>]()
     public private(set) var lastMessage: Message? = nil
     
     public init() {
     }
     
-    public func filter(predicate: Message->Bool) -> FilteredEvent<Message> {
+    public func filter(_ predicate: @escaping (Message)->Bool) -> FilteredEvent<Message> {
         return FilteredEvent(event: self, predicate: predicate)
     }
 
-    private func add(slot: InternalSlot<Message>) {
+    private func add(_ slot: InternalSlot<Message>) {
         connectedSlots.append(slot)
         if let lastMessage = self.lastMessage {
             slot.invoke(with: lastMessage)
         }
     }
 
-    @warn_unused_result public func then(
+    public func then(
         with context: InvocationContext,
-        call function: Message->Void) -> Slot<Message>
+        call function: @escaping (Message)->Void) -> Slot<Message>
     {
         let slot = InternalSlot<Message>(context: context, receiver: self, function: function)
         add(slot)
         return Slot(internalSlot: slot)
     }
     
-    public func then<Receiver:AnyObject>(
+    @discardableResult public func then<Receiver:AnyObject>(
         with context: InvocationContext,
         and receiver: Receiver,
-        call function: (Receiver, Message) -> Void) -> Slot<Message>
+        call function: @escaping (Receiver, Message) -> Void) -> Slot<Message>
     {
         let slot = InternalSlot<Message>(context: context, receiver: receiver, function: { 
             [weak receiver] message in
@@ -63,21 +65,21 @@ public final class Event<Message>: EventType, FilteredEventType {
         self.connectedSlots = validSlots
     }
     
-    internal func fire(message: Message) {
+    internal func fire(_ message: Message) {
         fire(with: message)
     }
 }
 
 public final class FilteredEvent<Message>: EventType, FilteredEventType {
-    internal let predicate: Message->Bool
+    internal let predicate: (Message)->Bool
     internal let event: Event<Message>
     
-    internal init(event: Event<Message>, predicate: Message->Bool) {
+    internal init(event: Event<Message>, predicate: @escaping (Message)->Bool) {
         self.event = event
         self.predicate = predicate
     }
     
-    @warn_unused_result public func filter(predicate: Message->Bool) -> FilteredEvent<Message> {
+    public func filter(_ predicate: @escaping (Message)->Bool) -> FilteredEvent<Message> {
         let currentPredictate = self.predicate
         return FilteredEvent(event: self.event, predicate: {
             message in
@@ -85,17 +87,17 @@ public final class FilteredEvent<Message>: EventType, FilteredEventType {
         })
     }
     
-    @warn_unused_result public func then(
+    public func then(
         with context: InvocationContext,
-        call function: Message->Void) -> Slot<Message>
+        call function: @escaping (Message)->Void) -> Slot<Message>
     {
         return event.then(with: context, call: function)
     }
     
-    public func then<Receiver:AnyObject>(
+    @discardableResult public func then<Receiver:AnyObject>(
         with context: InvocationContext,
         and receiver: Receiver,
-        call function: (Receiver, Message) -> Void) -> Slot<Message>
+        call function: @escaping (Receiver, Message) -> Void) -> Slot<Message>
     {
         return event.then(with: context, and: receiver) { [predicate] (receiver, message) in
             if (predicate(message)) {

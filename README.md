@@ -161,8 +161,8 @@ If you set a new value to `Property<T>.value` then the embedded event is fired a
 
 By calling then the function `setNewTemperature` is called by the current value of the property.
 
-### Defining a timer that fires once
-A `OnceOnlyTimer` has an embedded event `OnceOnlyTimer.fired` which will fire after a given time. The timer can be started with the function `OnceOnlyTimer.fireAfter(seconds:)`
+### Defining a once only time
+A once only timer has an embedded event `Timer.fired` which will fire after a given time. The timer can be started with the function `OnceOnlyTimer.fireAfter(seconds:)`
 
 	class TemperatureSensor {
 	    let timer = OnceOnlyTimer()

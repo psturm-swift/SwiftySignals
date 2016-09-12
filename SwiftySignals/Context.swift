@@ -21,16 +21,16 @@
 import Foundation
 
 public protocol InvocationContext {
-    func invoke(function: Void->Void)
+    func invoke(_ function: @escaping (Void)->Void)
 }
 
 public struct DefaultInvocationContext: InvocationContext {
-    public func invoke(function: Void -> Void) {
-        if NSThread.isMainThread() {
+    public func invoke(_ function: @escaping (Void) -> Void) {
+        if Thread.isMainThread {
             function()
         }
         else {
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 function()
             }
         }
@@ -38,51 +38,50 @@ public struct DefaultInvocationContext: InvocationContext {
 }
 
 public struct ImmediateInvocationContext: InvocationContext {
-    public func invoke(function: Void -> Void) {
+    public func invoke(_ function: @escaping (Void) -> Void) {
         function()
     }
 }
 
 public struct DispatchQueueInvocationContext: InvocationContext {
-    let dispatchQueue: dispatch_queue_t
+    let dispatchQueue: DispatchQueue
     
-    public init(dispatchQueue: dispatch_queue_t) {
+    public init(dispatchQueue: DispatchQueue) {
         self.dispatchQueue = dispatchQueue
     }
     
-    public func invoke(function: Void -> Void) {
-        dispatch_async(dispatchQueue) {
+    public func invoke(_ function: @escaping (Void) -> Void) {
+        dispatchQueue.async {
             function()
         }
     }
 }
 
 public enum InvocationPolicy {
-    case Immediately
-    case OnMainThreadASAP
-    case OnMainQueue
-    case WithLowPriority
-    case WithNormalPriority
-    case WithHighPriority
-    case OnQueue(dispatch_queue_t)
+    case immediately
+    case onMainThreadASAP
+    case onMainQueue
+    case withLowPriority
+    case withNormalPriority
+    case withHighPriority
+    case onQueue(DispatchQueue)
     
     var context: InvocationContext {
         switch self {
-        case .Immediately:
+        case .immediately:
             return ImmediateInvocationContext()
-        case .OnMainThreadASAP:
+        case .onMainThreadASAP:
             return DefaultInvocationContext()
-        case .OnMainQueue:
-            return DispatchQueueInvocationContext(dispatchQueue: dispatch_get_main_queue())
-        case .WithLowPriority:
-            return DispatchQueueInvocationContext(dispatchQueue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0))
-        case .WithNormalPriority:
-            return DispatchQueueInvocationContext(dispatchQueue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0))
-        case .WithHighPriority:
-            return DispatchQueueInvocationContext(dispatchQueue: dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0))
-        case .OnQueue(let customQueue):
+        case .onMainQueue:
+            return DispatchQueueInvocationContext(dispatchQueue: DispatchQueue.main)
+        case .withLowPriority:
+            return DispatchQueueInvocationContext(dispatchQueue: DispatchQueue.global(qos: .utility))
+        case .withNormalPriority:
+            return DispatchQueueInvocationContext(dispatchQueue: DispatchQueue.global(qos: .default))
+        case .withHighPriority:
+            return DispatchQueueInvocationContext(dispatchQueue: DispatchQueue.global(qos: .userInitiated))
+        case .onQueue(let customQueue):
             return DispatchQueueInvocationContext(dispatchQueue: customQueue)
         }
     }
 }
-

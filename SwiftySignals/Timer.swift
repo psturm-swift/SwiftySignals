@@ -21,11 +21,11 @@
 import Foundation
 
 public final class OnceOnlyTimer {
-    private weak var timer: NSTimer? = nil
-    private let tolerance: NSTimeInterval
+    private weak var timer: Timer? = nil
+    private let tolerance: TimeInterval
     public let fired = Event<Void>()
     
-    public init(tolerance: NSTimeInterval = 0) {
+    public init(tolerance: TimeInterval = 0) {
         self.tolerance = tolerance
     }
     
@@ -36,15 +36,16 @@ public final class OnceOnlyTimer {
         }
     }
     
-    public func fireAfter(seconds seconds: NSTimeInterval) {
+    public func fireAfter(seconds: TimeInterval) {
         invalidate()
-        let timer = NSTimer(
+        let timer = Timer(
             timeInterval: seconds,
             target: self,
             selector: #selector(OnceOnlyTimer.fireEvent),
-            userInfo: nil, repeats: false)
+            userInfo: nil,
+            repeats: false)
         timer.tolerance = tolerance
-        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
+        RunLoop.current.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
         self.timer = timer
     }
     
@@ -54,15 +55,15 @@ public final class OnceOnlyTimer {
 }
 
 public final class PeriodicTimer {
-    private weak var timer: NSTimer? = nil
-    private let tolerance: NSTimeInterval
+    private weak var timer: Foundation.Timer? = nil
+    private let tolerance: TimeInterval
     public let fired = Event<Void>()
     
-    public init(tolerance: NSTimeInterval = 0) {
+    public init(tolerance: TimeInterval = 0) {
         self.tolerance = tolerance
     }
     
-    public var interval: NSTimeInterval = 0.0 {
+    public var interval: TimeInterval = 0.0 {
         didSet {
             if let _ = timer {
                 activate()
@@ -79,13 +80,14 @@ public final class PeriodicTimer {
     
     public func activate() {
         invalidate()
-        let timer = NSTimer(
+        let timer = Timer(
             timeInterval: interval,
             target: self,
             selector: #selector(PeriodicTimer.fireEvent),
-            userInfo: nil, repeats: true)
+            userInfo: nil,
+            repeats: true)
         timer.tolerance = tolerance
-        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
+        RunLoop.current.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
         self.timer = timer
     }
     

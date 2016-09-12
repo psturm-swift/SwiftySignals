@@ -24,132 +24,124 @@ public protocol EventType {
     associatedtype MessageType
     associatedtype SlotType: AnyObject
     
-    @warn_unused_result func then(
+    func then(
         with context: InvocationContext,
-        call function: MessageType->Void) -> SlotType
+        call function: @escaping (MessageType)->Void) -> SlotType
 
-    func then<Receiver:AnyObject>(
+    @discardableResult func then<Receiver:AnyObject>(
         with context: InvocationContext,
         and receiver: Receiver,
-        call function: (Receiver, MessageType) -> Void) -> SlotType
+        call function: @escaping (Receiver, MessageType) -> Void) -> SlotType
     
     // Begin: Functions with default implementation
     func then<Receiver:AnyObject>(
         with context: InvocationContext,
         on receiver: Receiver,
-        call function: Receiver->(MessageType->Void)) -> SlotType
-    
+        call function: @escaping (Receiver)->((MessageType)->Void)) -> SlotType
     func then<Receiver:AnyObject>(
         with context: InvocationContext,
         and receiver: Receiver,
-        call function: Receiver -> Void) -> SlotType
-    
+        call function: @escaping (Receiver) -> Void) -> SlotType
     func then<Receiver:AnyObject>(
         invoke policy: InvocationPolicy,
         with receiver: Receiver,
-        call function: (Receiver, MessageType) -> Void) -> SlotType
-    
+        call function: @escaping (Receiver, MessageType) -> Void) -> SlotType
     func then<Receiver:AnyObject>(
         invoke policy: InvocationPolicy,
         with receiver: Receiver,
-        call function: Receiver -> Void) -> SlotType
-    
+        call function: @escaping (Receiver) -> Void) -> SlotType
     func then<Receiver:AnyObject>(
         invoke policy: InvocationPolicy,
         on receiver: Receiver,
-        call function: Receiver->(MessageType->Void)) -> SlotType
-    
+        call function: @escaping (Receiver)->((MessageType)->Void)) -> SlotType
     func then<Receiver:AnyObject>(
         with receiver: Receiver,
-        call function: (Receiver, MessageType) -> Void) -> SlotType
-    
+        call function: @escaping (Receiver, MessageType) -> Void) -> SlotType
     func then<Receiver:AnyObject>(
         with receiver: Receiver,
-        call function: Receiver -> Void) -> SlotType
-    
+        call function: @escaping (Receiver) -> Void) -> SlotType
     func then<Receiver:AnyObject>(
         on receiver: Receiver,
-        call function: Receiver->(MessageType->Void)) -> SlotType
-
-    @warn_unused_result func then(
+        call function: @escaping (Receiver)->((MessageType)->Void)) -> SlotType
+    func then(
         invoke policy: InvocationPolicy,
-        call function: MessageType->Void) -> SlotType
+        call function: @escaping (MessageType)->Void) -> SlotType
 
-    @warn_unused_result func then(call function: MessageType->Void) -> SlotType
+    func then(call function: @escaping (MessageType)->Void) -> SlotType
     // End: Functions with default implementation
 }
 
 public extension EventType {
-    public func then<Receiver:AnyObject>(
+    @discardableResult public func then<Receiver:AnyObject>(
         with context: InvocationContext,
         on receiver: Receiver,
-        call function: Receiver->(MessageType->Void)) -> SlotType
+        call function: @escaping (Receiver)->((MessageType)->Void)) -> SlotType
     {
         return then(with: context, and: receiver) { (receiver, message) in function(receiver)(message) }
     }
     
-    public func then<Receiver:AnyObject>(
+    @discardableResult public func then<Receiver:AnyObject>(
         with context: InvocationContext,
         and receiver: Receiver,
-        call function: Receiver -> Void) -> SlotType
+        call function: @escaping (Receiver) -> Void) -> SlotType
     {
         return then(with: context, and: receiver) { (receiver, _) in function(receiver) }
     }
     
-    public func then<Receiver:AnyObject>(
+    @discardableResult public func then<Receiver:AnyObject>(
         invoke policy: InvocationPolicy,
         with receiver: Receiver,
-        call function: (Receiver, MessageType) -> Void) -> SlotType
+        call function: @escaping (Receiver, MessageType) -> Void) -> SlotType
     {
         return then(with: policy.context, and: receiver, call: function)
     }
     
-    public func then<Receiver:AnyObject>(
+    @discardableResult public func then<Receiver:AnyObject>(
         invoke policy: InvocationPolicy,
         with receiver: Receiver,
-        call function: Receiver -> Void) -> SlotType
+        call function: @escaping (Receiver) -> Void) -> SlotType
     {
         return then(with: policy.context, and: receiver, call: function)
     }
     
-    public func then<Receiver:AnyObject>(
+    @discardableResult public func then<Receiver:AnyObject>(
         invoke policy: InvocationPolicy,
         on receiver: Receiver,
-        call function: Receiver->(MessageType->Void)) -> SlotType
+        call function: @escaping (Receiver)->((MessageType)->Void)) -> SlotType
     {
         return then(invoke: policy, on: receiver, call: function)
     }
     
-    public func then<Receiver:AnyObject>(
+    @discardableResult public func then<Receiver:AnyObject>(
         with receiver: Receiver,
-        call function: (Receiver, MessageType) -> Void) -> SlotType
+        call function: @escaping (Receiver, MessageType) -> Void) -> SlotType
     {
-        return then(with: InvocationPolicy.OnMainThreadASAP.context, and: receiver, call: function)
+        return then(with: InvocationPolicy.onMainThreadASAP.context, and: receiver, call: function)
     }
     
-    public func then<Receiver:AnyObject>(
+    @discardableResult func then<Receiver:AnyObject>(
         with receiver: Receiver,
-        call function: Receiver -> Void) -> SlotType
+        call function: @escaping (Receiver) -> Void) -> SlotType
     {
-        return then(with: InvocationPolicy.OnMainThreadASAP.context, and: receiver, call: function)
+        return then(with: InvocationPolicy.onMainThreadASAP.context, and: receiver, call: function)
     }
     
-    public func then<Receiver:AnyObject>(
+    @discardableResult func then<Receiver:AnyObject>(
         on receiver: Receiver,
-        call function: Receiver->(MessageType->Void)) -> SlotType
+        call function: @escaping (Receiver)->((MessageType)->Void)) -> SlotType
     {
-        return then(with: InvocationPolicy.OnMainThreadASAP.context, on: receiver, call: function)
+        return then(with: InvocationPolicy.onMainThreadASAP.context, on: receiver, call: function)
     }
     
-    @warn_unused_result public func then(
+    public func then(
         invoke policy: InvocationPolicy,
-        call function: MessageType->Void) -> SlotType
+        call function: @escaping (MessageType)->Void) -> SlotType
     {
         return then(with: policy.context, call: function)
     }
  
-    @warn_unused_result public func then(call function: MessageType->Void) -> SlotType {
-        return then(with: InvocationPolicy.OnMainThreadASAP.context, call: function)
+    public func then(call function: @escaping (MessageType)->Void) -> SlotType {
+        return then(with: InvocationPolicy.onMainThreadASAP.context, call: function)
     }
 }
 
@@ -157,5 +149,5 @@ public protocol FilteredEventType {
     associatedtype MessageType
     associatedtype FilterResult: EventType
     
-    @warn_unused_result func filter(predicate: MessageType->Bool) -> FilterResult
+    func filter(_ predicate: @escaping (MessageType)->Bool) -> FilterResult
 }

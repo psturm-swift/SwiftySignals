@@ -20,6 +20,7 @@
 
 import Foundation
 
+
 public protocol Invalidatable: class {
     func invalidate()
 }
@@ -47,11 +48,11 @@ public final class InvalidationContainer: Invalidatable {
 }
 
 final class InternalSlot<Message> {
-    private let function: Message->Void
+    private let function: (Message)->Void
     private let context: InvocationContext
     private weak var receiver: AnyObject?
     
-    init(context: InvocationContext, receiver: AnyObject, function: Message->Void) {
+    init(context: InvocationContext, receiver: AnyObject, function: @escaping (Message)->Void) {
         self.function = function
         self.context = context
         self.receiver = receiver
@@ -90,6 +91,6 @@ public final class Slot<Message>: Invalidatable {
     }
     
     public func invalidate(with container: InvalidationContainer) {
-        container.add(self)
+        container.add(object: self)
     }
 }
