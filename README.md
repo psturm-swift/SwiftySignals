@@ -110,23 +110,23 @@ If you fire a signal on the main thread, then the connected function are called 
 This behavior can be modified per subscription. For this purpose you can call `then` with the additional parameter `invoke` that defines the `InvocationPolicy`.
 
 	enum InvocationPolicy {
-	    case Immediately
-	    case OnMainThreadASAP /* Default behaviour */
-	    case OnMainQueue
-	    case WithLowPriority
-	    case WithNormalPriority
-	    case WithHighPriority
-	    case OnQueue(dispatch_queue_t)
+	    case immediately
+	    case onMainThreadASAP /* Default behaviour */
+	    case onMainQueue
+	    case withLowPriority
+	    case withNormalPriority
+	    case withHighPriority
+	    case onQueue(dispatch_queue_t)
 	}
 
 With an invocation policy you steer in which context a connected function is called:
-- `Immediately`: The connected function will be executed in the same thread as the signal was fired.
-- `OnMainQueue`: The connected function is delegated to the main queue.
-- `OnMainThreadASAP`: If the signal is fired on the main thread, then the connected function is called immediately. If the signal is fired on another thread than the main thread, then the subscribed function is delegated to the main queue.
-- `WithLowPriority`: The subscribed function will be executed on a global concurrent queue with low priority.
-- `WithMediumPriority`: The subscribed function will be executed on a global concurrent queue with medium priority.
-- `WithHighPriority`: The subscribed function will be executed on a global concurrent queue with high priority.
-- `OnQueue(dispatch_queue_t)`: The subscribed function will be executed on the given queue.
+- `immediately`: The connected function will be executed in the same thread as the signal was fired.
+- `onMainQueue`: The connected function is delegated to the main queue.
+- `onMainThreadASAP`: If the signal is fired on the main thread, then the connected function is called immediately. If the signal is fired on another thread than the main thread, then the subscribed function is delegated to the main queue.
+- `withLowPriority`: The subscribed function will be executed on a global concurrent queue with low priority.
+- `withMediumPriority`: The subscribed function will be executed on a global concurrent queue with medium priority.
+- `withHighPriority`: The subscribed function will be executed on a global concurrent queue with high priority.
+- `onQueue(dispatch_queue_t)`: The subscribed function will be executed on the given queue.
 
 ### Thread Safety
 In the current version instances of `Signal<MessageType>` are not thread-safe. Thus only one thread, preferable the main thread, is allowed to access the signal. This restriction might become obsolete in the future.
