@@ -19,7 +19,7 @@ Signals are senders of messages (arbitrary type). Slots receive messages in the 
   s.tvos.deployment_target = '9.0'
   s.watchos.deployment_target = '3.0'
 
-  s.source_files = 'SwiftySignals/*.swift'
+  s.source_files = 'Sources/*.swift'
 
   s.requires_arc = true
 

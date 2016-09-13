@@ -7,42 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		023A17CF1D5F240200295C46 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A17CE1D5F240200295C46 /* EventType.swift */; };
+		021A7DC41D87BD5600DCAFD2 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7DC01D87BD5600DCAFD2 /* SwiftySignalsTests.swift */; };
+		021A7DC51D87BD5600DCAFD2 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7DC01D87BD5600DCAFD2 /* SwiftySignalsTests.swift */; };
+		021A7DC61D87BD5600DCAFD2 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7DC01D87BD5600DCAFD2 /* SwiftySignalsTests.swift */; };
 		025C2C411D57817100397638 /* SwiftySignals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025C2C371D57817000397638 /* SwiftySignals.framework */; };
-		025C2C4E1D57827D00397638 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F71D53A19D009A3F63 /* Property.swift */; };
-		025C2C4F1D57827F00397638 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F81D53A19D009A3F63 /* Signal.swift */; };
-		025C2C501D57828200397638 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F91D53A19D009A3F63 /* Slot.swift */; };
-		025C2C521D57828F00397638 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 029D33371D53A0ED00002059 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		025C2C531D57829700397638 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D33431D53A0EE00002059 /* SwiftySignalsTests.swift */; };
 		025C2C631D57836900397638 /* SwiftySignals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025C2C591D57836900397638 /* SwiftySignals.framework */; };
-		025C2C701D57837B00397638 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F71D53A19D009A3F63 /* Property.swift */; };
-		025C2C711D57837D00397638 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F81D53A19D009A3F63 /* Signal.swift */; };
-		025C2C721D57837F00397638 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F91D53A19D009A3F63 /* Slot.swift */; };
-		025C2C801D57841000397638 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F71D53A19D009A3F63 /* Property.swift */; };
-		025C2C811D57841200397638 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F81D53A19D009A3F63 /* Signal.swift */; };
-		025C2C821D57841400397638 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F91D53A19D009A3F63 /* Slot.swift */; };
-		026CA3081D679E21006F752E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CA3071D679E21006F752E /* Event.swift */; };
-		026CA3091D67A00D006F752E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CA3071D679E21006F752E /* Event.swift */; };
-		026CA30A1D67A01E006F752E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CA3071D679E21006F752E /* Event.swift */; };
-		026CA30B1D67A023006F752E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CA3071D679E21006F752E /* Event.swift */; };
-		029D33381D53A0ED00002059 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 029D33371D53A0ED00002059 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		028115211D87C15D008B1A97 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D921D87BD3100DCAFD2 /* Context.swift */; };
+		028115221D87C15D008B1A97 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D931D87BD3100DCAFD2 /* Event.swift */; };
+		028115231D87C15D008B1A97 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D941D87BD3100DCAFD2 /* EventType.swift */; };
+		028115241D87C15D008B1A97 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D951D87BD3100DCAFD2 /* Property.swift */; };
+		028115251D87C15D008B1A97 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D961D87BD3100DCAFD2 /* Signal.swift */; };
+		028115261D87C15D008B1A97 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D971D87BD3100DCAFD2 /* Slot.swift */; };
+		028115281D87C15D008B1A97 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D991D87BD3100DCAFD2 /* Timer.swift */; };
+		028115291D87C163008B1A97 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D921D87BD3100DCAFD2 /* Context.swift */; };
+		0281152A1D87C163008B1A97 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D931D87BD3100DCAFD2 /* Event.swift */; };
+		0281152B1D87C163008B1A97 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D941D87BD3100DCAFD2 /* EventType.swift */; };
+		0281152C1D87C163008B1A97 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D951D87BD3100DCAFD2 /* Property.swift */; };
+		0281152D1D87C163008B1A97 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D961D87BD3100DCAFD2 /* Signal.swift */; };
+		0281152E1D87C163008B1A97 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D971D87BD3100DCAFD2 /* Slot.swift */; };
+		028115301D87C163008B1A97 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D991D87BD3100DCAFD2 /* Timer.swift */; };
+		028115311D87C16A008B1A97 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D921D87BD3100DCAFD2 /* Context.swift */; };
+		028115321D87C16A008B1A97 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D931D87BD3100DCAFD2 /* Event.swift */; };
+		028115331D87C16A008B1A97 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D941D87BD3100DCAFD2 /* EventType.swift */; };
+		028115341D87C16A008B1A97 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D951D87BD3100DCAFD2 /* Property.swift */; };
+		028115351D87C16A008B1A97 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D961D87BD3100DCAFD2 /* Signal.swift */; };
+		028115361D87C16A008B1A97 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D971D87BD3100DCAFD2 /* Slot.swift */; };
+		028115381D87C16A008B1A97 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D991D87BD3100DCAFD2 /* Timer.swift */; };
+		028115391D87C170008B1A97 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D921D87BD3100DCAFD2 /* Context.swift */; };
+		0281153A1D87C170008B1A97 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D931D87BD3100DCAFD2 /* Event.swift */; };
+		0281153B1D87C170008B1A97 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D941D87BD3100DCAFD2 /* EventType.swift */; };
+		0281153C1D87C170008B1A97 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D951D87BD3100DCAFD2 /* Property.swift */; };
+		0281153D1D87C170008B1A97 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D961D87BD3100DCAFD2 /* Signal.swift */; };
+		0281153E1D87C170008B1A97 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D971D87BD3100DCAFD2 /* Slot.swift */; };
+		028115401D87C170008B1A97 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D991D87BD3100DCAFD2 /* Timer.swift */; };
+		028115411D87C212008B1A97 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 021A7D981D87BD3100DCAFD2 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		028115421D87C217008B1A97 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 021A7D981D87BD3100DCAFD2 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		028115431D87C21A008B1A97 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 021A7D981D87BD3100DCAFD2 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		028115441D87C21E008B1A97 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 021A7D981D87BD3100DCAFD2 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		029D333F1D53A0EE00002059 /* SwiftySignals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029D33341D53A0ED00002059 /* SwiftySignals.framework */; };
-		029D33441D53A0EE00002059 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D33431D53A0EE00002059 /* SwiftySignalsTests.swift */; };
-		02BC22FA1D53A19D009A3F63 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F71D53A19D009A3F63 /* Property.swift */; };
-		02BC22FB1D53A19D009A3F63 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F81D53A19D009A3F63 /* Signal.swift */; };
-		02BC22FC1D53A19D009A3F63 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BC22F91D53A19D009A3F63 /* Slot.swift */; };
-		02C868441D5B98E500435B55 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C868431D5B98E500435B55 /* Timer.swift */; };
-		02C868451D5B9E8900435B55 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C868431D5B98E500435B55 /* Timer.swift */; };
-		02C868461D5B9E8E00435B55 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C868431D5B98E500435B55 /* Timer.swift */; };
-		02C868471D5B9E9100435B55 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C868431D5B98E500435B55 /* Timer.swift */; };
-		02CD3F9F1D610C3900C7EA60 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A17CE1D5F240200295C46 /* EventType.swift */; };
-		02CD3FA01D610C4000C7EA60 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A17CE1D5F240200295C46 /* EventType.swift */; };
-		02CD3FA11D610C4400C7EA60 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A17CE1D5F240200295C46 /* EventType.swift */; };
-		02D865641D62A376007D02A6 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D33431D53A0EE00002059 /* SwiftySignalsTests.swift */; };
-		02E39FE71D590F2500E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
-		02E39FE81D590F4B00E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
-		02E39FE91D590F5400E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
-		02E39FEA1D590F5900E95722 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E39FE61D590F2500E95722 /* Context.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,24 +72,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		023A17CE1D5F240200295C46 /* EventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
+		021A7D921D87BD3100DCAFD2 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Context.swift; path = Sources/Context.swift; sourceTree = SOURCE_ROOT; };
+		021A7D931D87BD3100DCAFD2 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Sources/Event.swift; sourceTree = SOURCE_ROOT; };
+		021A7D941D87BD3100DCAFD2 /* EventType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventType.swift; path = Sources/EventType.swift; sourceTree = SOURCE_ROOT; };
+		021A7D951D87BD3100DCAFD2 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Property.swift; path = Sources/Property.swift; sourceTree = SOURCE_ROOT; };
+		021A7D961D87BD3100DCAFD2 /* Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Signal.swift; path = Sources/Signal.swift; sourceTree = SOURCE_ROOT; };
+		021A7D971D87BD3100DCAFD2 /* Slot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Slot.swift; path = Sources/Slot.swift; sourceTree = SOURCE_ROOT; };
+		021A7D981D87BD3100DCAFD2 /* SwiftySignals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwiftySignals.h; path = Sources/SwiftySignals.h; sourceTree = SOURCE_ROOT; };
+		021A7D991D87BD3100DCAFD2 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Sources/Timer.swift; sourceTree = SOURCE_ROOT; };
+		021A7DBA1D87BD4000DCAFD2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = SOURCE_ROOT; };
+		021A7DBF1D87BD5600DCAFD2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tests/Info.plist; sourceTree = SOURCE_ROOT; };
+		021A7DC01D87BD5600DCAFD2 /* SwiftySignalsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftySignalsTests.swift; path = Tests/SwiftySignalsTests.swift; sourceTree = SOURCE_ROOT; };
 		025C2C371D57817000397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C2C401D57817100397638 /* SwiftySignalsTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C2C591D57836900397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C2C621D57836900397638 /* SwiftySignalsTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C2C781D5783FA00397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		026CA3071D679E21006F752E /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		029D33341D53A0ED00002059 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		029D33371D53A0ED00002059 /* SwiftySignals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftySignals.h; sourceTree = "<group>"; };
-		029D33391D53A0ED00002059 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		029D333E1D53A0EE00002059 /* SwiftySignalsTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		029D33431D53A0EE00002059 /* SwiftySignalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftySignalsTests.swift; sourceTree = "<group>"; };
-		029D33451D53A0EE00002059 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		02BC22F71D53A19D009A3F63 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
-		02BC22F81D53A19D009A3F63 /* Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
-		02BC22F91D53A19D009A3F63 /* Slot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
-		02C868431D5B98E500435B55 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
-		02E39FE61D590F2500E95722 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,15 +174,15 @@
 		029D33361D53A0ED00002059 /* SwiftySignals */ = {
 			isa = PBXGroup;
 			children = (
-				029D33371D53A0ED00002059 /* SwiftySignals.h */,
-				029D33391D53A0ED00002059 /* Info.plist */,
-				02BC22F71D53A19D009A3F63 /* Property.swift */,
-				02BC22F81D53A19D009A3F63 /* Signal.swift */,
-				02BC22F91D53A19D009A3F63 /* Slot.swift */,
-				02E39FE61D590F2500E95722 /* Context.swift */,
-				02C868431D5B98E500435B55 /* Timer.swift */,
-				023A17CE1D5F240200295C46 /* EventType.swift */,
-				026CA3071D679E21006F752E /* Event.swift */,
+				021A7DBA1D87BD4000DCAFD2 /* Info.plist */,
+				021A7D921D87BD3100DCAFD2 /* Context.swift */,
+				021A7D931D87BD3100DCAFD2 /* Event.swift */,
+				021A7D941D87BD3100DCAFD2 /* EventType.swift */,
+				021A7D951D87BD3100DCAFD2 /* Property.swift */,
+				021A7D961D87BD3100DCAFD2 /* Signal.swift */,
+				021A7D971D87BD3100DCAFD2 /* Slot.swift */,
+				021A7D981D87BD3100DCAFD2 /* SwiftySignals.h */,
+				021A7D991D87BD3100DCAFD2 /* Timer.swift */,
 			);
 			path = SwiftySignals;
 			sourceTree = "<group>";
@@ -189,8 +191,8 @@
 		029D33421D53A0EE00002059 /* SwiftySignalsTests */ = {
 			isa = PBXGroup;
 			children = (
-				029D33431D53A0EE00002059 /* SwiftySignalsTests.swift */,
-				029D33451D53A0EE00002059 /* Info.plist */,
+				021A7DBF1D87BD5600DCAFD2 /* Info.plist */,
+				021A7DC01D87BD5600DCAFD2 /* SwiftySignalsTests.swift */,
 			);
 			path = SwiftySignalsTests;
 			sourceTree = "<group>";
@@ -202,7 +204,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025C2C521D57828F00397638 /* SwiftySignals.h in Headers */,
+				028115431D87C21A008B1A97 /* SwiftySignals.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +212,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				028115421D87C217008B1A97 /* SwiftySignals.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,6 +220,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				028115411D87C212008B1A97 /* SwiftySignals.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,7 +228,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				029D33381D53A0ED00002059 /* SwiftySignals.h in Headers */,
+				028115441D87C21E008B1A97 /* SwiftySignals.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,13 +476,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025C2C4E1D57827D00397638 /* Property.swift in Sources */,
-				025C2C4F1D57827F00397638 /* Signal.swift in Sources */,
-				025C2C501D57828200397638 /* Slot.swift in Sources */,
-				02E39FE81D590F4B00E95722 /* Context.swift in Sources */,
-				02C868451D5B9E8900435B55 /* Timer.swift in Sources */,
-				02CD3F9F1D610C3900C7EA60 /* EventType.swift in Sources */,
-				026CA3091D67A00D006F752E /* Event.swift in Sources */,
+				028115291D87C163008B1A97 /* Context.swift in Sources */,
+				0281152A1D87C163008B1A97 /* Event.swift in Sources */,
+				0281152B1D87C163008B1A97 /* EventType.swift in Sources */,
+				0281152C1D87C163008B1A97 /* Property.swift in Sources */,
+				0281152D1D87C163008B1A97 /* Signal.swift in Sources */,
+				0281152E1D87C163008B1A97 /* Slot.swift in Sources */,
+				028115301D87C163008B1A97 /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,7 +490,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025C2C531D57829700397638 /* SwiftySignalsTests.swift in Sources */,
+				021A7DC51D87BD5600DCAFD2 /* SwiftySignalsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,13 +498,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025C2C701D57837B00397638 /* Property.swift in Sources */,
-				025C2C711D57837D00397638 /* Signal.swift in Sources */,
-				025C2C721D57837F00397638 /* Slot.swift in Sources */,
-				02E39FE91D590F5400E95722 /* Context.swift in Sources */,
-				02C868461D5B9E8E00435B55 /* Timer.swift in Sources */,
-				02CD3FA01D610C4000C7EA60 /* EventType.swift in Sources */,
-				026CA30A1D67A01E006F752E /* Event.swift in Sources */,
+				028115311D87C16A008B1A97 /* Context.swift in Sources */,
+				028115321D87C16A008B1A97 /* Event.swift in Sources */,
+				028115331D87C16A008B1A97 /* EventType.swift in Sources */,
+				028115341D87C16A008B1A97 /* Property.swift in Sources */,
+				028115351D87C16A008B1A97 /* Signal.swift in Sources */,
+				028115361D87C16A008B1A97 /* Slot.swift in Sources */,
+				028115381D87C16A008B1A97 /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,7 +512,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02D865641D62A376007D02A6 /* SwiftySignalsTests.swift in Sources */,
+				021A7DC61D87BD5600DCAFD2 /* SwiftySignalsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,13 +520,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025C2C801D57841000397638 /* Property.swift in Sources */,
-				025C2C811D57841200397638 /* Signal.swift in Sources */,
-				025C2C821D57841400397638 /* Slot.swift in Sources */,
-				02E39FEA1D590F5900E95722 /* Context.swift in Sources */,
-				02C868471D5B9E9100435B55 /* Timer.swift in Sources */,
-				02CD3FA11D610C4400C7EA60 /* EventType.swift in Sources */,
-				026CA30B1D67A023006F752E /* Event.swift in Sources */,
+				028115391D87C170008B1A97 /* Context.swift in Sources */,
+				0281153A1D87C170008B1A97 /* Event.swift in Sources */,
+				0281153B1D87C170008B1A97 /* EventType.swift in Sources */,
+				0281153C1D87C170008B1A97 /* Property.swift in Sources */,
+				0281153D1D87C170008B1A97 /* Signal.swift in Sources */,
+				0281153E1D87C170008B1A97 /* Slot.swift in Sources */,
+				028115401D87C170008B1A97 /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,13 +534,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02BC22FA1D53A19D009A3F63 /* Property.swift in Sources */,
-				02E39FE71D590F2500E95722 /* Context.swift in Sources */,
-				02BC22FC1D53A19D009A3F63 /* Slot.swift in Sources */,
-				023A17CF1D5F240200295C46 /* EventType.swift in Sources */,
-				02C868441D5B98E500435B55 /* Timer.swift in Sources */,
-				026CA3081D679E21006F752E /* Event.swift in Sources */,
-				02BC22FB1D53A19D009A3F63 /* Signal.swift in Sources */,
+				028115211D87C15D008B1A97 /* Context.swift in Sources */,
+				028115221D87C15D008B1A97 /* Event.swift in Sources */,
+				028115231D87C15D008B1A97 /* EventType.swift in Sources */,
+				028115241D87C15D008B1A97 /* Property.swift in Sources */,
+				028115251D87C15D008B1A97 /* Signal.swift in Sources */,
+				028115261D87C15D008B1A97 /* Slot.swift in Sources */,
+				028115281D87C15D008B1A97 /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,7 +548,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				029D33441D53A0EE00002059 /* SwiftySignalsTests.swift in Sources */,
+				021A7DC41D87BD5600DCAFD2 /* SwiftySignalsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,7 +581,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -598,7 +602,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -615,8 +619,9 @@
 		025C2C4C1D57817100397638 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = SwiftySignalsTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
@@ -629,8 +634,9 @@
 		025C2C4D1D57817100397638 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = SwiftySignalsTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
@@ -649,7 +655,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignals;
@@ -670,7 +676,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignals;
@@ -687,7 +693,8 @@
 		025C2C6E1D57836900397638 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = SwiftySignalsTests/Info.plist;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -700,7 +707,8 @@
 		025C2C6F1D57836900397638 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = SwiftySignalsTests/Info.plist;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -720,7 +728,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignals;
@@ -742,7 +750,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignals;
@@ -860,7 +868,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignals;
@@ -882,7 +890,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = SwiftySignals/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignals;
@@ -895,8 +903,9 @@
 		029D334C1D53A0EE00002059 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SwiftySignalsTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -907,8 +916,9 @@
 		029D334D1D53A0EE00002059 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SwiftySignalsTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
