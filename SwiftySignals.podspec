@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name             = 'SwiftySignals'
-  s.version          = '2.0.1'
+  s.version          = '2.0.2'
   s.summary          = 'SwiftySignals provides a simple API to send and react to application messages.'
   s.description      = <<-DESC
 SwiftySignals provides a simple API to send and react to application messages.
@@ -22,6 +22,4 @@ Signals are senders of messages (arbitrary type). Slots receive messages in the 
   s.source_files = 'Sources/*.swift'
 
   s.requires_arc = true
-
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.0' }
 end
