@@ -228,4 +228,4 @@ A filter can be added to each subscription. Therefore the event provides the fun
 
 [image-1]:	https://travis-ci.org/psturm-swift/SwiftySignals.svg?branch=master
 [image-2]:	https://img.shields.io/cocoapods/v/SwiftySignals.svg "Version CocoaPods"
-[image-3]:	https://img.shields.io/badge/Swift-Version%203-blue.svg
+[image-3]:	https://img.shields.io/badge/swift-version%203-blue.svg
