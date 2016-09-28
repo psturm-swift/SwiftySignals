@@ -1,6 +1,6 @@
 # SwiftySignals
 
-[![Build Status][image-1]][1] [![][image-2]][2]
+[![Build Status][image-1]][1] [![][image-2]][2] [![Swift Version][image-3]][3]
 
 ## Author
 Patrick Sturm, psturm.mail@googlemail.com
@@ -224,6 +224,8 @@ A filter can be added to each subscription. Therefore the event provides the fun
 
 [1]:	https://travis-ci.org/psturm-swift/SwiftySignals
 [2]:	https://cocoapods.org/pods/SwiftySignals "CocoaPods"
+[3]:	https://swift.org "Swift"
 
 [image-1]:	https://travis-ci.org/psturm-swift/SwiftySignals.svg?branch=master
 [image-2]:	https://img.shields.io/cocoapods/v/SwiftySignals.svg "Version CocoaPods"
+[image-3]:	https://img.shields.io/badge/Swift-Version%203-blue.svg
