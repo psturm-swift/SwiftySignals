@@ -109,7 +109,7 @@ public extension EventType {
         on receiver: Receiver,
         call function: @escaping (Receiver)->((MessageType)->Void)) -> SlotType
     {
-        return then(invoke: policy, on: receiver, call: function)
+        return then(with: policy.context, and: receiver) { (receiver, message) in function(receiver)(message) }
     }
     
     @discardableResult public func then<Receiver:AnyObject>(
