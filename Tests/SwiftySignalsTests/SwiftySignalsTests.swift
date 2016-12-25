@@ -120,6 +120,7 @@ class SwiftySignalsTests: XCTestCase {
         XCTAssertEqual(3, property.didSet.subscriberCount)
     }
     
+    @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     func testIfTimerFiresOnlyOnce() {
         let expectation = self.expectation(description: "I expect that the timer has fired only once within 4 seconds")
 
@@ -141,6 +142,7 @@ class SwiftySignalsTests: XCTestCase {
         XCTAssertEqual(1, timerCounter)
     }
     
+    @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     func testIfPeriodicTimerFiresMoreThanOnce() {
         let expectation = self.expectation(description: "I expect that the timer has fired only once within 4 seconds")
         
@@ -205,16 +207,23 @@ class SwiftySignalsTests: XCTestCase {
     }
     
     static var allTests : [(String, (SwiftySignalsTests) -> () throws -> Void)] {
-        return [
+        let standardTests : [(String, (SwiftySignalsTests) -> () throws -> Void)] = [
             ("testIfAllObserversAreCalledIfTheyAreConnectedTheFirstTime", testIfAllObserversAreCalledIfTheyAreConnectedTheFirstTime),
             ("testIfAllObserversAreCalledIfTheValueChanges", testIfAllObserversAreCalledIfTheValueChanges),
             ("testIfReleasedSlotsAreIgnored", testIfReleasedSlotsAreIgnored),
             ("testIfMainQueueInvocationPolicyDefersTheInvocation", testIfMainQueueInvocationPolicyDefersTheInvocation),
-            ("testIfTimerFiresOnlyOnce", testIfTimerFiresOnlyOnce),
-            ("testIfPeriodicTimerFiresMoreThanOnce", testIfPeriodicTimerFiresMoreThanOnce),
             ("testIfOnlyFunctionsAreCalledThatPassTheFilter", testIfOnlyFunctionsAreCalledThatPassTheFilter),
             ("testIfOnlyFunctionsAreCalledThatPassTheConcatenatedFilter", testIfOnlyFunctionsAreCalledThatPassTheConcatenatedFilter),
             ("testIfReceiverLessSubscriptionsWorkProperly", testIfReceiverLessSubscriptionsWorkProperly)
         ]
+        if #available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *) {
+            return standardTests + [
+                ("testIfTimerFiresOnlyOnce", testIfTimerFiresOnlyOnce),
+                ("testIfPeriodicTimerFiresMoreThanOnce", testIfPeriodicTimerFiresMoreThanOnce),
+            ]
+        } else {
+            return standardTests
+        }
     }
+
 }

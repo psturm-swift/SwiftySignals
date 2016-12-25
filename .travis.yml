@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8
+osx_image: xcode8.2
 
 script:
   - xcodebuild test -workspace SwiftySignals.xcworkspace -scheme SwiftySignals-macOS

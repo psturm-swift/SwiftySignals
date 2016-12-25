@@ -20,6 +20,7 @@
 
 import Foundation
 
+@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public final class OnceOnlyTimer {
     private weak var timer: Timer? = nil
     private let tolerance: TimeInterval
@@ -38,22 +39,14 @@ public final class OnceOnlyTimer {
     
     public func fireAfter(seconds: TimeInterval) {
         invalidate()
-        let timer = Timer(
-            timeInterval: seconds,
-            target: self,
-            selector: #selector(OnceOnlyTimer.fireEvent),
-            userInfo: nil,
-            repeats: false)
+        let timer = Timer(timeInterval: seconds, repeats: false) { _ in self.fired.fire() }
         timer.tolerance = tolerance
         RunLoop.current.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
         self.timer = timer
     }
-    
-    @objc private func fireEvent() {
-        fired.fire()
-    }
 }
 
+@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public final class PeriodicTimer {
     private weak var timer: Foundation.Timer? = nil
     private let tolerance: TimeInterval
@@ -80,18 +73,9 @@ public final class PeriodicTimer {
     
     public func activate() {
         invalidate()
-        let timer = Timer(
-            timeInterval: interval,
-            target: self,
-            selector: #selector(PeriodicTimer.fireEvent),
-            userInfo: nil,
-            repeats: true)
+        let timer = Timer(timeInterval: interval, repeats: true) { _ in self.fired.fire() }
         timer.tolerance = tolerance
         RunLoop.current.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
         self.timer = timer
-    }
-    
-    @objc private func fireEvent() {
-        fired.fire()
     }
 }
