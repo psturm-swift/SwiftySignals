@@ -23,9 +23,9 @@ import XCTest
 
 
 class Helper {
-    var reference: SwiftySignals
+    var reference: SwiftySignalsTests
     
-    init(reference: SwiftySignals) {
+    init(reference: SwiftySignalsTests) {
         self.reference = reference
     }
     
@@ -34,7 +34,7 @@ class Helper {
     }
 }
 
-class SwiftySignals: XCTestCase {
+class SwiftySignalsTests: XCTestCase {
     var timerCounter = 0
     
     var property = Property(value: 42)
@@ -64,8 +64,8 @@ class SwiftySignals: XCTestCase {
     }
     
     func testIfAllObserversAreCalledIfTheyAreConnectedTheFirstTime() {
-        property.didSet.then(on: self, call: SwiftySignals.updateValue1)
-        property.didSet.then(on: self, call: SwiftySignals.updateValue2)
+        property.didSet.then(on: self, call: SwiftySignalsTests.updateValue1)
+        property.didSet.then(on: self, call: SwiftySignalsTests.updateValue2)
         
         XCTAssertEqual(42, value1)
         XCTAssertEqual(42, value2)
@@ -73,8 +73,8 @@ class SwiftySignals: XCTestCase {
     }
 
     func testIfAllObserversAreCalledIfTheValueChanges() {
-        property.didSet.then(on: self, call: SwiftySignals.updateValue1)
-        property.didSet.then(on: self, call: SwiftySignals.updateValue2)
+        property.didSet.then(on: self, call: SwiftySignalsTests.updateValue1)
+        property.didSet.then(on: self, call: SwiftySignalsTests.updateValue2)
 
         property.value = 84
 
@@ -84,7 +84,7 @@ class SwiftySignals: XCTestCase {
     }
     
     func testIfReleasedSlotsAreIgnored() {
-        property.didSet.then(on: self, call: SwiftySignals.updateValue1)
+        property.didSet.then(on: self, call: SwiftySignalsTests.updateValue1)
 
         var helper: Helper? = Helper(reference: self)
         if let helper = helper {
@@ -101,8 +101,8 @@ class SwiftySignals: XCTestCase {
     func testIfMainQueueInvocationPolicyDefersTheInvocation() {
         let expectation = self.expectation(description: "I expect that value3 is equal to 84")
 
-        property.didSet.then(on: self, call: SwiftySignals.updateValue1)
-        property.didSet.then(on: self, call: SwiftySignals.updateValue2)
+        property.didSet.then(on: self, call: SwiftySignalsTests.updateValue1)
+        property.didSet.then(on: self, call: SwiftySignalsTests.updateValue2)
         property.didSet.then(invoke: .onMainQueue, with: self, call: { (owner, newValue) in
             owner.value3 = newValue
             if newValue == 84 {
@@ -163,8 +163,8 @@ class SwiftySignals: XCTestCase {
     }
     
     func testIfOnlyFunctionsAreCalledThatPassTheFilter() {
-        property.didSet.filter({$0 > 0}).then(on: self, call: SwiftySignals.updateValue1)
-        property.didSet.filter({$0 > 100}).then(on: self, call: SwiftySignals.updateValue2)
+        property.didSet.filter({$0 > 0}).then(on: self, call: SwiftySignalsTests.updateValue1)
+        property.didSet.filter({$0 > 100}).then(on: self, call: SwiftySignalsTests.updateValue2)
         
         XCTAssertEqual(42, value1)
         XCTAssertEqual(0, value2)
@@ -172,8 +172,8 @@ class SwiftySignals: XCTestCase {
     }
 
     func testIfOnlyFunctionsAreCalledThatPassTheConcatenatedFilter() {
-        property.didSet.filter({$0 > 0}).filter({$0 > 10}).then(on: self, call: SwiftySignals.updateValue1)
-        property.didSet.filter({$0 > 3}).filter({$0 > 100}).then(on: self, call: SwiftySignals.updateValue2)
+        property.didSet.filter({$0 > 0}).filter({$0 > 10}).then(on: self, call: SwiftySignalsTests.updateValue1)
+        property.didSet.filter({$0 > 3}).filter({$0 > 100}).then(on: self, call: SwiftySignalsTests.updateValue2)
         
         XCTAssertEqual(42, value1)
         XCTAssertEqual(0, value2)
@@ -202,5 +202,19 @@ class SwiftySignals: XCTestCase {
 
         XCTAssertEqual(66, value1)
         XCTAssertEqual(66, value2)
+    }
+    
+    static var allTests : [(String, (SwiftySignalsTests) -> () throws -> Void)] {
+        return [
+            ("testIfAllObserversAreCalledIfTheyAreConnectedTheFirstTime", testIfAllObserversAreCalledIfTheyAreConnectedTheFirstTime),
+            ("testIfAllObserversAreCalledIfTheValueChanges", testIfAllObserversAreCalledIfTheValueChanges),
+            ("testIfReleasedSlotsAreIgnored", testIfReleasedSlotsAreIgnored),
+            ("testIfMainQueueInvocationPolicyDefersTheInvocation", testIfMainQueueInvocationPolicyDefersTheInvocation),
+            ("testIfTimerFiresOnlyOnce", testIfTimerFiresOnlyOnce),
+            ("testIfPeriodicTimerFiresMoreThanOnce", testIfPeriodicTimerFiresMoreThanOnce),
+            ("testIfOnlyFunctionsAreCalledThatPassTheFilter", testIfOnlyFunctionsAreCalledThatPassTheFilter),
+            ("testIfOnlyFunctionsAreCalledThatPassTheConcatenatedFilter", testIfOnlyFunctionsAreCalledThatPassTheConcatenatedFilter),
+            ("testIfReceiverLessSubscriptionsWorkProperly", testIfReceiverLessSubscriptionsWorkProperly)
+        ]
     }
 }

@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		021A7DC41D87BD5600DCAFD2 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7DC01D87BD5600DCAFD2 /* SwiftySignalsTests.swift */; };
-		021A7DC51D87BD5600DCAFD2 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7DC01D87BD5600DCAFD2 /* SwiftySignalsTests.swift */; };
-		021A7DC61D87BD5600DCAFD2 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7DC01D87BD5600DCAFD2 /* SwiftySignalsTests.swift */; };
 		025C2C411D57817100397638 /* SwiftySignals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025C2C371D57817000397638 /* SwiftySignals.framework */; };
 		025C2C631D57836900397638 /* SwiftySignals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025C2C591D57836900397638 /* SwiftySignals.framework */; };
 		028115211D87C15D008B1A97 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021A7D921D87BD3100DCAFD2 /* Context.swift */; };
@@ -45,6 +42,9 @@
 		028115431D87C21A008B1A97 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 021A7D981D87BD3100DCAFD2 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		028115441D87C21E008B1A97 /* SwiftySignals.h in Headers */ = {isa = PBXBuildFile; fileRef = 021A7D981D87BD3100DCAFD2 /* SwiftySignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		029D333F1D53A0EE00002059 /* SwiftySignals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029D33341D53A0ED00002059 /* SwiftySignals.framework */; };
+		02D2232C1E0FA41600AB1E28 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D2232B1E0FA41600AB1E28 /* SwiftySignalsTests.swift */; };
+		02D2232D1E0FA41600AB1E28 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D2232B1E0FA41600AB1E28 /* SwiftySignalsTests.swift */; };
+		02D2232E1E0FA41600AB1E28 /* SwiftySignalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D2232B1E0FA41600AB1E28 /* SwiftySignalsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +82,6 @@
 		021A7D991D87BD3100DCAFD2 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = Sources/Timer.swift; sourceTree = SOURCE_ROOT; };
 		021A7DBA1D87BD4000DCAFD2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = SOURCE_ROOT; };
 		021A7DBF1D87BD5600DCAFD2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tests/Info.plist; sourceTree = SOURCE_ROOT; };
-		021A7DC01D87BD5600DCAFD2 /* SwiftySignalsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftySignalsTests.swift; path = Tests/SwiftySignalsTests.swift; sourceTree = SOURCE_ROOT; };
 		025C2C371D57817000397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C2C401D57817100397638 /* SwiftySignalsTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		025C2C591D57836900397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +89,7 @@
 		025C2C781D5783FA00397638 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		029D33341D53A0ED00002059 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		029D333E1D53A0EE00002059 /* SwiftySignalsTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		02D2232B1E0FA41600AB1E28 /* SwiftySignalsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftySignalsTests.swift; path = Tests/SwiftySignalsTests/SwiftySignalsTests.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,8 +191,8 @@
 		029D33421D53A0EE00002059 /* SwiftySignalsTests */ = {
 			isa = PBXGroup;
 			children = (
+				02D2232B1E0FA41600AB1E28 /* SwiftySignalsTests.swift */,
 				021A7DBF1D87BD5600DCAFD2 /* Info.plist */,
-				021A7DC01D87BD5600DCAFD2 /* SwiftySignalsTests.swift */,
 			);
 			path = SwiftySignalsTests;
 			sourceTree = "<group>";
@@ -376,12 +376,14 @@
 					};
 					025C2C3F1D57817100397638 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0820;
 					};
 					025C2C581D57836900397638 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 					025C2C611D57836900397638 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0820;
 					};
 					025C2C771D5783FA00397638 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -392,7 +394,7 @@
 					};
 					029D333D1D53A0EE00002059 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -490,7 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				021A7DC51D87BD5600DCAFD2 /* SwiftySignalsTests.swift in Sources */,
+				02D2232D1E0FA41600AB1E28 /* SwiftySignalsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,7 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				021A7DC61D87BD5600DCAFD2 /* SwiftySignalsTests.swift in Sources */,
+				02D2232E1E0FA41600AB1E28 /* SwiftySignalsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,7 +550,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				021A7DC41D87BD5600DCAFD2 /* SwiftySignalsTests.swift in Sources */,
+				02D2232C1E0FA41600AB1E28 /* SwiftySignalsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +622,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -627,6 +630,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -635,6 +639,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -694,11 +699,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
@@ -708,6 +715,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
@@ -904,11 +912,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.googlemail.mail.psturm.SwiftySignalsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -917,6 +927,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
