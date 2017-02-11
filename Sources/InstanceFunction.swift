@@ -20,42 +20,22 @@
 
 import Foundation
 
-public final class Property<T> {
-    private let _observable: ObservableSync<T>
-    private let _syncQueue: DispatchQueue
-    private var _value: T
+struct InstanceFunction<Class: AnyObject, Arg> {
+    private let _function: (Class)->((Arg)->Void)
+    private weak var _target: Class?
     
-    public var value: T {
-        set {
-            self._syncQueue.async(flags: .barrier) {
-                self._value = newValue
-                self._observable.send(message: newValue)
-            }
-        }
-        get {
-            var syncedValue: T!
-            self._syncQueue.sync {
-                syncedValue = self._value
-            }
-            return syncedValue
+    init(target: Class, function: @escaping (Class)->((Arg)->Void)) {
+        self._target = target
+        self._function = function
+    }
+    
+    func call(_ arg: Arg) {
+        if let target = _target {
+            _function(target)(arg)
         }
     }
     
-    public var didSet: Tail<ObservableSync<T>> {
-        return Tail<ObservableSync<T>>(
-            observable: _observable,
-            dispatchQueue: DispatchQueue.main)
-    }
-    
-    public init(value: T) {
-        let syncQueue = DispatchQueue(label: "SwiftySignals.Property", attributes: .concurrent)
-        self._observable = ObservableSync<T>()
-        self._syncQueue = syncQueue
-        self._value = value
-        self._observable.send(message: value)
-    }
-    
-    deinit {
-        _observable.unsubscribeAll()
+    func call(with arg: Arg) {
+        call(arg)
     }
 }

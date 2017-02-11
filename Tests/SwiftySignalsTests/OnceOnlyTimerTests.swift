@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Patrick Sturm <psturm.mail@googlemail.com>
+// Copyright (c) 2017 Patrick Sturm <psturm.mail@googlemail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,19 +18,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
+import XCTest
+@testable import SwiftySignals
 
-public final class Signal<Message> {
-    public let fired = Event<Message>()
-    
-    public init() {
+@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+class OnceOnlyTimerTests: XCTestCase {
+    override func setUp() {
     }
     
-    public func fire(with message: Message) {
-        fired.fire(with: message)
+    override func tearDown() {
     }
     
-    public func fire(_ message: Message) {
-        fired.fire(message)
+    func testIfOneOnlyTimerTriggersAfterADefinedTimeInterval() {
+        let observables = ObservableCollection()
+        let expectation = self.expectation(description: "Timer has been triggered")
+        let timer = OnceOnlyTimer()
+        
+        timer
+            .fired
+            .then { expectation.fulfill() }
+            .append(to: observables)
+        
+        timer.fireAfter(seconds: 2)
+        
+        waitForExpectations(timeout: 10, handler: nil)
     }
+    
+    static var allTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] {
+        let unitTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] = [
+        ]
+        return unitTests
+    }
+    
 }

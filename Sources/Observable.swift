@@ -16,46 +16,45 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE
+// THE SOFTWARE.
 
 import Foundation
 
-public final class Property<T> {
-    private let _observable: ObservableSync<T>
-    private let _syncQueue: DispatchQueue
-    private var _value: T
+public final class Observable<T>: ObservableType {
+    public typealias MessageOut = T
+
+    private var _observers: [AnyObserver<MessageOut>] = []
+    private var _lastMessage: T? = nil
     
-    public var value: T {
-        set {
-            self._syncQueue.async(flags: .barrier) {
-                self._value = newValue
-                self._observable.send(message: newValue)
+    public func subscribe<O : ObserverType>(observer: O) where O.MessageIn == MessageOut {
+        if !self._observers.contains(where: { $0._base === observer }) {
+            self._observers.append(AnyObserver<O.MessageIn>(base: observer))
+            if let lastMessage = self._lastMessage {
+                observer.process(message: lastMessage)
             }
         }
-        get {
-            var syncedValue: T!
-            self._syncQueue.sync {
-                syncedValue = self._value
-            }
-            return syncedValue
+    }
+
+    public func unsubscribe<O : ObserverType>(observer: O) where O.MessageIn == MessageOut {
+        self._observers = self._observers.filter { $0._base !== observer }
+        observer.unsubscribed()
+    }
+
+    internal func send(_ message: MessageOut) {
+        self._lastMessage = message
+        for observer in self._observers {
+            observer.process(message: message)
         }
     }
-    
-    public var didSet: Tail<ObservableSync<T>> {
-        return Tail<ObservableSync<T>>(
-            observable: _observable,
-            dispatchQueue: DispatchQueue.main)
+        
+    internal func send(message: MessageOut) {
+        send(message)
     }
     
-    public init(value: T) {
-        let syncQueue = DispatchQueue(label: "SwiftySignals.Property", attributes: .concurrent)
-        self._observable = ObservableSync<T>()
-        self._syncQueue = syncQueue
-        self._value = value
-        self._observable.send(message: value)
-    }
-    
-    deinit {
-        _observable.unsubscribeAll()
+    public func unsubscribeAll() {
+        for observer in self._observers {
+            observer.unsubscribed()
+        }
+        self._observers = []
     }
 }

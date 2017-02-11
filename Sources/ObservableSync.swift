@@ -16,46 +16,46 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE
+// THE SOFTWARE.
 
 import Foundation
 
-public final class Property<T> {
-    private let _observable: ObservableSync<T>
+public final class ObservableSync<T>: ObservableType {
+    public typealias MessageOut = T
+    private let _observable = Observable<T>()
     private let _syncQueue: DispatchQueue
-    private var _value: T
     
-    public var value: T {
-        set {
-            self._syncQueue.async(flags: .barrier) {
-                self._value = newValue
-                self._observable.send(message: newValue)
-            }
-        }
-        get {
-            var syncedValue: T!
-            self._syncQueue.sync {
-                syncedValue = self._value
-            }
-            return syncedValue
+    public init() {
+        self._syncQueue = DispatchQueue(label: "ObservableSync")
+    }
+    
+    public func subscribe<O : ObserverType>(observer: O) where O.MessageIn == MessageOut {
+        self._syncQueue.async(flags: .barrier) {
+            self._observable.subscribe(observer: observer)
         }
     }
     
-    public var didSet: Tail<ObservableSync<T>> {
-        return Tail<ObservableSync<T>>(
-            observable: _observable,
-            dispatchQueue: DispatchQueue.main)
+    public func unsubscribe<O : ObserverType>(observer: O) where O.MessageIn == MessageOut {
+        self._syncQueue.async(flags: .barrier) {
+            self._observable.unsubscribe(observer: observer)
+        }
     }
     
-    public init(value: T) {
-        let syncQueue = DispatchQueue(label: "SwiftySignals.Property", attributes: .concurrent)
-        self._observable = ObservableSync<T>()
-        self._syncQueue = syncQueue
-        self._value = value
-        self._observable.send(message: value)
+    internal func send(_ message: MessageOut) {
+        self._syncQueue.async(flags: .barrier) {
+            self._observable.send(message)
+        }
     }
     
-    deinit {
-        _observable.unsubscribeAll()
+    internal func send(message: MessageOut) {
+        self._syncQueue.async(flags: .barrier) {
+            self._observable.send(message: message)
+        }
+    }
+    
+    public func unsubscribeAll() {
+        self._syncQueue.async(flags: .barrier) {
+            self._observable.unsubscribeAll()
+        }
     }
 }

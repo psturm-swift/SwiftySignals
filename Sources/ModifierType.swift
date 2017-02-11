@@ -16,46 +16,13 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE
+// THE SOFTWARE.
 
 import Foundation
 
-public final class Property<T> {
-    private let _observable: ObservableSync<T>
-    private let _syncQueue: DispatchQueue
-    private var _value: T
-    
-    public var value: T {
-        set {
-            self._syncQueue.async(flags: .barrier) {
-                self._value = newValue
-                self._observable.send(message: newValue)
-            }
-        }
-        get {
-            var syncedValue: T!
-            self._syncQueue.sync {
-                syncedValue = self._value
-            }
-            return syncedValue
-        }
-    }
-    
-    public var didSet: Tail<ObservableSync<T>> {
-        return Tail<ObservableSync<T>>(
-            observable: _observable,
-            dispatchQueue: DispatchQueue.main)
-    }
-    
-    public init(value: T) {
-        let syncQueue = DispatchQueue(label: "SwiftySignals.Property", attributes: .concurrent)
-        self._observable = ObservableSync<T>()
-        self._syncQueue = syncQueue
-        self._value = value
-        self._observable.send(message: value)
-    }
-    
-    deinit {
-        _observable.unsubscribeAll()
-    }
+public protocol ModifierType: class {
+    associatedtype MessageIn
+    associatedtype MessageOut
+
+    func process(message: MessageIn, notify: @escaping (MessageOut)->Void)
 }
