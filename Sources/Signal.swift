@@ -40,4 +40,8 @@ public final class Signal<T> {
             observable: _observable,
             dispatchQueue: DispatchQueue.main)
     }
+    
+    deinit {
+        _observable.unsubscribeAll()
+    }
 }
