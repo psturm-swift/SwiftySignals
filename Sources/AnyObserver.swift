@@ -22,12 +22,10 @@ import Foundation
 
 public final class AnyObserver<T>: ObserverType {
     public typealias MessageIn = T
-    internal let _base: AnyObject
     private let _process: (T)->Void
     private let _unsubscribed: ()->Void
     
     public init<Base: ObserverType>(base: Base) where Base.MessageIn == MessageIn {
-        self._base = base
         self._process = {
             base.process(message: $0)
         }
