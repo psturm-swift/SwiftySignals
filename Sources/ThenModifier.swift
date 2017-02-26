@@ -20,13 +20,13 @@
 
 import Foundation
 
-public final class ThenFunctionModifier<T, Target: AnyObject>: ModifierType {
+public final class ThenFunctionModifier<T>: ModifierType {
     public typealias MessageIn = T
     public typealias MessageOut = T
     
-    private let _instanceFunction: InstanceFunction<Target, MessageIn>
+    private let _instanceFunction: InstanceFunction<MessageIn>
 
-    fileprivate init(target: Target, function: @escaping (Target)->((MessageOut)->Void)) {
+    fileprivate init<Target: AnyObject>(target: Target, function: @escaping (Target)->((MessageOut)->Void)) {
         self._instanceFunction = InstanceFunction(target: target, function: function)
     }
     
@@ -36,22 +36,22 @@ public final class ThenFunctionModifier<T, Target: AnyObject>: ModifierType {
     }
 }
 
-public typealias ThenFunctionObservable<O: ObservableType, Target: AnyObject> = ModifierObservable<O, O.MessageOut, ThenFunctionModifier<O.MessageOut, Target>>
-public typealias ThenFunctionTail<O: ObservableType, Target: AnyObject> = Tail<ThenFunctionObservable<O, Target>>
+public typealias ThenFunctionObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut, ThenFunctionModifier<O.MessageOut>>
+public typealias ThenFunctionTail<O: ObservableType> = Tail<ThenFunctionObservable<O>>
 
 extension Tail {
     public func then<Target: AnyObject>(
         call function: @escaping (Target)->((SourceObservable.MessageOut)->Void),
         on target: Target)
-        -> ThenFunctionTail<SourceObservable, Target>
+        -> ThenFunctionTail<SourceObservable>
     {
         let thenObservable = ThenFunctionObservable(
             source: self.observable,
-            modifier: ThenFunctionModifier<SourceObservable.MessageOut, Target>(target: target, function: function),
+            modifier: ThenFunctionModifier<SourceObservable.MessageOut>(target: target, function: function),
             dispatchQueue: self.dispatchQueue
         )
         
-        return ThenFunctionTail<SourceObservable, Target>(
+        return ThenFunctionTail<SourceObservable>(
             observable: thenObservable,
             dispatchQueue: self.dispatchQueue)
     }

@@ -23,21 +23,26 @@ import Foundation
 public final class Observable<T>: ObservableType {
     public typealias MessageOut = T
 
-    private var _observers: [AnyObserver<MessageOut>] = []
+    private var _observers: [WeakObserverRef<MessageOut>] = []
     private var _lastMessage: T? = nil
     
     public func subscribe<O : ObserverType>(observer: O) where O.MessageIn == MessageOut {
-        if !self._observers.contains(where: { $0._base === observer }) {
-            self._observers.append(AnyObserver<O.MessageIn>(base: observer))
+        if !self._observers.contains(where: { $0.reference === observer }) {
+            self._observers.append(WeakObserverRef<O.MessageIn>(reference: observer))
             if let lastMessage = self._lastMessage {
                 observer.process(message: lastMessage)
             }
         }
     }
 
+    private func removeInvalidObservers() {
+        self._observers = self._observers.filter { $0.isValid }
+    }
+    
     public func unsubscribe<O : ObserverType>(observer: O) where O.MessageIn == MessageOut {
-        self._observers = self._observers.filter { $0._base !== observer }
+        self._observers = self._observers.filter { $0.reference !== observer }
         observer.unsubscribed()
+        removeInvalidObservers()
     }
 
     internal func send(_ message: MessageOut) {

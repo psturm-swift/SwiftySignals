@@ -16,27 +16,33 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE
+// THE SOFTWARE.
 
 import Foundation
 
-struct InstanceFunction<Arg> {
-    private let _function: (Arg)->Void
+final class WeakObserverRef<T>: ObserverType{
+    typealias MessageIn = T
+    private weak var _reference: AnyObject?
+    private let _forward: Forward<T>
     
-    init<Target: AnyObject>(target: Target, function: @escaping (Target)->((Arg)->Void)) {
-        self._function = {
-            [weak target] (argument: Arg)->Void in
-            if let strongTarget = target {
-                function(strongTarget)(argument)
-            }
-        }
+    init<O: ObserverType>(reference: O) where O.MessageIn == MessageIn {
+        self._reference = reference
+        self._forward = Forward(target: reference, processMessage: O.process(message:), unsubscribed: O.unsubscribed)
     }
     
-    func call(_ arg: Arg) {
-        _function(arg)
+    func process(message: MessageIn) {
+        _forward.process(message: message)
     }
     
-    func call(with arg: Arg) {
-        _function(arg)
+    func unsubscribed() {
+        _forward.unsubscribed()
+    }
+    
+    var reference: AnyObject? {
+        return _reference
+    }
+    
+    var isValid: Bool {
+        return _reference != nil
     }
 }

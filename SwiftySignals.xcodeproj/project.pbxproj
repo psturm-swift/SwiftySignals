@@ -82,6 +82,7 @@
 		02B750C71E5E36E100DD8F3E /* ObservableSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B750C51E5E36E100DD8F3E /* ObservableSync.swift */; };
 		02B750C81E5E36E100DD8F3E /* ObservableSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B750C51E5E36E100DD8F3E /* ObservableSync.swift */; };
 		02B750C91E5E36E100DD8F3E /* ObservableSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B750C51E5E36E100DD8F3E /* ObservableSync.swift */; };
+		02CA68D71E637A78006518D6 /* WeakObserverRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CA68D61E637A78006518D6 /* WeakObserverRef.swift */; };
 		02E2BF651E60DC17001CF696 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */; };
 		02E2BF661E60DC17001CF696 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */; };
 		02E2BF671E60DC17001CF696 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */; };
@@ -151,6 +152,7 @@
 		029D333E1D53A0EE00002059 /* SwiftySignalsTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		029D8EAC1E55855700C2900D /* Tail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tail.swift; path = Sources/Tail.swift; sourceTree = SOURCE_ROOT; };
 		02B750C51E5E36E100DD8F3E /* ObservableSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObservableSync.swift; path = Sources/ObservableSync.swift; sourceTree = SOURCE_ROOT; };
+		02CA68D61E637A78006518D6 /* WeakObserverRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeakObserverRef.swift; path = Sources/WeakObserverRef.swift; sourceTree = SOURCE_ROOT; };
 		02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeriodicTimer.swift; path = Sources/PeriodicTimer.swift; sourceTree = SOURCE_ROOT; };
 		02E2BF641E60DC17001CF696 /* OnceOnlyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnceOnlyTimer.swift; path = Sources/OnceOnlyTimer.swift; sourceTree = SOURCE_ROOT; };
 		02E2BF7B1E60DEE2001CF696 /* OnceOnlyTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnceOnlyTimerTests.swift; path = Tests/SwiftySignalsTests/OnceOnlyTimerTests.swift; sourceTree = SOURCE_ROOT; };
@@ -304,6 +306,7 @@
 				023F6FEE1E5B8B1E00181868 /* ObservableCollection.swift */,
 				02B750C51E5E36E100DD8F3E /* ObservableSync.swift */,
 				029D8EAC1E55855700C2900D /* Tail.swift */,
+				02CA68D61E637A78006518D6 /* WeakObserverRef.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -693,6 +696,7 @@
 				0204CB631E525698004AC3BE /* ThenModifier.swift in Sources */,
 				0204CB651E5257BB004AC3BE /* FilterModifier.swift in Sources */,
 				0299FDD11E4FCFEF0078A602 /* ObserverType.swift in Sources */,
+				02CA68D71E637A78006518D6 /* WeakObserverRef.swift in Sources */,
 				0204CB5D1E518655004AC3BE /* ModifierObservable.swift in Sources */,
 				023F6FEF1E5B8B1E00181868 /* ObservableCollection.swift in Sources */,
 				0299FDCF1E4FCFE20078A602 /* ObservableType.swift in Sources */,

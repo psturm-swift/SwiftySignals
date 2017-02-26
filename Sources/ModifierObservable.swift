@@ -29,7 +29,7 @@ public final class ModifierObservable<O: ObservableType, T, M: ModifierType>: Ob
     private let _dispatchQueue: DispatchQueue
     private let _modifier: M
     private var _source: O? = nil
-    private var _forwarder: Forward<ModifierObservable, MessageIn>! = nil
+    private var _forward: Forward<MessageIn>! = nil
     
     public init(source: O, modifier: M, dispatchQueue: DispatchQueue)
     {
@@ -37,17 +37,17 @@ public final class ModifierObservable<O: ObservableType, T, M: ModifierType>: Ob
         self._dispatchQueue = dispatchQueue
         self._source = source
         self._modifier = modifier
-        self._forwarder = Forward(
+        self._forward = Forward<MessageIn>(
             target: self,
             processMessage: ModifierObservable.process,
             unsubscribed: ModifierObservable.unsubscribed
         )
-        source.subscribe(observer: self._forwarder)
+        source.subscribe(observer: self._forward)
     }
     
     deinit {
         if let source = self._source {
-            source.unsubscribe(observer: self._forwarder)
+            source.unsubscribe(observer: self._forward)
         }
     }
     

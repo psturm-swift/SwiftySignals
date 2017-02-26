@@ -20,19 +20,18 @@
 
 import Foundation
 
-final class Forward<Target: AnyObject, T>: ObserverType {
+final class Forward<T>: ObserverType {
     typealias MessageIn = T
-    private let _processMessage: InstanceFunction<Target, T>
-    private let _unsubscribed: InstanceFunction<Target, Void>
+    private let _processMessage: InstanceFunction<T>
+    private let _unsubscribed: InstanceFunction<Void>
 
-    init(target: Target, processMessage: @escaping (Target)->((T)->Void), unsubscribed: @escaping (Target)->(()->Void)) {
+    init<Target: AnyObject>(target: Target, processMessage: @escaping (Target)->((T)->Void), unsubscribed: @escaping (Target)->(()->Void)) {
         self._processMessage = InstanceFunction(target: target, function: processMessage)
         self._unsubscribed = InstanceFunction(target: target, function: unsubscribed)
     }
     
     func process(message: MessageIn) {
         _processMessage.call(with: message)
-        
     }
     
     func unsubscribed() {
