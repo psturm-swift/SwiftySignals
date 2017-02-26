@@ -23,6 +23,7 @@
 		0204CB6A1E526E9F004AC3BE /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB691E526E9F004AC3BE /* Property.swift */; };
 		02195C131E52D6E5002B9EA2 /* AnyObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195C121E52D6E5002B9EA2 /* AnyObserver.swift */; };
 		02195C171E54FA8D002B9EA2 /* InstanceFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195C161E54FA8D002B9EA2 /* InstanceFunction.swift */; };
+		0236C3AB1E62D956003AD795 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0236C3AA1E62D956003AD795 /* Signal.swift */; };
 		02389DD01E5C0BBA00A45D54 /* ObservableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F6FEE1E5B8B1E00181868 /* ObservableCollection.swift */; };
 		02389DD11E5C0BC000A45D54 /* ObservableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F6FEE1E5B8B1E00181868 /* ObservableCollection.swift */; };
 		02389DD21E5C0BC800A45D54 /* ObservableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023F6FEE1E5B8B1E00181868 /* ObservableCollection.swift */; };
@@ -135,6 +136,7 @@
 		021A7D981D87BD3100DCAFD2 /* SwiftySignals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwiftySignals.h; path = Sources/SwiftySignals.h; sourceTree = SOURCE_ROOT; };
 		021A7DBA1D87BD4000DCAFD2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/Info.plist; sourceTree = SOURCE_ROOT; };
 		021A7DBF1D87BD5600DCAFD2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tests/Info.plist; sourceTree = SOURCE_ROOT; };
+		0236C3AA1E62D956003AD795 /* Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Signal.swift; path = Sources/Signal.swift; sourceTree = SOURCE_ROOT; };
 		023F6FEE1E5B8B1E00181868 /* ObservableCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObservableCollection.swift; path = Sources/ObservableCollection.swift; sourceTree = SOURCE_ROOT; };
 		024535B51E5ABEE5006DA1DB /* PropertyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PropertyTests.swift; path = Tests/SwiftySignalsTests/PropertyTests.swift; sourceTree = SOURCE_ROOT; };
 		0252F2EE1E5EB4FB009F48D5 /* ModifierType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModifierType.swift; path = Sources/ModifierType.swift; sourceTree = SOURCE_ROOT; };
@@ -265,6 +267,7 @@
 				02E2BF641E60DC17001CF696 /* OnceOnlyTimer.swift */,
 				02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */,
 				0204CB691E526E9F004AC3BE /* Property.swift */,
+				0236C3AA1E62D956003AD795 /* Signal.swift */,
 			);
 			name = Subjects;
 			sourceTree = "<group>";
@@ -684,6 +687,7 @@
 				0204CB6A1E526E9F004AC3BE /* Property.swift in Sources */,
 				02195C131E52D6E5002B9EA2 /* AnyObserver.swift in Sources */,
 				02B750C61E5E36E100DD8F3E /* ObservableSync.swift in Sources */,
+				0236C3AB1E62D956003AD795 /* Signal.swift in Sources */,
 				0204CB611E52559C004AC3BE /* MapModifier.swift in Sources */,
 				02195C171E54FA8D002B9EA2 /* InstanceFunction.swift in Sources */,
 				0204CB631E525698004AC3BE /* ThenModifier.swift in Sources */,
