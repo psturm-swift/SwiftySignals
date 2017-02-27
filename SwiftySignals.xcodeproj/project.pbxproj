@@ -89,6 +89,10 @@
 		02CA68DB1E6388F6006518D6 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0236C3AA1E62D956003AD795 /* Signal.swift */; };
 		02CA68DC1E6388FC006518D6 /* WeakObserverRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CA68D61E637A78006518D6 /* WeakObserverRef.swift */; };
 		02CA68DD1E6388FC006518D6 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0236C3AA1E62D956003AD795 /* Signal.swift */; };
+		02D644C41E64ADB5000C8A30 /* DiscardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */; };
+		02D644C51E64ADB5000C8A30 /* DiscardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */; };
+		02D644C61E64ADB5000C8A30 /* DiscardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */; };
+		02D644C71E64ADB5000C8A30 /* DiscardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */; };
 		02E2BF651E60DC17001CF696 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */; };
 		02E2BF661E60DC17001CF696 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */; };
 		02E2BF671E60DC17001CF696 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */; };
@@ -159,6 +163,7 @@
 		029D8EAC1E55855700C2900D /* Tail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tail.swift; path = Sources/Tail.swift; sourceTree = SOURCE_ROOT; };
 		02B750C51E5E36E100DD8F3E /* ObservableSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObservableSync.swift; path = Sources/ObservableSync.swift; sourceTree = SOURCE_ROOT; };
 		02CA68D61E637A78006518D6 /* WeakObserverRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeakObserverRef.swift; path = Sources/WeakObserverRef.swift; sourceTree = SOURCE_ROOT; };
+		02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscardModifier.swift; path = Sources/DiscardModifier.swift; sourceTree = SOURCE_ROOT; };
 		02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeriodicTimer.swift; path = Sources/PeriodicTimer.swift; sourceTree = SOURCE_ROOT; };
 		02E2BF641E60DC17001CF696 /* OnceOnlyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnceOnlyTimer.swift; path = Sources/OnceOnlyTimer.swift; sourceTree = SOURCE_ROOT; };
 		02E2BF7B1E60DEE2001CF696 /* OnceOnlyTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnceOnlyTimerTests.swift; path = Tests/SwiftySignalsTests/OnceOnlyTimerTests.swift; sourceTree = SOURCE_ROOT; };
@@ -283,6 +288,7 @@
 		02E2BF6E1E60DD14001CF696 /* Modifier */ = {
 			isa = PBXGroup;
 			children = (
+				02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */,
 				0204CB671E525848004AC3BE /* Dispatch.swift */,
 				0204CB641E5257BB004AC3BE /* FilterModifier.swift */,
 				0204CB601E52559C004AC3BE /* MapModifier.swift */,
@@ -609,6 +615,7 @@
 				029D8EB41E56CBB500C2900D /* FilterModifier.swift in Sources */,
 				029D8EB51E56CBB500C2900D /* Dispatch.swift in Sources */,
 				029D8EB61E56CBB500C2900D /* Property.swift in Sources */,
+				02D644C51E64ADB5000C8A30 /* DiscardModifier.swift in Sources */,
 				029D8EB71E56CBB500C2900D /* AnyObserver.swift in Sources */,
 				029D8EB81E56CBB500C2900D /* InstanceFunction.swift in Sources */,
 				02E2BF661E60DC17001CF696 /* PeriodicTimer.swift in Sources */,
@@ -646,6 +653,7 @@
 				029D8EBE1E56CBC100C2900D /* FilterModifier.swift in Sources */,
 				029D8EBF1E56CBC100C2900D /* Dispatch.swift in Sources */,
 				029D8EC01E56CBC100C2900D /* Property.swift in Sources */,
+				02D644C61E64ADB5000C8A30 /* DiscardModifier.swift in Sources */,
 				029D8EC11E56CBC100C2900D /* AnyObserver.swift in Sources */,
 				029D8EC21E56CBC100C2900D /* InstanceFunction.swift in Sources */,
 				02E2BF671E60DC17001CF696 /* PeriodicTimer.swift in Sources */,
@@ -683,6 +691,7 @@
 				029D8EC81E56CBC700C2900D /* FilterModifier.swift in Sources */,
 				029D8EC91E56CBC700C2900D /* Dispatch.swift in Sources */,
 				029D8ECA1E56CBC700C2900D /* Property.swift in Sources */,
+				02D644C71E64ADB5000C8A30 /* DiscardModifier.swift in Sources */,
 				029D8ECB1E56CBC700C2900D /* AnyObserver.swift in Sources */,
 				029D8ECC1E56CBC700C2900D /* InstanceFunction.swift in Sources */,
 				02E2BF681E60DC17001CF696 /* PeriodicTimer.swift in Sources */,
@@ -710,6 +719,7 @@
 				0299FDD11E4FCFEF0078A602 /* ObserverType.swift in Sources */,
 				02CA68D71E637A78006518D6 /* WeakObserverRef.swift in Sources */,
 				0204CB5D1E518655004AC3BE /* ModifierObservable.swift in Sources */,
+				02D644C41E64ADB5000C8A30 /* DiscardModifier.swift in Sources */,
 				023F6FEF1E5B8B1E00181868 /* ObservableCollection.swift in Sources */,
 				0299FDCF1E4FCFE20078A602 /* ObservableType.swift in Sources */,
 				02E2BF651E60DC17001CF696 /* PeriodicTimer.swift in Sources */,
