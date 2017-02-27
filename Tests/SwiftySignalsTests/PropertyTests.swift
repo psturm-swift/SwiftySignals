@@ -71,16 +71,13 @@ class PropertyTests: XCTestCase {
         
         self.waitForExpectations(timeout: 10, handler: nil)
     }
-    
-    func testIfBlocksAreExecutedOnMainQueue() {
+
+    func testIfBlocksAreExecutedOnMainQueueOnSubscription() {
         let observables = ObservableCollection()
-        
-        let propertyProcessed1 = self.expectation(description: "Property processed")
-        let propertyProcessed2 = self.expectation(description: "Property processed")
-        
+        let propertyProcessed = self.expectation(description: "Property processed")
         let property = Property<Bool>(value: true)
         
-        let tail = property
+        property
             .didSet
             .then { _ in XCTAssertTrue(Thread.isMainThread) }
             .map {
@@ -88,16 +85,28 @@ class PropertyTests: XCTestCase {
                 XCTAssertTrue(Thread.isMainThread)
                 return !value
             }
-            .then {
-                if $0 {
-                    propertyProcessed1.fulfill()
-                }
-                else {
-                    propertyProcessed2.fulfill()
-                }
+            .then { _ in propertyProcessed.fulfill() }
+            .append(to: observables)
+        
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testIfBlocksAreExecutedOnMainQueueIfPropertyDidSet() {
+        let observables = ObservableCollection()
+        let propertyProcessed = self.expectation(description: "Property processed")
+        let property = Property<Bool>(value: true)
+        
+        property
+            .didSet
+            .discard(first: 1)
+            .then { _ in XCTAssertTrue(Thread.isMainThread) }
+            .map {
+                value -> Bool in
+                XCTAssertTrue(Thread.isMainThread)
+                return !value
             }
-        XCTAssertTrue(tail.dispatchQueue === DispatchQueue.main)
-        tail.append(to: observables)
+            .then { _ in propertyProcessed.fulfill() }
+            .append(to: observables)
         
         property.value = !property.value
         
@@ -109,7 +118,9 @@ class PropertyTests: XCTestCase {
             ("testThatPropertyValueCanBeReadOut", testThatPropertyValueCanBeReadOut),
             ("testThatPropertyValueCanBeChanged", testThatPropertyValueCanBeChanged),
             ("testIfOnlyEvenNumbersCanBeObserved", testIfOnlyEvenNumbersCanBeObserved),
-            ("testIfLastMessageIsPropagatedOnSubscription", testIfLastMessageIsPropagatedOnSubscription)
+            ("testIfLastMessageIsPropagatedOnSubscription", testIfLastMessageIsPropagatedOnSubscription),
+            ("testIfBlocksAreExecutedOnMainQueueOnSubscription", testIfBlocksAreExecutedOnMainQueueOnSubscription),
+            ("testIfBlocksAreExecutedOnMainQueueIfPropertyDidSet", testIfBlocksAreExecutedOnMainQueueIfPropertyDidSet)
         ]
         return unitTests
     }
