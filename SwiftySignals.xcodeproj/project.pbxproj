@@ -93,6 +93,10 @@
 		02D644C51E64ADB5000C8A30 /* DiscardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */; };
 		02D644C61E64ADB5000C8A30 /* DiscardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */; };
 		02D644C71E64ADB5000C8A30 /* DiscardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */; };
+		02D644C91E64D9D1000C8A30 /* ThrottleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C81E64D9D1000C8A30 /* ThrottleModifier.swift */; };
+		02D644CA1E64D9D1000C8A30 /* ThrottleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C81E64D9D1000C8A30 /* ThrottleModifier.swift */; };
+		02D644CB1E64D9D1000C8A30 /* ThrottleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C81E64D9D1000C8A30 /* ThrottleModifier.swift */; };
+		02D644CC1E64D9D1000C8A30 /* ThrottleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C81E64D9D1000C8A30 /* ThrottleModifier.swift */; };
 		02E2BF651E60DC17001CF696 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */; };
 		02E2BF661E60DC17001CF696 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */; };
 		02E2BF671E60DC17001CF696 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */; };
@@ -164,6 +168,7 @@
 		02B750C51E5E36E100DD8F3E /* ObservableSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObservableSync.swift; path = Sources/ObservableSync.swift; sourceTree = SOURCE_ROOT; };
 		02CA68D61E637A78006518D6 /* WeakObserverRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeakObserverRef.swift; path = Sources/WeakObserverRef.swift; sourceTree = SOURCE_ROOT; };
 		02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscardModifier.swift; path = Sources/DiscardModifier.swift; sourceTree = SOURCE_ROOT; };
+		02D644C81E64D9D1000C8A30 /* ThrottleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThrottleModifier.swift; path = Sources/ThrottleModifier.swift; sourceTree = SOURCE_ROOT; };
 		02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeriodicTimer.swift; path = Sources/PeriodicTimer.swift; sourceTree = SOURCE_ROOT; };
 		02E2BF641E60DC17001CF696 /* OnceOnlyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnceOnlyTimer.swift; path = Sources/OnceOnlyTimer.swift; sourceTree = SOURCE_ROOT; };
 		02E2BF7B1E60DEE2001CF696 /* OnceOnlyTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnceOnlyTimerTests.swift; path = Tests/SwiftySignalsTests/OnceOnlyTimerTests.swift; sourceTree = SOURCE_ROOT; };
@@ -294,6 +299,7 @@
 				0204CB601E52559C004AC3BE /* MapModifier.swift */,
 				0204CB5C1E518655004AC3BE /* ModifierObservable.swift */,
 				0204CB621E525698004AC3BE /* ThenModifier.swift */,
+				02D644C81E64D9D1000C8A30 /* ThrottleModifier.swift */,
 			);
 			name = Modifier;
 			sourceTree = "<group>";
@@ -610,6 +616,7 @@
 				02389DD01E5C0BBA00A45D54 /* ObservableCollection.swift in Sources */,
 				029D8EB11E56CBB500C2900D /* ModifierObservable.swift in Sources */,
 				02B750C71E5E36E100DD8F3E /* ObservableSync.swift in Sources */,
+				02D644CA1E64D9D1000C8A30 /* ThrottleModifier.swift in Sources */,
 				029D8EB21E56CBB500C2900D /* MapModifier.swift in Sources */,
 				029D8EB31E56CBB500C2900D /* ThenModifier.swift in Sources */,
 				029D8EB41E56CBB500C2900D /* FilterModifier.swift in Sources */,
@@ -648,6 +655,7 @@
 				02389DD11E5C0BC000A45D54 /* ObservableCollection.swift in Sources */,
 				029D8EBB1E56CBC100C2900D /* ModifierObservable.swift in Sources */,
 				02B750C81E5E36E100DD8F3E /* ObservableSync.swift in Sources */,
+				02D644CB1E64D9D1000C8A30 /* ThrottleModifier.swift in Sources */,
 				029D8EBC1E56CBC100C2900D /* MapModifier.swift in Sources */,
 				029D8EBD1E56CBC100C2900D /* ThenModifier.swift in Sources */,
 				029D8EBE1E56CBC100C2900D /* FilterModifier.swift in Sources */,
@@ -686,6 +694,7 @@
 				02389DD21E5C0BC800A45D54 /* ObservableCollection.swift in Sources */,
 				029D8EC51E56CBC700C2900D /* ModifierObservable.swift in Sources */,
 				02B750C91E5E36E100DD8F3E /* ObservableSync.swift in Sources */,
+				02D644CC1E64D9D1000C8A30 /* ThrottleModifier.swift in Sources */,
 				029D8EC61E56CBC700C2900D /* MapModifier.swift in Sources */,
 				029D8EC71E56CBC700C2900D /* ThenModifier.swift in Sources */,
 				029D8EC81E56CBC700C2900D /* FilterModifier.swift in Sources */,
@@ -714,6 +723,7 @@
 				0236C3AB1E62D956003AD795 /* Signal.swift in Sources */,
 				0204CB611E52559C004AC3BE /* MapModifier.swift in Sources */,
 				02195C171E54FA8D002B9EA2 /* InstanceFunction.swift in Sources */,
+				02D644C91E64D9D1000C8A30 /* ThrottleModifier.swift in Sources */,
 				0204CB631E525698004AC3BE /* ThenModifier.swift in Sources */,
 				0204CB651E5257BB004AC3BE /* FilterModifier.swift in Sources */,
 				0299FDD11E4FCFEF0078A602 /* ObserverType.swift in Sources */,
