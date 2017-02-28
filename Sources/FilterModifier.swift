@@ -37,7 +37,7 @@ public final class FilterModifier<T>: ModifierType {
     }
 }
 
-public typealias FilterObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut, FilterModifier<O.MessageOut>>
+public typealias FilterObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut>
 public typealias FilterTail<O: ObservableType> = Tail<FilterObservable<O>>
 
 extension Tail {

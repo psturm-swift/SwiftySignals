@@ -20,23 +20,44 @@
 
 import Foundation
 
-public final class ModifierObservable<O: ObservableType, T, M: ModifierType>: ObservableType where M.MessageIn == O.MessageOut, M.MessageOut == T {
+public final class ModifierObservable<O: ObservableType, T>: ObservableType {
     public typealias MessageIn = O.MessageOut
     public typealias MessageOut = T
 
     private let _observable = Observable<T>()
     private let _syncQueue: DispatchQueue
-    private let _dispatchQueue: DispatchQueue
-    private let _modifier: M
+    private let _process: ((MessageIn, @escaping (MessageOut)->Void)->Void)
     private var _source: O? = nil
     private var _forward: Forward<MessageIn>! = nil
     
-    public init(source: O, modifier: M, dispatchQueue: DispatchQueue)
+    public init<M: ModifierType>(source: O, modifier: M, dispatchQueue: DispatchQueue? = nil) where M.MessageIn == O.MessageOut, M.MessageOut == MessageOut
     {
-        self._syncQueue = DispatchQueue(label: "SwiftySignals.ModifierObservable")
-        self._dispatchQueue = dispatchQueue
+        let syncQueue = DispatchQueue(label: "SwiftySignals.ModifierObservable")
+        self._syncQueue = syncQueue
         self._source = source
-        self._modifier = modifier
+        
+        if let dispatchQueue = dispatchQueue {
+            _process = {
+                (message: MessageIn, notify: @escaping (MessageOut)->Void)->Void in
+                dispatchQueue.async {
+                    modifier.process(message: message) {
+                        newMessage in
+                        syncQueue.async(flags: .barrier) {
+                            notify(newMessage)
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            _process = {
+                (message: MessageIn, notify: @escaping (MessageOut)->Void)->Void in
+                syncQueue.async(flags: .barrier) {
+                    modifier.process(message: message, notify: notify)
+                }
+            }
+        }
+        
         self._forward = Forward<MessageIn>(
             target: self,
             processMessage: ModifierObservable.process,
@@ -64,16 +85,11 @@ public final class ModifierObservable<O: ObservableType, T, M: ModifierType>: Ob
     }
 
     private func process(_ message: MessageIn) {
-        _dispatchQueue.async {
-            self._modifier.process(message: message, notify: {
-                [weak self] newMessage in
-                self?._syncQueue.async(flags: .barrier) {
-                    [weak self] in
-                    if let observable = self?._observable {
-                        observable.send(message: newMessage)
-                    }
-                }
-            })
+        _process(message) {
+            [weak self] newMessage in
+            if let observable = self?._observable {
+                observable.send(message: newMessage)
+            }
         }
     }
     

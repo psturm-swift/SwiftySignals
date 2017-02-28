@@ -40,15 +40,14 @@ public final class DiscardModifier<T>: ModifierType {
     }
 }
 
-public typealias DiscardObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut, DiscardModifier<O.MessageOut>>
+public typealias DiscardObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut>
 public typealias DiscardTail<O: ObservableType> = Tail<DiscardObservable<O>>
 
 extension Tail {
     public func discard(first n: Int) -> DiscardTail<SourceObservable> {
         let discardObservable = DiscardObservable(
             source: self.observable,
-            modifier: DiscardModifier<SourceObservable.MessageOut>(count: n),
-            dispatchQueue: self.dispatchQueue)
+            modifier: DiscardModifier<SourceObservable.MessageOut>(count: n))
         
         return DiscardTail<SourceObservable>(
             observable: discardObservable,

@@ -41,15 +41,14 @@ public final class ThrottleModifier<T>: ModifierType {
     }
 }
 
-public typealias ThrottleObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut, ThrottleModifier<O.MessageOut>>
+public typealias ThrottleObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut>
 public typealias ThrottleTail<O: ObservableType> = Tail<ThrottleObservable<O>>
 
 extension Tail {
     public func throttle(maxRate: Measurement<UnitFrequency>) -> ThrottleTail<SourceObservable> {
         let throttleObservable = ThrottleObservable(
             source: self.observable,
-            modifier: ThrottleModifier<SourceObservable.MessageOut>(maxRate: maxRate),
-            dispatchQueue: self.dispatchQueue)
+            modifier: ThrottleModifier<SourceObservable.MessageOut>(maxRate: maxRate))
         
         return ThrottleTail<SourceObservable>(
             observable: throttleObservable,

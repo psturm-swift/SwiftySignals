@@ -20,7 +20,7 @@
 
 import Foundation
 
-public protocol ModifierType: class {
+public protocol ModifierType {
     associatedtype MessageIn
     associatedtype MessageOut
 

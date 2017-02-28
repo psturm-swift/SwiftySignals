@@ -36,7 +36,7 @@ public final class ThenFunctionModifier<T>: ModifierType {
     }
 }
 
-public typealias ThenFunctionObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut, ThenFunctionModifier<O.MessageOut>>
+public typealias ThenFunctionObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut>
 public typealias ThenFunctionTail<O: ObservableType> = Tail<ThenFunctionObservable<O>>
 
 extension Tail {
@@ -73,7 +73,7 @@ public final class ThenBlockModifier<T>: ModifierType {
     }
 }
 
-public typealias ThenBlockObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut, ThenBlockModifier<O.MessageOut>>
+public typealias ThenBlockObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut>
 public typealias ThenBlockTail<O: ObservableType> = Tail<ThenBlockObservable<O>>
 
 extension Tail {

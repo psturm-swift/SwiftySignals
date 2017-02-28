@@ -35,7 +35,7 @@ public final class MapModifier<S, T>: ModifierType {
     }
 }
 
-public typealias MapObservable<O: ObservableType, T> = ModifierObservable<O, T, MapModifier<O.MessageOut,T>>
+public typealias MapObservable<O: ObservableType, T> = ModifierObservable<O, T>
 public typealias MapTail<O: ObservableType, T> = Tail<MapObservable<O, T>>
 
 extension Tail {
