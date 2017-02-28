@@ -32,4 +32,8 @@ extension Tail {
             observable: self.observable,
             dispatchQueue: DispatchQueue(label: "Tail.dispatch(qos:)", qos: qos))
     }
+    
+    public func noDispatch() -> Tail {
+        return Tail(observable: self.observable)
+    }
 }

@@ -24,11 +24,11 @@ public struct Tail<O: ObservableType> {
     public typealias SourceObservable = O
     
     public let observable: SourceObservable
-    public let dispatchQueue: DispatchQueue
+    public let dispatchQueue: DispatchQueue?
     
     internal init(
         observable: SourceObservable,
-        dispatchQueue: DispatchQueue)
+        dispatchQueue: DispatchQueue? = nil)
     {
         self.observable = observable
         self.dispatchQueue = dispatchQueue
