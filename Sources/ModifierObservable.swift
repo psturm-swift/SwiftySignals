@@ -67,8 +67,11 @@ public final class ModifierObservable<O: ObservableType, T, M: ModifierType>: Ob
         _dispatchQueue.async {
             self._modifier.process(message: message, notify: {
                 [weak self] newMessage in
-                if let observable = self?._observable {
-                    observable.send(message: newMessage)
+                self?._syncQueue.async(flags: .barrier) {
+                    [weak self] in
+                    if let observable = self?._observable {
+                        observable.send(message: newMessage)
+                    }
                 }
             })
         }
