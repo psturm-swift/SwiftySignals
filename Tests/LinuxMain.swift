@@ -4,5 +4,6 @@ import XCTest
 XCTMain([
      testCase(PropertyTests.allTests),
      testCase(OnceOnlyTimerTests.allTests),
-     testCase(PeriodicTimerTests.allTests)
+     testCase(PeriodicTimerTests.allTests),
+     testCase(DispatchTests.allTests)
 ])
