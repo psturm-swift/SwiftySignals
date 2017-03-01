@@ -20,6 +20,7 @@
 
 import Foundation
 
+@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public final class ThrottleModifier<T>: ModifierType {
     public typealias MessageIn = T
     public typealias MessageOut = T
@@ -41,10 +42,14 @@ public final class ThrottleModifier<T>: ModifierType {
     }
 }
 
+@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public typealias ThrottleObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut>
+
+@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public typealias ThrottleTail<O: ObservableType> = Tail<ThrottleObservable<O>>
 
 extension Tail {
+    @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public func throttle(maxRate: Measurement<UnitFrequency>) -> ThrottleTail<SourceObservable> {
         let throttleObservable = ThrottleObservable(
             source: self.observable,
