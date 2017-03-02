@@ -35,7 +35,7 @@ public final class ObservableCollection {
     }
 }
 
-extension Tail {
+extension EndPoint {
     public func append(to collection: ObservableCollection) {
         collection.append(observable: self.observable)
     }

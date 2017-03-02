@@ -35,8 +35,8 @@ public final class Signal<T> {
         _observable.send(message)
     }
  
-    public var fired: Tail<ObservableSync<T>> {
-        return Tail<ObservableSync<T>>(
+    public var fired: EndPoint<ObservableSync<T>> {
+        return EndPoint<ObservableSync<T>>(
             observable: _observable,
             dispatchQueue: DispatchQueue.main)
     }

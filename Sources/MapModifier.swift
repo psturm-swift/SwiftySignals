@@ -36,16 +36,16 @@ public final class MapModifier<S, T>: ModifierType {
 }
 
 public typealias MapObservable<O: ObservableType, T> = ModifierObservable<O, T>
-public typealias MapTail<O: ObservableType, T> = Tail<MapObservable<O, T>>
+public typealias MapEndPoint<O: ObservableType, T> = EndPoint<MapObservable<O, T>>
 
-extension Tail {
-    public func map<T>(transform: @escaping (SourceObservable.MessageOut)->T) -> MapTail<SourceObservable, T> {
+extension EndPoint {
+    public func map<T>(transform: @escaping (SourceObservable.MessageOut)->T) -> MapEndPoint<SourceObservable, T> {
         let mapObservable = MapObservable(
             source: self.observable,
             modifier: MapModifier<SourceObservable.MessageOut, T>(transform: transform),
             dispatchQueue: self.dispatchQueue)
         
-        return MapTail<SourceObservable, T>(
+        return MapEndPoint<SourceObservable, T>(
             observable: mapObservable,
             dispatchQueue: self.dispatchQueue)
     }

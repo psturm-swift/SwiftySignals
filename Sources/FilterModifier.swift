@@ -38,16 +38,16 @@ public final class FilterModifier<T>: ModifierType {
 }
 
 public typealias FilterObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut>
-public typealias FilterTail<O: ObservableType> = Tail<FilterObservable<O>>
+public typealias FilterEndPoint<O: ObservableType> = EndPoint<FilterObservable<O>>
 
-extension Tail {
-    public func filter(predicate: @escaping (SourceObservable.MessageOut)->Bool) -> FilterTail<SourceObservable> {
+extension EndPoint {
+    public func filter(predicate: @escaping (SourceObservable.MessageOut)->Bool) -> FilterEndPoint<SourceObservable> {
         let filterObservable = FilterObservable(
             source: self.observable,
             modifier: FilterModifier<SourceObservable.MessageOut>(predicate: predicate),
             dispatchQueue: self.dispatchQueue)
         
-        return FilterTail<SourceObservable>(
+        return FilterEndPoint<SourceObservable>(
             observable: filterObservable,
             dispatchQueue: self.dispatchQueue)
     }

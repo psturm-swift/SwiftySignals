@@ -46,16 +46,16 @@ public final class ThrottleModifier<T>: ModifierType {
 public typealias ThrottleObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut>
 
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-public typealias ThrottleTail<O: ObservableType> = Tail<ThrottleObservable<O>>
+public typealias ThrottleEndPoint<O: ObservableType> = EndPoint<ThrottleObservable<O>>
 
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-extension Tail {
-    public func throttle(maxRate: Measurement<UnitFrequency>) -> ThrottleTail<SourceObservable> {
+extension EndPoint {
+    public func throttle(maxRate: Measurement<UnitFrequency>) -> ThrottleEndPoint<SourceObservable> {
         let throttleObservable = ThrottleObservable(
             source: self.observable,
             modifier: ThrottleModifier<SourceObservable.MessageOut>(maxRate: maxRate))
         
-        return ThrottleTail<SourceObservable>(
+        return ThrottleEndPoint<SourceObservable>(
             observable: throttleObservable,
             dispatchQueue: self.dispatchQueue)
     }

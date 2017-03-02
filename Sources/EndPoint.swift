@@ -20,7 +20,7 @@
 
 import Foundation
 
-public struct Tail<O: ObservableType> {
+public struct EndPoint<O: ObservableType> {
     public typealias SourceObservable = O
     
     public let observable: SourceObservable

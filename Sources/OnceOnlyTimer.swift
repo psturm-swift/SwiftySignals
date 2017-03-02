@@ -27,9 +27,9 @@ public final class OnceOnlyTimer {
     private weak var _timer: Timer? = nil
     private let _tolerance: TimeInterval
 
-    public var fired: Tail<ObservableSync<Void>> {
+    public var fired: EndPoint<ObservableSync<Void>> {
         get {
-            return Tail<ObservableSync<Void>>(observable: _observable, dispatchQueue: DispatchQueue.main)
+            return EndPoint<ObservableSync<Void>>(observable: _observable, dispatchQueue: DispatchQueue.main)
         }
     }
     

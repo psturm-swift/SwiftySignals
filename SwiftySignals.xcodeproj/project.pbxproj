@@ -53,7 +53,7 @@
 		0299FDDC1E4FD1990078A602 /* ObservableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0299FDCE1E4FCFE20078A602 /* ObservableType.swift */; };
 		0299FDDD1E4FD1990078A602 /* ObserverType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0299FDD01E4FCFEF0078A602 /* ObserverType.swift */; };
 		029D333F1D53A0EE00002059 /* SwiftySignals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029D33341D53A0ED00002059 /* SwiftySignals.framework */; };
-		029D8EAD1E55855700C2900D /* Tail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D8EAC1E55855700C2900D /* Tail.swift */; };
+		029D8EAD1E55855700C2900D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D8EAC1E55855700C2900D /* EndPoint.swift */; };
 		029D8EB11E56CBB500C2900D /* ModifierObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB5C1E518655004AC3BE /* ModifierObservable.swift */; };
 		029D8EB21E56CBB500C2900D /* MapModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB601E52559C004AC3BE /* MapModifier.swift */; };
 		029D8EB31E56CBB500C2900D /* ThenModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB621E525698004AC3BE /* ThenModifier.swift */; };
@@ -62,7 +62,7 @@
 		029D8EB61E56CBB500C2900D /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB691E526E9F004AC3BE /* Property.swift */; };
 		029D8EB71E56CBB500C2900D /* AnyObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195C121E52D6E5002B9EA2 /* AnyObserver.swift */; };
 		029D8EB81E56CBB500C2900D /* InstanceFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195C161E54FA8D002B9EA2 /* InstanceFunction.swift */; };
-		029D8EB91E56CBB500C2900D /* Tail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D8EAC1E55855700C2900D /* Tail.swift */; };
+		029D8EB91E56CBB500C2900D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D8EAC1E55855700C2900D /* EndPoint.swift */; };
 		029D8EBB1E56CBC100C2900D /* ModifierObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB5C1E518655004AC3BE /* ModifierObservable.swift */; };
 		029D8EBC1E56CBC100C2900D /* MapModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB601E52559C004AC3BE /* MapModifier.swift */; };
 		029D8EBD1E56CBC100C2900D /* ThenModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB621E525698004AC3BE /* ThenModifier.swift */; };
@@ -71,7 +71,7 @@
 		029D8EC01E56CBC100C2900D /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB691E526E9F004AC3BE /* Property.swift */; };
 		029D8EC11E56CBC100C2900D /* AnyObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195C121E52D6E5002B9EA2 /* AnyObserver.swift */; };
 		029D8EC21E56CBC100C2900D /* InstanceFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195C161E54FA8D002B9EA2 /* InstanceFunction.swift */; };
-		029D8EC31E56CBC100C2900D /* Tail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D8EAC1E55855700C2900D /* Tail.swift */; };
+		029D8EC31E56CBC100C2900D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D8EAC1E55855700C2900D /* EndPoint.swift */; };
 		029D8EC51E56CBC700C2900D /* ModifierObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB5C1E518655004AC3BE /* ModifierObservable.swift */; };
 		029D8EC61E56CBC700C2900D /* MapModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB601E52559C004AC3BE /* MapModifier.swift */; };
 		029D8EC71E56CBC700C2900D /* ThenModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB621E525698004AC3BE /* ThenModifier.swift */; };
@@ -80,7 +80,7 @@
 		029D8ECA1E56CBC700C2900D /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0204CB691E526E9F004AC3BE /* Property.swift */; };
 		029D8ECB1E56CBC700C2900D /* AnyObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195C121E52D6E5002B9EA2 /* AnyObserver.swift */; };
 		029D8ECC1E56CBC700C2900D /* InstanceFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195C161E54FA8D002B9EA2 /* InstanceFunction.swift */; };
-		029D8ECD1E56CBC700C2900D /* Tail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D8EAC1E55855700C2900D /* Tail.swift */; };
+		029D8ECD1E56CBC700C2900D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D8EAC1E55855700C2900D /* EndPoint.swift */; };
 		02B750C61E5E36E100DD8F3E /* ObservableSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B750C51E5E36E100DD8F3E /* ObservableSync.swift */; };
 		02B750C71E5E36E100DD8F3E /* ObservableSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B750C51E5E36E100DD8F3E /* ObservableSync.swift */; };
 		02B750C81E5E36E100DD8F3E /* ObservableSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B750C51E5E36E100DD8F3E /* ObservableSync.swift */; };
@@ -168,7 +168,7 @@
 		0299FDD01E4FCFEF0078A602 /* ObserverType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObserverType.swift; path = Sources/ObserverType.swift; sourceTree = SOURCE_ROOT; };
 		029D33341D53A0ED00002059 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		029D333E1D53A0EE00002059 /* SwiftySignalsTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		029D8EAC1E55855700C2900D /* Tail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tail.swift; path = Sources/Tail.swift; sourceTree = SOURCE_ROOT; };
+		029D8EAC1E55855700C2900D /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EndPoint.swift; path = Sources/EndPoint.swift; sourceTree = SOURCE_ROOT; };
 		02B750C51E5E36E100DD8F3E /* ObservableSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObservableSync.swift; path = Sources/ObservableSync.swift; sourceTree = SOURCE_ROOT; };
 		02CA68D61E637A78006518D6 /* WeakObserverRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeakObserverRef.swift; path = Sources/WeakObserverRef.swift; sourceTree = SOURCE_ROOT; };
 		02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscardModifier.swift; path = Sources/DiscardModifier.swift; sourceTree = SOURCE_ROOT; };
@@ -328,7 +328,7 @@
 				0204CB491E4FD6EE004AC3BE /* Observable.swift */,
 				023F6FEE1E5B8B1E00181868 /* ObservableCollection.swift */,
 				02B750C51E5E36E100DD8F3E /* ObservableSync.swift */,
-				029D8EAC1E55855700C2900D /* Tail.swift */,
+				029D8EAC1E55855700C2900D /* EndPoint.swift */,
 				02CA68D61E637A78006518D6 /* WeakObserverRef.swift */,
 			);
 			name = Core;
@@ -631,7 +631,7 @@
 				029D8EB71E56CBB500C2900D /* AnyObserver.swift in Sources */,
 				029D8EB81E56CBB500C2900D /* InstanceFunction.swift in Sources */,
 				02E2BF661E60DC17001CF696 /* PeriodicTimer.swift in Sources */,
-				029D8EB91E56CBB500C2900D /* Tail.swift in Sources */,
+				029D8EB91E56CBB500C2900D /* EndPoint.swift in Sources */,
 				0204CB4F1E4FD7F1004AC3BE /* Observable.swift in Sources */,
 				0204CB511E4FD7F1004AC3BE /* Forward.swift in Sources */,
 				0299FDDC1E4FD1990078A602 /* ObservableType.swift in Sources */,
@@ -671,7 +671,7 @@
 				029D8EC11E56CBC100C2900D /* AnyObserver.swift in Sources */,
 				029D8EC21E56CBC100C2900D /* InstanceFunction.swift in Sources */,
 				02E2BF671E60DC17001CF696 /* PeriodicTimer.swift in Sources */,
-				029D8EC31E56CBC100C2900D /* Tail.swift in Sources */,
+				029D8EC31E56CBC100C2900D /* EndPoint.swift in Sources */,
 				0204CB521E4FD7F8004AC3BE /* Observable.swift in Sources */,
 				0204CB541E4FD7F8004AC3BE /* Forward.swift in Sources */,
 				0299FDD81E4FD1930078A602 /* ObservableType.swift in Sources */,
@@ -711,7 +711,7 @@
 				029D8ECB1E56CBC700C2900D /* AnyObserver.swift in Sources */,
 				029D8ECC1E56CBC700C2900D /* InstanceFunction.swift in Sources */,
 				02E2BF681E60DC17001CF696 /* PeriodicTimer.swift in Sources */,
-				029D8ECD1E56CBC700C2900D /* Tail.swift in Sources */,
+				029D8ECD1E56CBC700C2900D /* EndPoint.swift in Sources */,
 				0204CB551E4FD7FE004AC3BE /* Observable.swift in Sources */,
 				0204CB571E4FD7FE004AC3BE /* Forward.swift in Sources */,
 				0299FDD41E4FD18C0078A602 /* ObservableType.swift in Sources */,
@@ -745,7 +745,7 @@
 				0204CB681E525848004AC3BE /* Dispatch.swift in Sources */,
 				0252F2EF1E5EB4FB009F48D5 /* ModifierType.swift in Sources */,
 				02E2BF691E60DC17001CF696 /* OnceOnlyTimer.swift in Sources */,
-				029D8EAD1E55855700C2900D /* Tail.swift in Sources */,
+				029D8EAD1E55855700C2900D /* EndPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

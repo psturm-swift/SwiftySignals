@@ -28,8 +28,8 @@ public final class PeriodicTimer {
     private let _tolerance: TimeInterval
     private let _interval: TimeInterval
     
-    public var fired: Tail<ObservableSync<Void>> {
-        return Tail<ObservableSync<Void>>(observable: self._observable, dispatchQueue: DispatchQueue.main)
+    public var fired: EndPoint<ObservableSync<Void>> {
+        return EndPoint<ObservableSync<Void>>(observable: self._observable, dispatchQueue: DispatchQueue.main)
     }
     
     public init(interval: TimeInterval, tolerance: TimeInterval = 0) {

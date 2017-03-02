@@ -41,8 +41,8 @@ public final class Property<T> {
         }
     }
     
-    public var didSet: Tail<ObservableSync<T>> {
-        return Tail<ObservableSync<T>>(
+    public var didSet: EndPoint<ObservableSync<T>> {
+        return EndPoint<ObservableSync<T>>(
             observable: _observable,
             dispatchQueue: DispatchQueue.main)
     }

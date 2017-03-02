@@ -37,13 +37,13 @@ public final class ThenFunctionModifier<T>: ModifierType {
 }
 
 public typealias ThenFunctionObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut>
-public typealias ThenFunctionTail<O: ObservableType> = Tail<ThenFunctionObservable<O>>
+public typealias ThenFunctionEndPoint<O: ObservableType> = EndPoint<ThenFunctionObservable<O>>
 
-extension Tail {
+extension EndPoint {
     public func then<Target: AnyObject>(
         call function: @escaping (Target)->((SourceObservable.MessageOut)->Void),
         on target: Target)
-        -> ThenFunctionTail<SourceObservable>
+        -> ThenFunctionEndPoint<SourceObservable>
     {
         let thenObservable = ThenFunctionObservable(
             source: self.observable,
@@ -51,7 +51,7 @@ extension Tail {
             dispatchQueue: self.dispatchQueue
         )
         
-        return ThenFunctionTail<SourceObservable>(
+        return ThenFunctionEndPoint<SourceObservable>(
             observable: thenObservable,
             dispatchQueue: self.dispatchQueue)
     }
@@ -74,16 +74,16 @@ public final class ThenBlockModifier<T>: ModifierType {
 }
 
 public typealias ThenBlockObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut>
-public typealias ThenBlockTail<O: ObservableType> = Tail<ThenBlockObservable<O>>
+public typealias ThenBlockEndPoint<O: ObservableType> = EndPoint<ThenBlockObservable<O>>
 
-extension Tail {
-    public func then(do block: @escaping (SourceObservable.MessageOut)->Void) -> ThenBlockTail<SourceObservable> {
+extension EndPoint {
+    public func then(do block: @escaping (SourceObservable.MessageOut)->Void) -> ThenBlockEndPoint<SourceObservable> {
         let thenObservable = ThenBlockObservable(
             source: self.observable,
             modifier: ThenBlockModifier<SourceObservable.MessageOut>(block: block),
             dispatchQueue: self.dispatchQueue)
 
-        return ThenBlockTail<SourceObservable>(
+        return ThenBlockEndPoint<SourceObservable>(
             observable: thenObservable,
             dispatchQueue: self.dispatchQueue)
     }

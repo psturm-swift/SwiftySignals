@@ -20,20 +20,20 @@
 
 import Foundation
 
-extension Tail {
-    public func dispatch(to queue: DispatchQueue) -> Tail {
-        return Tail(
+extension EndPoint {
+    public func dispatch(to queue: DispatchQueue) -> EndPoint {
+        return EndPoint(
             observable: self.observable,
             dispatchQueue: queue)
     }
     
-    public func dispatch(qos: DispatchQoS = DispatchQoS.default) -> Tail {
-        return Tail(
+    public func dispatch(qos: DispatchQoS = DispatchQoS.default) -> EndPoint {
+        return EndPoint(
             observable: self.observable,
-            dispatchQueue: DispatchQueue(label: "Tail.dispatch(qos:)", qos: qos))
+            dispatchQueue: DispatchQueue(label: "EndPoint.dispatch(qos:)", qos: qos))
     }
     
-    public func noDispatch() -> Tail {
-        return Tail(observable: self.observable)
+    public func noDispatch() -> EndPoint {
+        return EndPoint(observable: self.observable)
     }
 }
