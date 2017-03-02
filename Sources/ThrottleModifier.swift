@@ -48,8 +48,8 @@ public typealias ThrottleObservable<O: ObservableType> = ModifierObservable<O, O
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public typealias ThrottleTail<O: ObservableType> = Tail<ThrottleObservable<O>>
 
+@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 extension Tail {
-    @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
     public func throttle(maxRate: Measurement<UnitFrequency>) -> ThrottleTail<SourceObservable> {
         let throttleObservable = ThrottleObservable(
             source: self.observable,
