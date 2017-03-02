@@ -72,12 +72,11 @@ class DispatchTests: XCTestCase {
     func testIfBlocksAreExecutedNotOnMainThreadIfDispatchIsTurnedOff() {
         let observables = ObservableCollection()
         let propertyProcessed = self.expectation(description: "Property processed")
-        let property = Property<Bool>(value: true)
+        let signal = Signal<Bool>()
         
-        property
-            .didSet
+        signal
+            .fired
             .noDispatch()
-            .discard(first: 1)
             .then { _ in XCTAssertTrue(!Thread.isMainThread) }
             .map {
                 value -> Bool in
@@ -87,7 +86,7 @@ class DispatchTests: XCTestCase {
             .then { _ in propertyProcessed.fulfill() }
             .append(to: observables)
         
-        property.value = !property.value
+        signal.fire(with: false)
         
         self.waitForExpectations(timeout: 10, handler: nil)
     }
