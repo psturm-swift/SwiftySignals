@@ -160,6 +160,6 @@ If the closures should be executed in synchronization queue of the modifier, the
 [2]:	https://cocoapods.org/pods/SwiftySignals "CocoaPods"
 [3]:	https://swift.org "Swift"
 
-[image-1]:	https://travis-ci.org/psturm-swift/SwiftySignals.svg?branch=fb_rework_api
+[image-1]:	https://travis-ci.org/psturm-swift/SwiftySignals.svg?branch=master
 [image-2]:	https://img.shields.io/cocoapods/v/SwiftySignals.svg "Version CocoaPods"
 [image-3]:	https://img.shields.io/badge/swift-version%203-blue.svg
