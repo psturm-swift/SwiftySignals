@@ -39,7 +39,7 @@ class OnceOnlyTimerTests: XCTestCase {
             .then { expectation.fulfill() }
             .append(to: observables)
         
-        timer.fireAfter(seconds: 2)
+        timer.fire(after: Measurement(value: 2, unit: UnitDuration.seconds))
         
         waitForExpectations(timeout: 10, handler: nil)
     }

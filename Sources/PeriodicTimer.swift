@@ -32,11 +32,11 @@ public final class PeriodicTimer {
         return EndPoint<ObservableSync<Void>>(observable: self._observable, dispatchQueue: DispatchQueue.main)
     }
     
-    public init(interval: TimeInterval, tolerance: TimeInterval = 0) {
+    public init(interval: Measurement<UnitDuration>, tolerance: TimeInterval = 0) {
         self._observable = ObservableSync<Void>()
         self._syncQueue = DispatchQueue.main
         self._tolerance = tolerance
-        self._interval = interval
+        self._interval = interval.converted(to: UnitDuration.seconds).value
     }
     
     private func _invalidate() {

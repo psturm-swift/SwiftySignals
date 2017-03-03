@@ -36,7 +36,7 @@ class PeriodicTimerTests: XCTestCase {
             self.expectation(description: "Timer has been triggered twice")
         ]
         
-        let timer = PeriodicTimer(interval: 1.0)
+        let timer = PeriodicTimer(interval: Measurement(value: 1.0, unit: UnitDuration.seconds))
         
         var currentExpectation = 0
         timer

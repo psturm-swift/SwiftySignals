@@ -53,10 +53,10 @@ public final class OnceOnlyTimer {
         }
     }
     
-    public func fireAfter(seconds: TimeInterval) {
+    public func fire(after interval: Measurement<UnitDuration>) {
         self._syncQueue.async {
             self._invalidate()
-            let timer = Timer(timeInterval: seconds, repeats: false) {
+            let timer = Timer(timeInterval: interval.converted(to: .seconds).value, repeats: false) {
                 _ in self._observable.send()
             }
             timer.tolerance = self._tolerance
