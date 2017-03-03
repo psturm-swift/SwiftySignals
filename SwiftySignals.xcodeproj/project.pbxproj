@@ -266,7 +266,7 @@
 				02E2BF701E60DD60001CF696 /* Core */,
 				02E2BF6F1E60DD24001CF696 /* Types */,
 				02E2BF6E1E60DD14001CF696 /* Modifier */,
-				02E2BF6D1E60DCF9001CF696 /* Subjects */,
+				02E2BF6D1E60DCF9001CF696 /* Source */,
 			);
 			path = SwiftySignals;
 			sourceTree = "<group>";
@@ -284,7 +284,7 @@
 			path = SwiftySignalsTests;
 			sourceTree = "<group>";
 		};
-		02E2BF6D1E60DCF9001CF696 /* Subjects */ = {
+		02E2BF6D1E60DCF9001CF696 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				02E2BF641E60DC17001CF696 /* OnceOnlyTimer.swift */,
@@ -292,7 +292,7 @@
 				0204CB691E526E9F004AC3BE /* Property.swift */,
 				0236C3AA1E62D956003AD795 /* Signal.swift */,
 			);
-			name = Subjects;
+			name = Source;
 			sourceTree = "<group>";
 		};
 		02E2BF6E1E60DD14001CF696 /* Modifier */ = {
