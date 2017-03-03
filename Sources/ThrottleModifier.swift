@@ -25,17 +25,17 @@ public final class ThrottleModifier<T>: ModifierType {
     public typealias MessageIn = T
     public typealias MessageOut = T
     
-    private let _timeDiff: TimeInterval
+    private let _pause: TimeInterval
     private var _last: TimeInterval = 0
     
-    fileprivate init(maxRate: Measurement<UnitFrequency>) {
-        _timeDiff = 1.0 / maxRate.converted(to: UnitFrequency.hertz).value
+    fileprivate init(pause: Measurement<UnitDuration>) {
+        _pause = pause.converted(to: UnitDuration.seconds).value
     }
     
     public func process(message: MessageIn, notify: @escaping (MessageOut) -> Void) {
         let now = Date().timeIntervalSince1970
 
-        if now - _last >= _timeDiff {
+        if now - _last >= _pause {
             _last = now
             notify(message)
         }
@@ -50,10 +50,10 @@ public typealias ThrottleEndPoint<O: ObservableType> = EndPoint<ThrottleObservab
 
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 extension EndPoint {
-    public func throttle(maxRate: Measurement<UnitFrequency>) -> ThrottleEndPoint<SourceObservable> {
+    public func throttle(pause: Measurement<UnitDuration>) -> ThrottleEndPoint<SourceObservable> {
         let throttleObservable = ThrottleObservable(
             source: self.observable,
-            modifier: ThrottleModifier<SourceObservable.MessageOut>(maxRate: maxRate))
+            modifier: ThrottleModifier<SourceObservable.MessageOut>(pause: pause))
         
         return ThrottleEndPoint<SourceObservable>(
             observable: throttleObservable,
