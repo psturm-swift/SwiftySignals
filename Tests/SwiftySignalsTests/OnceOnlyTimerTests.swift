@@ -16,46 +16,38 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE
+// THE SOFTWARE.
 
-import Foundation
+import XCTest
+@testable import SwiftySignals
 
-public final class Property<T> {
-    private let _observable: ObservableSync<T>
-    private let _syncQueue: DispatchQueue
-    private var _value: T
-    
-    public var value: T {
-        set {
-            self._syncQueue.async(flags: .barrier) {
-                self._value = newValue
-                self._observable.send(message: newValue)
-            }
-        }
-        get {
-            var syncedValue: T!
-            self._syncQueue.sync {
-                syncedValue = self._value
-            }
-            return syncedValue
-        }
+@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+class OnceOnlyTimerTests: XCTestCase {
+    override func setUp() {
     }
     
-    public var didSet: EndPoint<ObservableSync<T>> {
-        return EndPoint<ObservableSync<T>>(
-            observable: _observable,
-            dispatchQueue: DispatchQueue.main)
+    override func tearDown() {
     }
     
-    public init(value: T) {
-        let syncQueue = DispatchQueue(label: "SwiftySignals.Property", attributes: .concurrent)
-        self._observable = ObservableSync<T>()
-        self._syncQueue = syncQueue
-        self._value = value
-        self._observable.send(message: value)
+    func testIfOneOnlyTimerTriggersAfterADefinedTimeInterval() {
+        let observables = ObservableCollection()
+        let expectation = self.expectation(description: "Timer has been triggered")
+        let timer = OnceOnlyTimer()
+        
+        timer
+            .fired
+            .then { expectation.fulfill() }
+            .append(to: observables)
+        
+        timer.fire(after: Measurement(value: 2, unit: UnitDuration.seconds))
+        
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
-    deinit {
-        _observable.unsubscribeAll()
+    static var allTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] {
+        let unitTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] = [
+        ]
+        return unitTests
     }
+    
 }

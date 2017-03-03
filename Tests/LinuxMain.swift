@@ -2,5 +2,8 @@ import XCTest
 @testable import SwiftySignalsTests
 
 XCTMain([
-     testCase(SwiftySignalsTests.allTests)
+     testCase(PropertyTests.allTests),
+     testCase(OnceOnlyTimerTests.allTests),
+     testCase(PeriodicTimerTests.allTests),
+     testCase(DispatchTests.allTests)
 ])

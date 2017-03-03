@@ -16,46 +16,29 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE
+// THE SOFTWARE.
 
 import Foundation
 
-public final class Property<T> {
-    private let _observable: ObservableSync<T>
-    private let _syncQueue: DispatchQueue
-    private var _value: T
+public final class AnyObserver<T>: ObserverType {
+    public typealias MessageIn = T
+    private let _process: (T)->Void
+    private let _unsubscribed: ()->Void
     
-    public var value: T {
-        set {
-            self._syncQueue.async(flags: .barrier) {
-                self._value = newValue
-                self._observable.send(message: newValue)
-            }
+    public init<Base: ObserverType>(base: Base) where Base.MessageIn == MessageIn {
+        self._process = {
+            base.process(message: $0)
         }
-        get {
-            var syncedValue: T!
-            self._syncQueue.sync {
-                syncedValue = self._value
-            }
-            return syncedValue
+        self._unsubscribed = {
+            base.unsubscribed()
         }
     }
     
-    public var didSet: EndPoint<ObservableSync<T>> {
-        return EndPoint<ObservableSync<T>>(
-            observable: _observable,
-            dispatchQueue: DispatchQueue.main)
+    public func process(message: MessageIn) {
+        _process(message)
     }
     
-    public init(value: T) {
-        let syncQueue = DispatchQueue(label: "SwiftySignals.Property", attributes: .concurrent)
-        self._observable = ObservableSync<T>()
-        self._syncQueue = syncQueue
-        self._value = value
-        self._observable.send(message: value)
-    }
-    
-    deinit {
-        _observable.unsubscribeAll()
+    public func unsubscribed() {
+        _unsubscribed()
     }
 }

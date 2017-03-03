@@ -16,46 +16,37 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE
+// THE SOFTWARE.
 
 import Foundation
 
-public final class Property<T> {
-    private let _observable: ObservableSync<T>
-    private let _syncQueue: DispatchQueue
-    private var _value: T
-    
-    public var value: T {
-        set {
-            self._syncQueue.async(flags: .barrier) {
-                self._value = newValue
-                self._observable.send(message: newValue)
-            }
-        }
-        get {
-            var syncedValue: T!
-            self._syncQueue.sync {
-                syncedValue = self._value
-            }
-            return syncedValue
-        }
+public final class MapModifier<S, T>: ModifierType {
+    public typealias MessageIn = S
+    public typealias MessageOut = T
+
+    private let _transform: (MessageIn)->MessageOut
+
+    fileprivate init(transform: @escaping (MessageIn)->MessageOut) {
+        self._transform = transform
     }
     
-    public var didSet: EndPoint<ObservableSync<T>> {
-        return EndPoint<ObservableSync<T>>(
-            observable: _observable,
-            dispatchQueue: DispatchQueue.main)
+    public func process(message: MessageIn, notify: @escaping (MessageOut) -> Void) {
+        notify(self._transform(message))
     }
-    
-    public init(value: T) {
-        let syncQueue = DispatchQueue(label: "SwiftySignals.Property", attributes: .concurrent)
-        self._observable = ObservableSync<T>()
-        self._syncQueue = syncQueue
-        self._value = value
-        self._observable.send(message: value)
-    }
-    
-    deinit {
-        _observable.unsubscribeAll()
+}
+
+public typealias MapObservable<O: ObservableType, T> = ModifierObservable<O, T>
+public typealias MapEndPoint<O: ObservableType, T> = EndPoint<MapObservable<O, T>>
+
+extension EndPoint {
+    public func map<T>(transform: @escaping (SourceObservable.MessageOut)->T) -> MapEndPoint<SourceObservable, T> {
+        let mapObservable = MapObservable(
+            source: self.observable,
+            modifier: MapModifier<SourceObservable.MessageOut, T>(transform: transform),
+            dispatchQueue: self.dispatchQueue)
+        
+        return MapEndPoint<SourceObservable, T>(
+            observable: mapObservable,
+            dispatchQueue: self.dispatchQueue)
     }
 }

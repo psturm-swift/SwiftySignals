@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Patrick Sturm <psturm.mail@googlemail.com>
+// Copyright (c) 2017 Patrick Sturm <psturm.mail@googlemail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -16,21 +16,32 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// THE SOFTWARE
 
 import Foundation
 
-public final class Signal<Message> {
-    public let fired = Event<Message>()
+
+public final class Signal<T> {
+    private let _observable = ObservableSync<T>()
     
     public init() {
     }
     
-    public func fire(with message: Message) {
-        fired.fire(with: message)
+    public func fire(with message: T) {
+        _observable.send(message)
     }
     
-    public func fire(_ message: Message) {
-        fired.fire(message)
+    public func fire(_ message: T) {
+        _observable.send(message)
+    }
+ 
+    public var fired: EndPoint<ObservableSync<T>> {
+        return EndPoint<ObservableSync<T>>(
+            observable: _observable,
+            dispatchQueue: DispatchQueue.main)
+    }
+    
+    deinit {
+        _observable.unsubscribeAll()
     }
 }
