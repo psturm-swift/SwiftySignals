@@ -27,13 +27,7 @@ public final class TimerSignal {
     private weak var _timer: Foundation.Timer? = nil
     private let _tolerance: TimeInterval
     private let _repeats: Bool
-
-    public var interval: TimeInterval = 0 {
-        didSet {
-            self.disable()
-            self.enable()
-        }
-    }
+    private var _interval: TimeInterval = 0
     
     public var fired: EndPoint<ObservableSync<Void>> {
         return EndPoint<ObservableSync<Void>>(observable: self._observable, dispatchQueue: DispatchQueue.main)
@@ -44,7 +38,7 @@ public final class TimerSignal {
         self._syncQueue = DispatchQueue.main
         self._tolerance = tolerance
         self._repeats = repeats
-        self.interval = interval.converted(to: UnitDuration.seconds).value
+        self._interval = interval.converted(to: UnitDuration.seconds).value
     }
     
     private func _disable() {
@@ -54,24 +48,33 @@ public final class TimerSignal {
         }
     }
     
+    private func _enable() {
+        self._disable()
+        guard self._interval > 0 else { return }
+        let timer = Timer(timeInterval: self._interval, repeats: self._repeats) {
+            _ in self._observable.send()
+        }
+        timer.tolerance = self._tolerance
+        RunLoop.current.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
+        self._timer = timer
+    }
+    
     public func disable() {
         self._syncQueue.async(flags: .barrier) {
             self._disable()
         }
     }
     
+    public func fire(after interval: Measurement<UnitDuration>) {
+        self._syncQueue.async(flags: .barrier) {
+            self._interval = interval.converted(to: UnitDuration.seconds).value
+            self._enable()
+        }
+    }
+    
     public func enable() {
-        let timeout = self.interval
-        guard timeout > 0 else { return }
-        
-        self._syncQueue.async {
-            self._disable()
-            let timer = Timer(timeInterval: timeout, repeats: self._repeats) {
-                _ in self._observable.send()
-            }
-            timer.tolerance = self._tolerance
-            RunLoop.current.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
-            self._timer = timer
+        self._syncQueue.async(flags: .barrier) {
+            self._enable()
         }
     }
     
