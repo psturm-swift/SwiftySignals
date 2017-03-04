@@ -100,6 +100,13 @@
 		02D644CA1E64D9D1000C8A30 /* ThrottleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C81E64D9D1000C8A30 /* ThrottleModifier.swift */; };
 		02D644CB1E64D9D1000C8A30 /* ThrottleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C81E64D9D1000C8A30 /* ThrottleModifier.swift */; };
 		02D644CC1E64D9D1000C8A30 /* ThrottleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D644C81E64D9D1000C8A30 /* ThrottleModifier.swift */; };
+		02DF74DB1E6B354E005F5136 /* DistinctModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF74DA1E6B354E005F5136 /* DistinctModifier.swift */; };
+		02DF74DC1E6B37CE005F5136 /* DistinctModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF74DA1E6B354E005F5136 /* DistinctModifier.swift */; };
+		02DF74DD1E6B37D3005F5136 /* DistinctModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF74DA1E6B354E005F5136 /* DistinctModifier.swift */; };
+		02DF74DE1E6B37D8005F5136 /* DistinctModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF74DA1E6B354E005F5136 /* DistinctModifier.swift */; };
+		02DF74E11E6B383A005F5136 /* DistinctModifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF74DF1E6B3818005F5136 /* DistinctModifierTests.swift */; };
+		02DF74E21E6B3840005F5136 /* DistinctModifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF74DF1E6B3818005F5136 /* DistinctModifierTests.swift */; };
+		02DF74E31E6B3845005F5136 /* DistinctModifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF74DF1E6B3818005F5136 /* DistinctModifierTests.swift */; };
 		02E2BF651E60DC17001CF696 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */; };
 		02E2BF661E60DC17001CF696 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */; };
 		02E2BF671E60DC17001CF696 /* PeriodicTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */; };
@@ -173,6 +180,8 @@
 		02CA68D61E637A78006518D6 /* WeakObserverRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeakObserverRef.swift; path = Sources/WeakObserverRef.swift; sourceTree = SOURCE_ROOT; };
 		02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscardModifier.swift; path = Sources/DiscardModifier.swift; sourceTree = SOURCE_ROOT; };
 		02D644C81E64D9D1000C8A30 /* ThrottleModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThrottleModifier.swift; path = Sources/ThrottleModifier.swift; sourceTree = SOURCE_ROOT; };
+		02DF74DA1E6B354E005F5136 /* DistinctModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DistinctModifier.swift; path = Sources/DistinctModifier.swift; sourceTree = SOURCE_ROOT; };
+		02DF74DF1E6B3818005F5136 /* DistinctModifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DistinctModifierTests.swift; path = Tests/SwiftySignalsTests/DistinctModifierTests.swift; sourceTree = SOURCE_ROOT; };
 		02E2BF631E60DC17001CF696 /* PeriodicTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeriodicTimer.swift; path = Sources/PeriodicTimer.swift; sourceTree = SOURCE_ROOT; };
 		02E2BF641E60DC17001CF696 /* OnceOnlyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnceOnlyTimer.swift; path = Sources/OnceOnlyTimer.swift; sourceTree = SOURCE_ROOT; };
 		02E2BF7B1E60DEE2001CF696 /* OnceOnlyTimerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnceOnlyTimerTests.swift; path = Tests/SwiftySignalsTests/OnceOnlyTimerTests.swift; sourceTree = SOURCE_ROOT; };
@@ -280,6 +289,7 @@
 				02E2BF7C1E60DEE2001CF696 /* PeriodicTimerTests.swift */,
 				024535B51E5ABEE5006DA1DB /* PropertyTests.swift */,
 				021F95C51E669C0600A260FA /* DispatchTests.swift */,
+				02DF74DF1E6B3818005F5136 /* DistinctModifierTests.swift */,
 			);
 			path = SwiftySignalsTests;
 			sourceTree = "<group>";
@@ -300,6 +310,7 @@
 			children = (
 				02D644C31E64ADB5000C8A30 /* DiscardModifier.swift */,
 				0204CB671E525848004AC3BE /* Dispatch.swift */,
+				02DF74DA1E6B354E005F5136 /* DistinctModifier.swift */,
 				0204CB641E5257BB004AC3BE /* FilterModifier.swift */,
 				0204CB601E52559C004AC3BE /* MapModifier.swift */,
 				0204CB5C1E518655004AC3BE /* ModifierObservable.swift */,
@@ -615,6 +626,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02DF74DC1E6B37CE005F5136 /* DistinctModifier.swift in Sources */,
 				02CA68D81E6388F0006518D6 /* WeakObserverRef.swift in Sources */,
 				02CA68D91E6388F0006518D6 /* Signal.swift in Sources */,
 				0252F2F01E5EBF57009F48D5 /* ModifierType.swift in Sources */,
@@ -644,6 +656,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02DF74E21E6B3840005F5136 /* DistinctModifierTests.swift in Sources */,
 				02E2BF811E60DEE2001CF696 /* PeriodicTimerTests.swift in Sources */,
 				02E2BF7E1E60DEE2001CF696 /* OnceOnlyTimerTests.swift in Sources */,
 				021F95C71E669C0600A260FA /* DispatchTests.swift in Sources */,
@@ -655,6 +668,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02DF74DD1E6B37D3005F5136 /* DistinctModifier.swift in Sources */,
 				02CA68DA1E6388F6006518D6 /* WeakObserverRef.swift in Sources */,
 				02CA68DB1E6388F6006518D6 /* Signal.swift in Sources */,
 				0252F2F11E5EBF5B009F48D5 /* ModifierType.swift in Sources */,
@@ -684,6 +698,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02DF74E11E6B383A005F5136 /* DistinctModifierTests.swift in Sources */,
 				02E2BF821E60DEE2001CF696 /* PeriodicTimerTests.swift in Sources */,
 				02E2BF7F1E60DEE2001CF696 /* OnceOnlyTimerTests.swift in Sources */,
 				021F95C81E669C0600A260FA /* DispatchTests.swift in Sources */,
@@ -695,6 +710,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02DF74DE1E6B37D8005F5136 /* DistinctModifier.swift in Sources */,
 				02CA68DC1E6388FC006518D6 /* WeakObserverRef.swift in Sources */,
 				02CA68DD1E6388FC006518D6 /* Signal.swift in Sources */,
 				0252F2F21E5EBF60009F48D5 /* ModifierType.swift in Sources */,
@@ -735,6 +751,7 @@
 				0204CB651E5257BB004AC3BE /* FilterModifier.swift in Sources */,
 				0299FDD11E4FCFEF0078A602 /* ObserverType.swift in Sources */,
 				02CA68D71E637A78006518D6 /* WeakObserverRef.swift in Sources */,
+				02DF74DB1E6B354E005F5136 /* DistinctModifier.swift in Sources */,
 				0204CB5D1E518655004AC3BE /* ModifierObservable.swift in Sources */,
 				02D644C41E64ADB5000C8A30 /* DiscardModifier.swift in Sources */,
 				023F6FEF1E5B8B1E00181868 /* ObservableCollection.swift in Sources */,
@@ -753,6 +770,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02DF74E31E6B3845005F5136 /* DistinctModifierTests.swift in Sources */,
 				02E2BF801E60DEE2001CF696 /* PeriodicTimerTests.swift in Sources */,
 				02E2BF7D1E60DEE2001CF696 /* OnceOnlyTimerTests.swift in Sources */,
 				021F95C61E669C0600A260FA /* DispatchTests.swift in Sources */,

@@ -21,32 +21,48 @@
 import XCTest
 @testable import SwiftySignals
 
-@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-class OnceOnlyTimerTests: XCTestCase {
+class DistinctTests: XCTestCase {
     override func setUp() {
     }
     
     override func tearDown() {
     }
     
-    func testIfOneOnlyTimerTriggersAfterADefinedTimeInterval() {
+    func testIfOnlyDistinctMessagesArePassed() {
+        let expectation = self.expectation(description: "Last message should be 10")
+        let signal = Signal<Int>()
         let observables = ObservableCollection()
-        let expectation = self.expectation(description: "Timer has been triggered")
-        let timer = OnceOnlyTimer()
+        var result = 0
+        var count = 0
         
-        timer
+        signal
             .fired
-            .then { expectation.fulfill() }
+            .distinct()
+            .then {
+                result += $0
+                count += 1
+                if $0 == 10 {
+                    expectation.fulfill()
+                }
+            }
             .append(to: observables)
         
-        timer.fire(after: Measurement(value: 2, unit: UnitDuration.seconds))
+        signal.fire(with: 2)
+        signal.fire(with: 2)
+        signal.fire(with: 2)
+        signal.fire(with: 3)
+        signal.fire(with: 3)
+        signal.fire(with: 10)
         
-        waitForExpectations(timeout: 10, handler: nil)
+        self.waitForExpectations(timeout: 10, handler: nil)
+        XCTAssertEqual(3, count)
+        XCTAssertEqual(15, result)
+        
     }
-    
-    static var allTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] {
-        let unitTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] = [
-            ("testIfOneOnlyTimerTriggersAfterADefinedTimeInterval", testIfOneOnlyTimerTriggersAfterADefinedTimeInterval)
+
+    static var allTests : [(String, (DistinctTests) -> () throws -> Void)] {
+        let unitTests : [(String, (DistinctTests) -> () throws -> Void)] = [
+            ("testIfOnlyDistinctMessagesArePassed", testIfOnlyDistinctMessagesArePassed)
         ]
         return unitTests
     }

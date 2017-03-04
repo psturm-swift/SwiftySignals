@@ -18,37 +18,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import XCTest
-@testable import SwiftySignals
+import Foundation
 
-@available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-class OnceOnlyTimerTests: XCTestCase {
-    override func setUp() {
+public final class DistinctModifier<T: Comparable>: ModifierType {
+    public typealias MessageIn = T
+    public typealias MessageOut = T
+    
+    private var _lastMessage: T? = nil
+    
+    fileprivate init() {
     }
     
-    override func tearDown() {
+    public func process(message: MessageIn, notify: @escaping (MessageOut) -> Void) {
+        let lastMessage = self._lastMessage
+        if lastMessage == nil || lastMessage! != message {
+            self._lastMessage = message
+            notify(message)
+        }
     }
-    
-    func testIfOneOnlyTimerTriggersAfterADefinedTimeInterval() {
-        let observables = ObservableCollection()
-        let expectation = self.expectation(description: "Timer has been triggered")
-        let timer = OnceOnlyTimer()
+}
+
+public typealias DistinctObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut>
+public typealias DistinctEndPoint<O: ObservableType> = EndPoint<DistinctObservable<O>>
+
+extension EndPoint where O.MessageOut: Comparable {
+    public func distinct() -> DistinctEndPoint<SourceObservable> {
+        let distinctObservable = DistinctObservable(
+            source: self.observable,
+            modifier: DistinctModifier<SourceObservable.MessageOut>())
         
-        timer
-            .fired
-            .then { expectation.fulfill() }
-            .append(to: observables)
-        
-        timer.fire(after: Measurement(value: 2, unit: UnitDuration.seconds))
-        
-        waitForExpectations(timeout: 10, handler: nil)
+        return DistinctEndPoint<SourceObservable>(
+            observable: distinctObservable,
+            dispatchQueue: self.dispatchQueue)
     }
-    
-    static var allTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] {
-        let unitTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] = [
-            ("testIfOneOnlyTimerTriggersAfterADefinedTimeInterval", testIfOneOnlyTimerTriggersAfterADefinedTimeInterval)
-        ]
-        return unitTests
-    }
-    
 }
