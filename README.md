@@ -125,6 +125,9 @@ The function `.discard(first n: Int)` connects a modifier that discards the firs
 ### Distinct modifier
 The function `.distinct()` connects a modifier that discards a message if the previous passed message is equal. This modifiers is only available for comparable message types.
 
+### Debounce modifier
+The function `.debounce(timeout: Measurement<UnitDuration>)` connects a modifier that forwards the message after a given time (timeout). If a new message arrives before the timeout is reached, then the count-down is reset. Be aware if you a deal with a fast and continuous message flow, it could happen that all messages are discarded by debounce.
+
 ## Concurrency
 Each message source and each modifier use its own dispatch queue for synchronization. Closures defined by the user, like closures used in `then`, `filter` and `map` are executed on the main queue by default. However, this behavior can be changed by function `.dispatch` which comes in two flavors:
 
