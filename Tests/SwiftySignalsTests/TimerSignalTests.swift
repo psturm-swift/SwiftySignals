@@ -22,31 +22,57 @@ import XCTest
 @testable import SwiftySignals
 
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-class OnceOnlyTimerTests: XCTestCase {
+class TimerSignalTests: XCTestCase {
     override func setUp() {
     }
     
     override func tearDown() {
     }
     
-    func testIfOneOnlyTimerTriggersAfterADefinedTimeInterval() {
+    func testIfTimerTriggersAtLeastTwice() {
+        let observables = ObservableCollection()
+        let expectations = [
+            self.expectation(description: "Timer has been triggered once"),
+            self.expectation(description: "Timer has been triggered twice")
+        ]
+        
+        let timer = TimerSignal(interval: Measurement(value: 1.0, unit: UnitDuration.seconds), repeats: true)
+        
+        var currentExpectation = 0
+        timer
+            .fired
+            .then {
+                guard currentExpectation < expectations.count else { return }
+                expectations[currentExpectation].fulfill()
+                currentExpectation += 1
+            }
+            .append(to: observables)
+        
+        timer.enable()
+        
+        waitForExpectations(timeout: 10, handler: nil)
+        XCTAssertEqual(2, currentExpectation)
+    }
+    
+    func testIfTimerTriggersAfterADefinedTimeInterval() {
         let observables = ObservableCollection()
         let expectation = self.expectation(description: "Timer has been triggered")
-        let timer = OnceOnlyTimer()
+        let timer = TimerSignal(interval: Measurement(value: 2, unit: UnitDuration.seconds), repeats: false)
         
         timer
             .fired
             .then { expectation.fulfill() }
             .append(to: observables)
         
-        timer.fire(after: Measurement(value: 2, unit: UnitDuration.seconds))
+        timer.enable()
         
         waitForExpectations(timeout: 10, handler: nil)
     }
     
-    static var allTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] {
-        let unitTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] = [
-            ("testIfOneOnlyTimerTriggersAfterADefinedTimeInterval", testIfOneOnlyTimerTriggersAfterADefinedTimeInterval)
+    static var allTests : [(String, (TimerSignalTests) -> () throws -> Void)] {
+        let unitTests : [(String, (TimerSignalTests) -> () throws -> Void)] = [
+            ("testIfTimerTriggersAtLeastTwice", testIfTimerTriggersAtLeastTwice),
+            ("testIfTimerTriggersAfterADefinedTimeInterval", testIfTimerTriggersAfterADefinedTimeInterval)
         ]
         return unitTests
     }

@@ -55,30 +55,17 @@ Properties are of class `Property<T>`. A property has an attribute `value` of ty
 	    property.value += 1
 	}
 
-### Once-Only-Timer
-Once-Only-Timers are of class `OnceOnlyTimer`. Once-Only-Timers can be seen as time triggered signals with message type `void`. The timer is started by the function `fire(after: Measurement<UnitDuration>)`. If the given time in seconds has expired the Once-Only-Timer sends a message to all observes connected to endpoint `fired`. Each call to `fire(after:)` will invalide the timer first.
+### Timer Signal
+Timer Signals are of class `TimerSignal`. Such timers can be seen as time triggered signals with message type `Void`. The timer  is configured by its `init(interval: TimeInterval, repeats: Bool)` function and activated by `activate`. The timer is triggering messages with the given time interval (continuously if repeats is true).
 
-	let timer = OnceOnlyTimer()
-	let observables = ObservableCollection()
-	
-	timer
-	    .fired
-	    .then { print("Waited for 10 seconds.") }
-	    .append(to: observables)
-	
-	timer.fire(after: Measurement(value: 10, unit: TimeDuration.seconds))
-
-### Periodic Timer
-Periodic timers are of class `PeriodicTimer`. Periodic timers can be seen as time triggered signals with message type `Void`. The timer  is configured by its `init(interval: TimeInterval)` function and activated by `activate`. The timer is triggering continuously messages with the given time interval.
-
-	let timer = PeriodicTimer(: 10)
+	let timer = TimerSignal(interval: 10, repeats: true)
 	let observables = ObservableCollection()
 	timer
 	    .fired
 	    .then {.print("Timer has been triggered") }
 	    .append(to: observables)
 	
-	timer.activate()
+	timer.enable()
 
 ## Available modifiers
 Different modifiers can be connected to an endpoint. Modifiers transforms observables into different observables. As modifiers are observables as well it is possible to chain different modifiers together.
