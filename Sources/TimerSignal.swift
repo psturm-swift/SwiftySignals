@@ -26,19 +26,25 @@ public final class TimerSignal {
     private let _syncQueue: DispatchQueue
     private weak var _timer: Foundation.Timer? = nil
     private let _tolerance: TimeInterval
-    private let _interval: TimeInterval
     private let _repeats: Bool
+
+    public var interval: TimeInterval = 0 {
+        didSet {
+            self.disable()
+            self.enable()
+        }
+    }
     
     public var fired: EndPoint<ObservableSync<Void>> {
         return EndPoint<ObservableSync<Void>>(observable: self._observable, dispatchQueue: DispatchQueue.main)
     }
     
-    public init(interval: Measurement<UnitDuration>, repeats: Bool, tolerance: TimeInterval = 0) {
+    public init(interval: Measurement<UnitDuration> = Measurement(value: 0, unit: UnitDuration.seconds), repeats: Bool, tolerance: TimeInterval = 0) {
         self._observable = ObservableSync<Void>()
         self._syncQueue = DispatchQueue.main
         self._tolerance = tolerance
-        self._interval = interval.converted(to: UnitDuration.seconds).value
         self._repeats = repeats
+        self.interval = interval.converted(to: UnitDuration.seconds).value
     }
     
     private func _disable() {
@@ -55,9 +61,12 @@ public final class TimerSignal {
     }
     
     public func enable() {
+        let timeout = self.interval
+        guard timeout > 0 else { return }
+        
         self._syncQueue.async {
             self._disable()
-            let timer = Timer(timeInterval: self._interval, repeats: self._repeats) {
+            let timer = Timer(timeInterval: timeout, repeats: self._repeats) {
                 _ in self._observable.send()
             }
             timer.tolerance = self._tolerance
