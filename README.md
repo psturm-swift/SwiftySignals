@@ -55,30 +55,17 @@ Properties are of class `Property<T>`. A property has an attribute `value` of ty
 	    property.value += 1
 	}
 
-### Once-Only-Timer
-Once-Only-Timers are of class `OnceOnlyTimer`. Once-Only-Timers can be seen as time triggered signals with message type `void`. The timer is started by the function `fire(after: Measurement<UnitDuration>)`. If the given time in seconds has expired the Once-Only-Timer sends a message to all observes connected to endpoint `fired`. Each call to `fire(after:)` will invalide the timer first.
+### Timer Signal
+Timer Signals are of class `TimerSignal`. Such timers can be seen as time triggered signals with message type `Void`. The timer  is configured by its `init(interval: TimeInterval, repeats: Bool)` function and activated by `activate`. The timer is triggering messages with the given time interval (continuously if repeats is true).
 
-	let timer = OnceOnlyTimer()
-	let observables = ObservableCollection()
-	
-	timer
-	    .fired
-	    .then { print("Waited for 10 seconds.") }
-	    .append(to: observables)
-	
-	timer.fire(after: Measurement(value: 10, unit: TimeDuration.seconds))
-
-### Periodic Timer
-Periodic timers are of class `PeriodicTimer`. Periodic timers can be seen as time triggered signals with message type `Void`. The timer  is configured by its `init(interval: TimeInterval)` function and activated by `activate`. The timer is triggering continuously messages with the given time interval.
-
-	let timer = PeriodicTimer(: 10)
+	let timer = TimerSignal(interval: 10, repeats: true)
 	let observables = ObservableCollection()
 	timer
 	    .fired
 	    .then {.print("Timer has been triggered") }
 	    .append(to: observables)
 	
-	timer.activate()
+	timer.enable()
 
 ## Available modifiers
 Different modifiers can be connected to an endpoint. Modifiers transforms observables into different observables. As modifiers are observables as well it is possible to chain different modifiers together.
@@ -133,7 +120,13 @@ The function `.map(transform: (T)->S)` connects a modifier that transforms an in
 The function `.throttle(pause: Measurement<UnitDuration>)` connects a modifier that discards messages if they are sent to fast. There needs to be a at least a defined pause between two message so that none of them are discarded.
 
 ### Discard modifier
-The function `.discard(first n: Int)` connect a modifier that discards the first n messages. All other message after that are sent to the connected modifiers.
+The function `.discard(first n: Int)` connects a modifier that discards the first n messages. All other message after that are sent to the connected modifiers.
+
+### Distinct modifier
+The function `.distinct()` connects a modifier that discards a message if the previous passed message is equal. This modifiers is only available for comparable message types.
+
+### Debounce modifier
+The function `.debounce(timeout: Measurement<UnitDuration>)` connects a modifier that forwards the message after a given time (timeout). If a new message arrives before the timeout is reached, then the count-down is reset. Be aware if you a deal with a fast and continuous message flow, it could happen that all messages are discarded by debounce.
 
 ## Concurrency
 Each message source and each modifier use its own dispatch queue for synchronization. Closures defined by the user, like closures used in `then`, `filter` and `map` are executed on the main queue by default. However, this behavior can be changed by function `.dispatch` which comes in two flavors:

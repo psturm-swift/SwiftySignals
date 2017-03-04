@@ -21,42 +21,43 @@
 import Foundation
 
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-public final class OnceOnlyTimer {
+public final class TimerSignal {
     private let _observable: ObservableSync<Void>
     private let _syncQueue: DispatchQueue
-    private weak var _timer: Timer? = nil
+    private weak var _timer: Foundation.Timer? = nil
     private let _tolerance: TimeInterval
-
+    private let _interval: TimeInterval
+    private let _repeats: Bool
+    
     public var fired: EndPoint<ObservableSync<Void>> {
-        get {
-            return EndPoint<ObservableSync<Void>>(observable: _observable, dispatchQueue: DispatchQueue.main)
-        }
+        return EndPoint<ObservableSync<Void>>(observable: self._observable, dispatchQueue: DispatchQueue.main)
     }
     
-    public init(tolerance: TimeInterval = 0) {
-        let syncQueue = DispatchQueue.main
+    public init(interval: Measurement<UnitDuration>, repeats: Bool, tolerance: TimeInterval = 0) {
         self._observable = ObservableSync<Void>()
-        self._syncQueue = syncQueue
+        self._syncQueue = DispatchQueue.main
         self._tolerance = tolerance
+        self._interval = interval.converted(to: UnitDuration.seconds).value
+        self._repeats = repeats
     }
     
-    private func _invalidate() {
+    private func _disable() {
         if let timer = self._timer {
             timer.invalidate()
             self._timer = nil
         }
     }
     
-    public func invalidate() {
-        self._syncQueue.async {
-            self._invalidate()
+    public func disable() {
+        self._syncQueue.async(flags: .barrier) {
+            self._disable()
         }
     }
     
-    public func fire(after interval: Measurement<UnitDuration>) {
+    public func enable() {
         self._syncQueue.async {
-            self._invalidate()
-            let timer = Timer(timeInterval: interval.converted(to: .seconds).value, repeats: false) {
+            self._disable()
+            let timer = Timer(timeInterval: self._interval, repeats: self._repeats) {
                 _ in self._observable.send()
             }
             timer.tolerance = self._tolerance
@@ -67,5 +68,5 @@ public final class OnceOnlyTimer {
     
     deinit {
         _observable.unsubscribeAll()
-    }    
+    }
 }

@@ -22,30 +22,39 @@ import XCTest
 @testable import SwiftySignals
 
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-class OnceOnlyTimerTests: XCTestCase {
+class DebounceTests: XCTestCase {
     override func setUp() {
     }
     
     override func tearDown() {
     }
     
-    func testIfOneOnlyTimerTriggersAfterADefinedTimeInterval() {
+    func testIfOnlyTheLastMessageOfASeriesIsPassed() {
         let observables = ObservableCollection()
-        let expectation = self.expectation(description: "Timer has been triggered")
-        let timer = OnceOnlyTimer()
+        let signal = Signal<Int>()
+        let expectation = self.expectation(description: "Last message arrives")
         
-        timer
+        signal
             .fired
-            .then { expectation.fulfill() }
+            .debounce(timeout: Measurement(value: 2, unit: UnitDuration.seconds))
+            .then {
+                XCTAssertEqual(10, $0)
+                if $0 == 10 {
+                    expectation.fulfill()
+                }
+            }
             .append(to: observables)
+
+        for msg in 0...10 {
+            signal.fire(with: msg)
+        }
         
-        timer.fire(after: Measurement(value: 2, unit: UnitDuration.seconds))
-        
-        waitForExpectations(timeout: 10, handler: nil)
+        self.waitForExpectations(timeout: 10, handler: nil)
     }
     
-    static var allTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] {
-        let unitTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] = [
+    static var allTests : [(String, (DebounceTests) -> () throws -> Void)] {
+        let unitTests : [(String, (DebounceTests) -> () throws -> Void)] = [
+            ("testIfOnlyTheLastMessageOfASeriesIsPassed", testIfOnlyTheLastMessageOfASeriesIsPassed)
         ]
         return unitTests
     }
