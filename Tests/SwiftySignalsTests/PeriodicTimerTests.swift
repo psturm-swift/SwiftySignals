@@ -56,6 +56,7 @@ class PeriodicTimerTests: XCTestCase {
     
     static var allTests : [(String, (PeriodicTimerTests) -> () throws -> Void)] {
         let unitTests : [(String, (PeriodicTimerTests) -> () throws -> Void)] = [
+            ("testIfPeriodicTimerTriggersAtLeastTwice", testIfPeriodicTimerTriggersAtLeastTwice)
         ]
         return unitTests
     }

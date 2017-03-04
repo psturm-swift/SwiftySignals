@@ -46,6 +46,7 @@ class OnceOnlyTimerTests: XCTestCase {
     
     static var allTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] {
         let unitTests : [(String, (OnceOnlyTimerTests) -> () throws -> Void)] = [
+            ("testIfOneOnlyTimerTriggersAfterADefinedTimeInterval", testIfOneOnlyTimerTriggersAfterADefinedTimeInterval)
         ]
         return unitTests
     }
