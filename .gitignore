@@ -189,3 +189,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Files created by Ulysses
+.Ulysses*.plist

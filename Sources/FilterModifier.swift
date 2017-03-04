@@ -16,46 +16,39 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE
+// THE SOFTWARE.
 
 import Foundation
 
-public final class Property<T> {
-    private let _observable: ObservableSync<T>
-    private let _syncQueue: DispatchQueue
-    private var _value: T
+public final class FilterModifier<T>: ModifierType {
+    public typealias MessageIn = T
+    public typealias MessageOut = T
     
-    public var value: T {
-        set {
-            self._syncQueue.async(flags: .barrier) {
-                self._value = newValue
-                self._observable.send(message: newValue)
-            }
-        }
-        get {
-            var syncedValue: T!
-            self._syncQueue.sync {
-                syncedValue = self._value
-            }
-            return syncedValue
+    private let _predicate: (MessageIn)->Bool
+    
+    fileprivate init(predicate: @escaping (MessageIn)->Bool) {
+        self._predicate = predicate
+    }
+    
+    public func process(message: MessageIn, notify: @escaping (MessageOut) -> Void) {
+        if self._predicate(message) {
+            notify(message)
         }
     }
-    
-    public var didSet: EndPoint<ObservableSync<T>> {
-        return EndPoint<ObservableSync<T>>(
-            observable: _observable,
-            dispatchQueue: DispatchQueue.main)
-    }
-    
-    public init(value: T) {
-        let syncQueue = DispatchQueue(label: "SwiftySignals.Property", attributes: .concurrent)
-        self._observable = ObservableSync<T>()
-        self._syncQueue = syncQueue
-        self._value = value
-        self._observable.send(message: value)
-    }
-    
-    deinit {
-        _observable.unsubscribeAll()
+}
+
+public typealias FilterObservable<O: ObservableType> = ModifierObservable<O, O.MessageOut>
+public typealias FilterEndPoint<O: ObservableType> = EndPoint<FilterObservable<O>>
+
+extension EndPoint {
+    public func filter(predicate: @escaping (SourceObservable.MessageOut)->Bool) -> FilterEndPoint<SourceObservable> {
+        let filterObservable = FilterObservable(
+            source: self.observable,
+            modifier: FilterModifier<SourceObservable.MessageOut>(predicate: predicate),
+            dispatchQueue: self.dispatchQueue)
+        
+        return FilterEndPoint<SourceObservable>(
+            observable: filterObservable,
+            dispatchQueue: self.dispatchQueue)
     }
 }

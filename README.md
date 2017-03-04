@@ -1,4 +1,4 @@
-# SwiftySignals
+# SwiftySignals (Draft)
 
 [![Build Status][image-1]][1] [![][image-2]][2] [![Swift Version][image-3]][3]
 
@@ -9,218 +9,152 @@ Patrick Sturm, psturm.mail@googlemail.com
 SwiftySignals is available under the MIT license. See the LICENSE file for more info.
 
 ## Introduction
-SwiftySignals provides a simple API to send and react to application messages.
-There are three basic concepts involved:
-- *Events:* You can subscribe handler function to an event. The functions will be called if the event is fired. An event can have up to one message argument.
-- *Message*: Messages are instances of an arbitrary type.
-- *Slot:* Slots receive messages in the first place and hand them over to a connected user defined function. The user defined function can be executed on any dispatch queue.
-The concept can be considered as a specific implementation of the observer pattern.
-SwiftySignals provides already some classes which make use of event:
-- *Signal:* A signal triggers an event and sends out a message.
-- *Property:* A property stores a value of arbitrary type and fires an event if the value has been changed.
-- *Timer:* A timer can be configured to fire an event after a certain amount of time.
-- *PeriodicTimer:* A periodic timer fires an event periodically configured by an interval.
+SwiftySignals started as a simple framework with only a few classes. Up to SwiftySignals 2 concurrency was completely ignored and left to the user. With SwiftySignals 3 the API becomes more flexible and thread safe. Concurrency is now supported widely.
+SwiftySignals 3 implements now the observer pattern and builds upon Apple’s dispatching framework.
 
-## Tutorial
-Let’s consider a class representing a temperature sensor. The class has a instance function `updateTemperature()` which reads out the current temperature and sends its value via a signal to all its connected receivers. A receiver could be anything like a view controller which displays the temperature in a view or a controller that triggers an alert if the temperature is too low or too high.
+## Basic concept
+The basic concept of SwiftySignals are observables and observers. Observables are able to send messages and observers are able to receive and to process messages. In general you never need to define observables or observers by yourself. You only need to deal with helper classes. There are mainly two types of helper classes in SwiftySignals:
 
-The class `TemperatureSensor` could be implemented like this:
+1. Message sources
+2. Modifiers
 
-	class TemperatureSensor {
-	    static shared = TemperatureSensor()
-	    let signalTemperature = Signal<Temperature>()
-	
-	    func updateTemperature() {
-	        let currentTemperature = readTemperature()
-	        signalTemperature.fire(with: currentTemperature)
-	    }
-	}
+Message sources have one or more observables. Modifiers are both - observers and observables. Modifiers can be connected to an observable. They are able to filter, map, discard and generate messages. As modifiers are observables themselves, modifiers can be connected to a modifier chain. A message starts at a message source and is send along the modifier chains.
 
-### Defining a signal
-In SwiftySignals a signal is an instance of
+Class `Signal<T>` is the simplest implementation of a message source. A signal can be used to send a message of type `T`. To do so, the function `Signal<T>.fire(with: T)` can be used. If a message is fired, then it is send to all modifiers connected to `Signal<T>.fired` which is called the end point. 
 
-	class Signal<Message>
+Connecting modifiers to signals is quite easy. Let´s say, we want to print the message when it is fired. For that purpose we could use the modifier `then` to connect to the signal’s endpoint `fired`:
 
-Along with the definition of a signal, you need to define the type of the message, the signal will send out. There is no restriction on the message type. Also `Void` is a valid message type.
+	let signal = Signal<Int>(value: 15)
+	let observables = ObservableCollection()
+	signal
+	    .fired
+	    .then { print($0) }
+	    .append(to: observables)
+	signal.fire(with: 20)
 
-In our example we define the signal as:
+Important to note is, that modifier chain needs to be stored somewhere. If this is not done, then the modifier chain is deleted immediately due to automatic reference counting. However, modifiers can be appended to an observable collection to keep them alive. In this case the modifier chain is destroyed along with the observable collection.
 
-	let signalTemperature = Signal<Temperature>()
+## Available message sources
+In SwiftySignals there a few message sources defined.
 
-The update function will send the current temperature by calling the function `Signal<Message>.fire(with:)`
-
-	signalTemperature.fire(with: currentTemperature)
-
-### Connecting a instance function to a signal
-To react on a message we need to connect at least one receiver to the signal. In our example we will define a view controller as receiver which will display the current temperature.
-The best place to connect the view controller as receiver is its `viewDidLoad()` function.  Now we need to call `Signal.fired.then(on:call:)`. Parameter `on:` defines the receiver object and `call:` the instance function that should be invoked on the receiver. Such a function needs to have one parameter for the message.
-
-	class TemperatureVC: NSViewController {
-	    override func viewDidLoad() {
-	        TemperatureSensor.shared
-	                .signalTemperature
-	                .fired
-	                .then(
-	                    on: self, 
-	                    call: TemperatureVC.newTemperatureArrived
-	                )
-	            }
-	
-	        private func newTemperatureArrived(value: Temperature) {
-	            // Update views here
-	        }
-	}
-
-The connection between view controller and signal lives until either the signal or the receiver is destroyed.
-As soon you connect a function to a signal, your function will get the last fired message, if the signal has been fired previously.
-
-### Manual disconnect the receiver from the signal
-The `then(on:call:)` function returns a so called slot. By invaliding the slot, you can unsubscribe from the signal manually.
-t
-	let slot = TemperatureSensor.shared
-	                .signalTemperature
-	                .fired
-	                .then(
-	                    on: self, 
-	                    call: TemperatureVC.newTemperatureArrived
-	                )
-	
-	slot.invalidate() // Disconnect the receiver
-
-### Connecting closures to a signal
-Alternatively you could connect a closure instead of an instance method to the signal. However, also in this case you need a receiver object to determine the lifetime of the subscription. This receiver object is given along with the message to your closure:
-
-	class TemperatureVC: NSViewController {
-	    override func viewDidLoad() {
-	        TemperatureSensor.shared
-	            .signalTemperature
-	            .fired
-	            .then(with: self) { (receiver, temperature) in
-	                /* receiver === self */
-	                receiver.newTemperatureArrived(temperature)
-	            }
-	    }
-	}
-
-*Warning:* You should never use a strong reference to self within these closures to avoid strong-reference-cycles. This is the reason for having the receiver object as first closure argument.
-
-### SwiftySignals and Grand Central Dispatch
-If you fire a signal on the main thread, then the connected function are called immediately by default. If you trigger a signal on another thread than the main thread, then your receiver function will be process on the main dispatch queue.
-
-This behavior can be modified per subscription. For this purpose you can call `then` with the additional parameter `invoke` that defines the `InvocationPolicy`.
-
-	enum InvocationPolicy {
-	    case immediately
-	    case onMainThreadASAP /* Default behaviour */
-	    case onMainQueue
-	    case withLowPriority
-	    case withNormalPriority
-	    case withHighPriority
-	    case onQueue(dispatch_queue_t)
-	}
-
-With an invocation policy you steer in which context a connected function is called:
-- `immediately`: The connected function will be executed in the same thread as the signal was fired.
-- `onMainQueue`: The connected function is delegated to the main queue.
-- `onMainThreadASAP`: If the signal is fired on the main thread, then the connected function is called immediately. If the signal is fired on another thread than the main thread, then the subscribed function is delegated to the main queue.
-- `withLowPriority`: The subscribed function will be executed on a global concurrent queue with low priority.
-- `withMediumPriority`: The subscribed function will be executed on a global concurrent queue with medium priority.
-- `withHighPriority`: The subscribed function will be executed on a global concurrent queue with high priority.
-- `onQueue(dispatch_queue_t)`: The subscribed function will be executed on the given queue.
-
-### Thread Safety
-In the current version instances of `Signal<MessageType>` are not thread-safe. Thus only one thread, preferable the main thread, is allowed to access the signal. This restriction might become obsolete in the future.
+### Signals
+Signals are of class `Signal<T>`. A signal has a function `fire(with message: T)` that sends a message to all observables which connected to the signal’s endpoint `fired`.
 
 ### Properties
-A property is of type `Property<T>`. It stores a value `Property<T>.value` of type `T` and has an embedded event `Property<T>.didSet`
- 
-If you set a new value to `Property<T>.value` then the embedded event is fired automatically. You can subscribe your functions directly to the event `didSet`.
+Properties are of class `Property<T>`. A property has an attribute `value` of type `T`. Whenever the value is modified, the new value is send to the property’s endpoint `didSet`. Properties are thread safe. That means reading from and writing to the property’s value is allowed from all threads. But be aware the reading is a blocking command, that might cause issues in some situations.
 
-	class Model {
-	    static let shared = Model()
-	    let temperature = Property<Temperature>(value: 56°C)
+	let property = Property<Int>(value: 0)
+	let observables = ObservableCollection()
+	
+	property
+	    .didSet
+	    .then { print("Value changed to \($0)") }
+	    .append(to: observables)
+	
+	for i in 0..<10 {
+	    property.value += 1
 	}
+
+### Once-Only-Timer
+Once-Only-Timers are of class `OnceOnlyTimer`. Once-Only-Timers can be seen as time triggered signals with message type `void`. The timer is started by the function `fire(after: Measurement<UnitDuration>)`. If the given time in seconds has expired the Once-Only-Timer sends a message to all observes connected to endpoint `fired`. Each call to `fire(after:)` will invalide the timer first.
+
+	let timer = OnceOnlyTimer()
+	let observables = ObservableCollection()
 	
-	class TemperatureVC: NSViewController {
-	    var temperatureValue: Temperature? = nil
+	timer
+	    .fired
+	    .then { print("Waited for 10 seconds.") }
+	    .append(to: observables)
 	
-	    override func init() {
-	        Model.shared
-	            .temperature
+	timer.fire(after: Measurement(value: 10, unit: TimeDuration.seconds))
+
+### Periodic Timer
+Periodic timers are of class `PeriodicTimer`. Periodic timers can be seen as time triggered signals with message type `Void`. The timer  is configured by its `init(interval: TimeInterval)` function and activated by `activate`. The timer is triggering continuously messages with the given time interval.
+
+	let timer = PeriodicTimer(: 10)
+	let observables = ObservableCollection()
+	timer
+	    .fired
+	    .then {.print("Timer has been triggered") }
+	    .append(to: observables)
+	
+	timer.activate()
+
+## Available modifiers
+Different modifiers can be connected to an endpoint. Modifiers transforms observables into different observables. As modifiers are observables as well it is possible to chain different modifiers together.
+If a modifier is connected, it receives automatically the last message that was sent.
+
+### Then modifier
+The function `.then` connects a modifier that executes an action when a message of type `T` is sent. There are two possibilities to define such an action:
+
+1. As closure with function `.then(do: (T)->Void)`
+2. As instance with: `.then(call: (Object)->((T)->Void)), on: Object)`
+After the message is processed by the action, it is send to all observables connected to the modifier.
+
+	class ViewController {
+	    private let property = Property<Int>(value: 56)
+	    private let obersables = ObservableCollection()
+	
+	    override func viewDidLoad() {
+	        property
 	            .didSet
-	            .then(
-	                on: self, 
-	                call: TemperatureVC.setNewTemperature
-	            )
+	            .then(call: ViewController.update, on: self)
+	        property.value = 67
 	    }
 	
-	    func setNewTemperature(value: Temperature) {
-	        temperatureValue = value
+	    func update(value: Int) {
+	        print("Value = \(value)")
 	    }
 	}
 
-By calling then the function `setNewTemperature` is called by the current value of the property.
+### Filter modifier
+The function `.filter(predicate: (T)->Bool)` connects a modifier that checks if the message fulfills a predicate. If the predicate returns `true`, the message is sent to all observables connected to the modifier. If the predicate return `false`instead, the message is discarded.
 
-### Defining a once only time
-A once only timer has an embedded event `Timer.fired` which will fire after a given time. The timer can be started with the function `OnceOnlyTimer.fireAfter(seconds:)`
-
-	class TemperatureSensor {
-	    let timer = OnceOnlyTimer()
+	let property = Property(value: 45)
+	let observables = Observables()
 	
-	    override func viewDidLoad() {
-	        timer
-	            .fired
-	            .then(
-	                on: self, 
-	                call: TemperatureSensor.updateTemperature
-	            )
+	property
+	    .didSet
+	    .filter { $0 >= 100 }
+	    .then { print("Value \($0) is larger or equal than 100") }
+	    .append(to: observables)
+
+### Map modifier
+The function `.map(transform: (T)->S)` connects a modifier that transforms an incoming message of type `T` to `S`. The transformed message is sent to all observables connected to the modifier.
+
+	let property = Property(value: 100)
+	property
+	    .didSet
+	    .map { 2 * $0 }
+	    .then { print($0) }
+	    .append(to: observables)
+
+### Throttle modifier
+The function `.throttle(pause: Measurement<UnitDuration>)` connects a modifier that discards messages if they are sent to fast. There needs to be a at least a defined pause between two message so that none of them are discarded.
+
+### Discard modifier
+The function `.discard(first n: Int)` connect a modifier that discards the first n messages. All other message after that are sent to the connected modifiers.
+
+## Concurrency
+Each message source and each modifier use its own dispatch queue for synchronization. Closures defined by the user, like closures used in `then`, `filter` and `map` are executed on the main queue by default. However, this behavior can be changed by function `.dispatch` which comes in two flavors:
+
+1. `.dispatch(to queue: DispatchQueue)`
+2. `.dispatch(qos: DispatchQoS)` 
+
+The first version delegates all closures to the given. The second version delegates all closures to a global dispatch queue with the given quality of service class.
+
+If the closures should be executed in synchronization queue of the modifier, then you can use function `.noDispatch()`.
+
+	let property = Property(value: 50)
+	let observables = Observables()
 	
-	        timer.fireAfter(seconds: 600)
-	    }
-	}
-
-The timer can be stopped by calling `OnceOnlyTimer.invalidate()`. When the timer has fired it will never fire again unless you call explicitly `OnceOnlyTimer.fireAfter(seconds:)` again.
-
-### Defining a periodic timer
-The `PeriodicTimer` is a timer which is called regularly in intervals. 
-
-	class TemperatureSensor {
-	    let timer = PeriodicTimer()
-	
-	    override func viewDidLoad() {
-	        timer
-	            .fired
-	            .then(
-	                on: self, 
-	                call: TemperatureSensor.updateTemperature
-	            )
-	
-	        timer.interval = 600
-	        timer.activate()
-	    }
-	}
-
-You can change the fire interval by setting `PeriodicTimer.interval` to the interval length in seconds. The timer needs to be started by `PeriodicTimer.activate()`.
-
-### Filter messages
-A filter can be added to each subscription. Therefore the event provides the function `filter(predicate:)`
-
-	class TemperatureAlert {
-	    override func viewDidLoad() {
-	        TemperatureSensor.shared
-	            .signalTemperature
-	            .fired
-	            .filter({ $0 > 30.0 })
-	            .then(
-	                on: self,
-	                call: TemperatureAlert.tooHigh
-	            )
-	    }
-	
-	    func tooHigh(temperature: Temperature) {
-	        // Show alert
-	    }
-	}
+	property
+	    .didSet
+	    .dispatch(qos: DispatchQoS.userInitiated)
+	    .then { print("I am running on a global queue.") }
+	    .dispatch(qos: DispatchQoS.main)
+	    .then { print("I am running on the main queue.") }
+	    .append(to: observables)
 
 [1]:	https://travis-ci.org/psturm-swift/SwiftySignals
 [2]:	https://cocoapods.org/pods/SwiftySignals "CocoaPods"
