@@ -133,7 +133,10 @@ The function `.map(transform: (T)->S)` connects a modifier that transforms an in
 The function `.throttle(pause: Measurement<UnitDuration>)` connects a modifier that discards messages if they are sent to fast. There needs to be a at least a defined pause between two message so that none of them are discarded.
 
 ### Discard modifier
-The function `.discard(first n: Int)` connect a modifier that discards the first n messages. All other message after that are sent to the connected modifiers.
+The function `.discard(first n: Int)` connects a modifier that discards the first n messages. All other message after that are sent to the connected modifiers.
+
+### Distinct modifier
+The function `.distinct()` connects a modifier that discards a message if the previous passed message is equal. This modifiers is only available for comparable message types.
 
 ## Concurrency
 Each message source and each modifier use its own dispatch queue for synchronization. Closures defined by the user, like closures used in `then`, `filter` and `map` are executed on the main queue by default. However, this behavior can be changed by function `.dispatch` which comes in two flavors:
