@@ -23,6 +23,7 @@ import Foundation
 
 public final class Signal<T> {
     private let _observable = ObservableSync<T>()
+    private let _ownedObservables = ObservableCollection()
     
     public init() {
     }
@@ -38,6 +39,7 @@ public final class Signal<T> {
     public var fired: EndPoint<ObservableSync<T>> {
         return EndPoint<ObservableSync<T>>(
             observable: _observable,
+            owner: _ownedObservables,
             dispatchQueue: DispatchQueue.main)
     }
     

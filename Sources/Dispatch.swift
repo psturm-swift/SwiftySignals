@@ -24,16 +24,18 @@ extension EndPoint {
     public func dispatch(to queue: DispatchQueue) -> EndPoint {
         return EndPoint(
             observable: self.observable,
+            owner: self.owner,
             dispatchQueue: queue)
     }
     
     public func dispatch(qos: DispatchQoS = DispatchQoS.default) -> EndPoint {
         return EndPoint(
             observable: self.observable,
+            owner: self.owner,
             dispatchQueue: DispatchQueue(label: "EndPoint.dispatch(qos:)", qos: qos))
     }
     
     public func noDispatch() -> EndPoint {
-        return EndPoint(observable: self.observable)
+        return EndPoint(observable: self.observable, owner: self.owner)
     }
 }

@@ -27,9 +27,10 @@ public final class TimerSignal {
     private weak var _timer: Foundation.Timer? = nil
     private let _tolerance: TimeInterval
     private let _repeats: Bool
+    private let _ownedObservables = ObservableCollection()
     
     public var fired: EndPoint<ObservableSync<Void>> {
-        return EndPoint<ObservableSync<Void>>(observable: self._observable, dispatchQueue: DispatchQueue.main)
+        return EndPoint<ObservableSync<Void>>(observable: self._observable, owner: _ownedObservables, dispatchQueue: DispatchQueue.main)
     }
     
     public init(repeats: Bool, tolerance: TimeInterval = 0) {

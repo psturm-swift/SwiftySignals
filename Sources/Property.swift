@@ -24,6 +24,7 @@ public final class Property<T> {
     private let _observable: ObservableSync<T>
     private let _syncQueue: DispatchQueue
     private var _value: T
+    private let _ownedObservables = ObservableCollection()
     
     public var value: T {
         set {
@@ -44,6 +45,7 @@ public final class Property<T> {
     public var didSet: EndPoint<ObservableSync<T>> {
         return EndPoint<ObservableSync<T>>(
             observable: _observable,
+            owner: _ownedObservables,
             dispatchQueue: DispatchQueue.main)
     }
     

@@ -25,12 +25,12 @@ public struct EndPoint<O: ObservableType> {
     
     public let observable: SourceObservable
     public let dispatchQueue: DispatchQueue?
-    public let owner: OwnerType?
+    public let owner: OwnerType
     
     internal init(
         observable: SourceObservable,
-        dispatchQueue: DispatchQueue? = nil,
-        owner: OwnerType? = nil)
+        owner: OwnerType,
+        dispatchQueue: DispatchQueue? = nil)
     {
         self.observable = observable
         self.dispatchQueue = dispatchQueue
@@ -40,7 +40,7 @@ public struct EndPoint<O: ObservableType> {
     public func endPoint<R: ObservableType>(with observable: R) -> EndPoint<R> {
         return EndPoint<R>(
             observable: observable,
-            dispatchQueue: self.dispatchQueue,
-            owner: self.owner)
+            owner: self.owner,
+            dispatchQueue: self.dispatchQueue)
     }
 }
