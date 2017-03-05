@@ -55,8 +55,6 @@ extension EndPoint {
             source: self.observable,
             modifier: ThrottleModifier<SourceObservable.MessageOut>(pause: pause))
         
-        return ThrottleEndPoint<SourceObservable>(
-            observable: throttleObservable,
-            dispatchQueue: self.dispatchQueue)
+        return endPoint(with: throttleObservable)
     }
 }

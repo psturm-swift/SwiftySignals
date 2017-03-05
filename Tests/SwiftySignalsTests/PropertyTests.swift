@@ -50,7 +50,7 @@ class PropertyTests: XCTestCase {
             .filter { $0 % 2 == 0 }
             .then { XCTAssertTrue($0 % 2 == 0) }
             .then { _ in expectEvenNumber.fulfill() }
-            .append(to: observables)
+            .giveOwnership(to: observables)
         
         property.value = 54
         
@@ -67,7 +67,7 @@ class PropertyTests: XCTestCase {
             .map { $0 == 13 }
             .then { XCTAssertTrue($0) }
             .then { _ in expectLastMessage.fulfill() }
-            .append(to: observables)
+            .giveOwnership(to: observables)
         
         self.waitForExpectations(timeout: 10, handler: nil)
     }

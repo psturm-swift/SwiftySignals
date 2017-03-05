@@ -45,7 +45,7 @@ class DistinctTests: XCTestCase {
                     expectation.fulfill()
                 }
             }
-            .append(to: observables)
+            .giveOwnership(to: observables)
         
         signal.fire(with: 2)
         signal.fire(with: 2)

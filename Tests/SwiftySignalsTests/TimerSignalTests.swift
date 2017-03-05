@@ -46,7 +46,7 @@ class TimerSignalTests: XCTestCase {
                 expectations[currentExpectation].fulfill()
                 currentExpectation += 1
             }
-            .append(to: observables)
+            .giveOwnership(to: observables)
         
         timer.fire(after: Measurement(value: 1.0, unit: UnitDuration.seconds))
         
@@ -62,7 +62,7 @@ class TimerSignalTests: XCTestCase {
         timer
             .fired
             .then { expectation.fulfill() }
-            .append(to: observables)
+            .giveOwnership(to: observables)
         
         timer.fire(after: Measurement(value: 2, unit: UnitDuration.seconds))
         

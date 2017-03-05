@@ -43,7 +43,7 @@ class DebounceTests: XCTestCase {
                     expectation.fulfill()
                 }
             }
-            .append(to: observables)
+            .giveOwnership(to: observables)
 
         for msg in 0...10 {
             signal.fire(with: msg)

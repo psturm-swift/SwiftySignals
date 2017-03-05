@@ -47,8 +47,6 @@ extension EndPoint where O.MessageOut: Comparable {
             source: self.observable,
             modifier: DistinctModifier<SourceObservable.MessageOut>())
         
-        return DistinctEndPoint<SourceObservable>(
-            observable: distinctObservable,
-            dispatchQueue: self.dispatchQueue)
+        return endPoint(with: distinctObservable)
     }
 }

@@ -47,8 +47,6 @@ extension EndPoint {
             modifier: FilterModifier<SourceObservable.MessageOut>(predicate: predicate),
             dispatchQueue: self.dispatchQueue)
         
-        return FilterEndPoint<SourceObservable>(
-            observable: filterObservable,
-            dispatchQueue: self.dispatchQueue)
+        return endPoint(with: filterObservable)
     }
 }

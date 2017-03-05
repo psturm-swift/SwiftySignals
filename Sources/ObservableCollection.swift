@@ -20,13 +20,13 @@
 
 import Foundation
 
-public final class ObservableCollection {
+public final class ObservableCollection: OwnerType {
     private var data: [AnyObject] = []
     
     public init() {
     }
 
-    public func append<O: ObservableType>(observable: O) {
+    public func takeOwnership<O: ObservableType>(of observable: O) {
         data.append(observable)
     }
     
@@ -36,7 +36,7 @@ public final class ObservableCollection {
 }
 
 extension EndPoint {
-    public func append(to collection: ObservableCollection) {
-        collection.append(observable: self.observable)
+    public func giveOwnership(to collection: ObservableCollection) {
+        collection.takeOwnership(of: self.observable)
     }
 }

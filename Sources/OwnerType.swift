@@ -20,31 +20,6 @@
 
 import Foundation
 
-public final class MapModifier<S, T>: ModifierType {
-    public typealias MessageIn = S
-    public typealias MessageOut = T
-
-    private let _transform: (MessageIn)->MessageOut
-
-    fileprivate init(transform: @escaping (MessageIn)->MessageOut) {
-        self._transform = transform
-    }
-    
-    public func process(message: MessageIn, notify: @escaping (MessageOut) -> Void) {
-        notify(self._transform(message))
-    }
-}
-
-public typealias MapObservable<O: ObservableType, T> = ModifierObservable<O, T>
-public typealias MapEndPoint<O: ObservableType, T> = EndPoint<MapObservable<O, T>>
-
-extension EndPoint {
-    public func map<T>(transform: @escaping (SourceObservable.MessageOut)->T) -> MapEndPoint<SourceObservable, T> {
-        let mapObservable = MapObservable(
-            source: self.observable,
-            modifier: MapModifier<SourceObservable.MessageOut, T>(transform: transform),
-            dispatchQueue: self.dispatchQueue)
-        
-        return endPoint(with: mapObservable)
-    }
+public protocol OwnerType {
+    func takeOwnership<O: ObservableType>(of observable: O)
 }

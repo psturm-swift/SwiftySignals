@@ -51,9 +51,7 @@ extension EndPoint {
             dispatchQueue: self.dispatchQueue
         )
         
-        return ThenFunctionEndPoint<SourceObservable>(
-            observable: thenObservable,
-            dispatchQueue: self.dispatchQueue)
+        return endPoint(with: thenObservable)
     }
 }
 
@@ -83,9 +81,7 @@ extension EndPoint {
             modifier: ThenBlockModifier<SourceObservable.MessageOut>(block: block),
             dispatchQueue: self.dispatchQueue)
 
-        return ThenBlockEndPoint<SourceObservable>(
-            observable: thenObservable,
-            dispatchQueue: self.dispatchQueue)
+        return endPoint(with: thenObservable)
     }
     
 }

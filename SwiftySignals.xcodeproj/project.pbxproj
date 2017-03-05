@@ -81,6 +81,7 @@
 		029D8ECB1E56CBC700C2900D /* AnyObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195C121E52D6E5002B9EA2 /* AnyObserver.swift */; };
 		029D8ECC1E56CBC700C2900D /* InstanceFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02195C161E54FA8D002B9EA2 /* InstanceFunction.swift */; };
 		029D8ECD1E56CBC700C2900D /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D8EAC1E55855700C2900D /* EndPoint.swift */; };
+		02ADEC541E6CB8D00087A946 /* OwnerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADEC531E6CB8D00087A946 /* OwnerType.swift */; };
 		02B750C61E5E36E100DD8F3E /* ObservableSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B750C51E5E36E100DD8F3E /* ObservableSync.swift */; };
 		02B750C71E5E36E100DD8F3E /* ObservableSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B750C51E5E36E100DD8F3E /* ObservableSync.swift */; };
 		02B750C81E5E36E100DD8F3E /* ObservableSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B750C51E5E36E100DD8F3E /* ObservableSync.swift */; };
@@ -176,6 +177,7 @@
 		029D33341D53A0ED00002059 /* SwiftySignals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftySignals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		029D333E1D53A0EE00002059 /* SwiftySignalsTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftySignalsTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		029D8EAC1E55855700C2900D /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EndPoint.swift; path = Sources/EndPoint.swift; sourceTree = SOURCE_ROOT; };
+		02ADEC531E6CB8D00087A946 /* OwnerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OwnerType.swift; path = Sources/OwnerType.swift; sourceTree = SOURCE_ROOT; };
 		02B750C51E5E36E100DD8F3E /* ObservableSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ObservableSync.swift; path = Sources/ObservableSync.swift; sourceTree = SOURCE_ROOT; };
 		02CA68D61E637A78006518D6 /* WeakObserverRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeakObserverRef.swift; path = Sources/WeakObserverRef.swift; sourceTree = SOURCE_ROOT; };
 		02D272181E6B6D0500286843 /* DebounceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebounceTests.swift; path = Tests/SwiftySignalsTests/DebounceTests.swift; sourceTree = SOURCE_ROOT; };
@@ -326,6 +328,7 @@
 				0252F2EE1E5EB4FB009F48D5 /* ModifierType.swift */,
 				0299FDCE1E4FCFE20078A602 /* ObservableType.swift */,
 				0299FDD01E4FCFEF0078A602 /* ObserverType.swift */,
+				02ADEC531E6CB8D00087A946 /* OwnerType.swift */,
 			);
 			name = Types;
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 				0204CB681E525848004AC3BE /* Dispatch.swift in Sources */,
 				0252F2EF1E5EB4FB009F48D5 /* ModifierType.swift in Sources */,
 				029D8EAD1E55855700C2900D /* EndPoint.swift in Sources */,
+				02ADEC541E6CB8D00087A946 /* OwnerType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

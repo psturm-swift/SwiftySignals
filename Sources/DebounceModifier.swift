@@ -67,8 +67,6 @@ extension EndPoint {
             source: self.observable,
             modifier: DebounceModifier<SourceObservable.MessageOut>(timeout: timeout))
         
-        return DebounceEndPoint<SourceObservable>(
-            observable: debounceObservable,
-            dispatchQueue: self.dispatchQueue)
+        return endPoint(with: debounceObservable)
     }
 }

@@ -49,8 +49,6 @@ extension EndPoint {
             source: self.observable,
             modifier: DiscardModifier<SourceObservable.MessageOut>(count: n))
         
-        return DiscardEndPoint<SourceObservable>(
-            observable: discardObservable,
-            dispatchQueue: self.dispatchQueue)
+        return endPoint(with: discardObservable)
     }
 }

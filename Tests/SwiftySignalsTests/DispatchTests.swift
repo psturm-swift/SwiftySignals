@@ -42,7 +42,7 @@ class DispatchTests: XCTestCase {
                 return !value
             }
             .then { _ in propertyProcessed.fulfill() }
-            .append(to: observables)
+            .giveOwnership(to: observables)
         
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -62,7 +62,7 @@ class DispatchTests: XCTestCase {
                 return !value
             }
             .then { _ in propertyProcessed.fulfill() }
-            .append(to: observables)
+            .giveOwnership(to: observables)
         
         property.value = !property.value
         
@@ -84,7 +84,7 @@ class DispatchTests: XCTestCase {
                 return !value
             }
             .then { _ in propertyProcessed.fulfill() }
-            .append(to: observables)
+            .giveOwnership(to: observables)
         
         signal.fire(with: false)
         
