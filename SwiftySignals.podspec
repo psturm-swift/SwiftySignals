@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name             = 'SwiftySignals'
-  s.version          = '3.0.3'
+  s.version          = '3.0.4'
   s.summary          = 'SwiftySignals provides a simple API to send and react to application messages.'
   s.description      = <<-DESC
 SwiftySignals provides a simple API to send and react to application messages.
