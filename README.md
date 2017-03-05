@@ -56,16 +56,16 @@ Properties are of class `Property<T>`. A property has an attribute `value` of ty
 	}
 
 ### Timer Signal
-Timer Signals are of class `TimerSignal`. Such timers can be seen as time triggered signals with message type `Void`. The timer  is configured by its `init(interval: TimeInterval, repeats: Bool)` function and activated by `activate`. The timer is triggering messages with the given time interval (continuously if repeats is true).
+Timer Signals are of class `TimerSignal`. Such timers can be seen as time triggered signals with message type `Void`. The timer  is configured by its `init(repeats: Bool)` function and activated by `fire`. The timer is triggering messages with the given time interval (continuously if repeats is true).
 
-	let timer = TimerSignal(interval: 10, repeats: true)
+	let timer = TimerSignal(repeats: true)
 	let observables = ObservableCollection()
 	timer
 	    .fired
 	    .then {.print("Timer has been triggered") }
 	    .append(to: observables)
 	
-	timer.enable()
+	timer.fire(after: Measurement(value: 10, UnitDuration.seconds)
 
 ## Available modifiers
 Different modifiers can be connected to an endpoint. Modifiers transforms observables into different observables. As modifiers are observables as well it is possible to chain different modifiers together.

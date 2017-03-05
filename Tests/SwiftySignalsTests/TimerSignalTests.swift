@@ -36,7 +36,7 @@ class TimerSignalTests: XCTestCase {
             self.expectation(description: "Timer has been triggered twice")
         ]
         
-        let timer = TimerSignal(interval: Measurement(value: 1.0, unit: UnitDuration.seconds), repeats: true)
+        let timer = TimerSignal(repeats: true)
         
         var currentExpectation = 0
         timer
@@ -48,7 +48,7 @@ class TimerSignalTests: XCTestCase {
             }
             .append(to: observables)
         
-        timer.enable()
+        timer.fire(after: Measurement(value: 1.0, unit: UnitDuration.seconds))
         
         waitForExpectations(timeout: 10, handler: nil)
         XCTAssertEqual(2, currentExpectation)
@@ -57,14 +57,14 @@ class TimerSignalTests: XCTestCase {
     func testIfTimerTriggersAfterADefinedTimeInterval() {
         let observables = ObservableCollection()
         let expectation = self.expectation(description: "Timer has been triggered")
-        let timer = TimerSignal(interval: Measurement(value: 2, unit: UnitDuration.seconds), repeats: false)
+        let timer = TimerSignal(repeats: false)
         
         timer
             .fired
             .then { expectation.fulfill() }
             .append(to: observables)
         
-        timer.enable()
+        timer.fire(after: Measurement(value: 2, unit: UnitDuration.seconds))
         
         waitForExpectations(timeout: 10, handler: nil)
     }
